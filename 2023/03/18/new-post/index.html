@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>new post | Hexo</title>
+  <title>对Stone-Weierstrass定理的简单讨论 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="内容主要来自 Walter Rudin《数学分析原理》第七章函数序列与函数项级数">
+  <meta name="description" content="Weierstrass的逼近 $\textbf{Theorem(Weierstrass).}\quad$ 如果 $f$ 是 $[a,b]$ 上的一个连续实函数，那么便有实多项式 $P_n$ 的序列使得$$\lim\limits_{n\to \infty} P_n(x) &#x3D; f(x)$$ 在 $[a,b]$ 上一致地成立，对于连续复函数也可以用复多项式逼近  这是 $\text{Weie">
 <meta property="og:type" content="article">
-<meta property="og:title" content="new post">
+<meta property="og:title" content="对Stone-Weierstrass定理的简单讨论">
 <meta property="og:url" content="http://example.com/2023/03/18/new-post/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="内容主要来自 Walter Rudin《数学分析原理》第七章函数序列与函数项级数">
+<meta property="og:description" content="Weierstrass的逼近 $\textbf{Theorem(Weierstrass).}\quad$ 如果 $f$ 是 $[a,b]$ 上的一个连续实函数，那么便有实多项式 $P_n$ 的序列使得$$\lim\limits_{n\to \infty} P_n(x) &#x3D; f(x)$$ 在 $[a,b]$ 上一致地成立，对于连续复函数也可以用复多项式逼近  这是 $\text{Weie">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-8acdbe49c2318087203d642c29a69693.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-1b8781df3394870ddf4cfd178ad485af">
 <meta property="article:published_time" content="2023-03-18T02:20:08.000Z">
-<meta property="article:modified_time" content="2023-03-18T02:26:07.845Z">
+<meta property="article:modified_time" content="2023-03-18T02:37:13.043Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="数学分析">
 <meta name="twitter:card" content="summary">
@@ -97,7 +97,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      new post
+      对Stone-Weierstrass定理的简单讨论
     </h1>
   
 
@@ -105,11 +105,8 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>内容主要来自 Walter Rudin《数学分析原理》第七章函数序列与函数项级数</p>
-<span id="more"></span>
-
-<p><img src="https://pic4.zhimg.com/80/v2-8acdbe49c2318087203d642c29a69693.png" alt="Image"></p>
-<h1 id="对Stone-Weierstrass定理的简单讨论"><a href="#对Stone-Weierstrass定理的简单讨论" class="headerlink" title="对Stone-Weierstrass定理的简单讨论"></a>对Stone-Weierstrass定理的简单讨论</h1><h3 id="Weierstrass的逼近"><a href="#Weierstrass的逼近" class="headerlink" title="Weierstrass的逼近"></a>Weierstrass的逼近</h3><blockquote>
+        <p><img src="https://pic4.zhimg.com/80/v2-8acdbe49c2318087203d642c29a69693.png" alt="Image"></p>
+<h2 id="Weierstrass的逼近"><a href="#Weierstrass的逼近" class="headerlink" title="Weierstrass的逼近"></a>Weierstrass的逼近</h2><blockquote>
 <p>$\textbf{Theorem(Weierstrass).}\quad$ 如果 $f$ 是 $[a,b]$ 上的一个连续实函数，那么便有实多项式 $P_n$ 的序列使得<br>$$<br>\lim\limits_{n\to \infty} P_n(x) &#x3D; f(x)<br>$$</p>
 <p>在 $[a,b]$ 上一致地成立，对于连续复函数也可以用复多项式逼近</p>
 </blockquote>
@@ -131,7 +128,7 @@
 <p>$\text{(a)} $ $\frac{1}{2\pi}\int_{-\pi}^\pi K_n(x) ,\mathrm{d}x &#x3D; 1$​<br>$\text{(b)} $ $\frac{1}{2\pi}\int_{-\pi}^\pi K_n(x) ,\mathrm{d}x$ 关于 $n$ 是有界的<br>$\text{(c)} $ 在任意一个邻域之外积分为零 $\int_{\delta\le|x|\le\pi}|K_n(x)|,\mathrm{d}x \to 0$</p>
 <p>那么我们就称之为好核。满足这样条件的”好核”具有**单位逼近性(approximation to identity)*<em>，也就是说<br>$$<br>\lim\limits_{n\to \infty} (K_n</em> f)(x) &#x3D; f(x)<br>$$</p>
 <p>当然这些性质是基于对傅里叶分析的研究而提出的，不过其中的思想对于我们理解本定理的构造是有参考价值的，本题证明中的 $Q_n$ 就是构造了这样的一个具有类似好核性质的卷积核。</p>
-<h3 id="Stone对Weierstrass的推广"><a href="#Stone对Weierstrass的推广" class="headerlink" title="Stone对Weierstrass的推广"></a>Stone对Weierstrass的推广</h3><p>首先给出一个原始逼近定理的推论，这个推论是接下来推广定理所需要的全部结论（也因此我们其实可以通过其他的路径去证明这个推广的定理）</p>
+<h2 id="Stone对Weierstrass的推广"><a href="#Stone对Weierstrass的推广" class="headerlink" title="Stone对Weierstrass的推广"></a>Stone对Weierstrass的推广</h2><p>首先给出一个原始逼近定理的推论，这个推论是接下来推广定理所需要的全部结论（也因此我们其实可以通过其他的路径去证明这个推广的定理）</p>
 <blockquote>
 <p>$\textbf{Corollary.}\quad$ 可以用多项式函数一致逼近 $f(x) &#x3D; |x|$</p>
 </blockquote>
@@ -177,7 +174,7 @@
 <p>于是这样的 $h$ 就能够满足<br>$$<br>|h(x) - f(x)| &lt;\varepsilon<br>$$</p>
 <p>因为 $\mathscr B$ 是一致闭集，所以第四步得到的结论就可以导出定理。</p>
 <p><strong>讨论&amp;补充 :</strong> 这个定理可以推广到复数上，只需要 $\mathscr A$ 满足自伴性质，也就是对共轭运算保持封闭性。</p>
-<h3 id="问题-x2F-应用"><a href="#问题-x2F-应用" class="headerlink" title="问题&#x2F;应用"></a>问题&#x2F;应用</h3><p>下面以问题的形式介绍 $\text{Stone-Weierstrass}$ 定理的推广和应用</p>
+<h2 id="问题-x2F-应用"><a href="#问题-x2F-应用" class="headerlink" title="问题&#x2F;应用"></a>问题&#x2F;应用</h2><p>下面以问题的形式介绍 $\text{Stone-Weierstrass}$ 定理的推广和应用</p>
 <blockquote>
 <p>$\textbf{1.}\quad$ 如果 $f$ 在 $[0,1]$ 上连续，而且<br>$$<br>\int_0^1 f(x) x^n ,\mathrm{d}x &#x3D; 0, (n &#x3D; 0,1,2,\cdots)<br>$$</p>
 <p>证明 $f(x) &#x3D; 0$ 在 $[0,1]$ 上成立</p>
@@ -212,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/18/new-post/" data-id="clfdcx3hf00017kh23d8570vg" data-title="new post" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/03/18/new-post/" data-id="clfdcz8910001t0h27k5g53q6" data-title="对Stone-Weierstrass定理的简单讨论" class="article-share-link">Share</a>
       
       
       
@@ -286,7 +283,7 @@
       <ul>
         
           <li>
-            <a href="/2023/03/18/new-post/">new post</a>
+            <a href="/2023/03/18/new-post/">对Stone-Weierstrass定理的简单讨论</a>
           </li>
         
           <li>

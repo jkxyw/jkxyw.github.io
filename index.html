@@ -91,7 +91,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/03/18/new-post/">new post</a>
+      <a class="p-name article-title" href="/2023/03/18/new-post/">对Stone-Weierstrass定理的简单讨论</a>
     </h1>
   
 
@@ -99,16 +99,111 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>内容主要来自 Walter Rudin《数学分析原理》第七章函数序列与函数项级数</p>
-        
-          <p class="article-more-link">
-            <a href="/2023/03/18/new-post/#more">Read More</a>
-          </p>
-        
+        <p><img src="https://pic4.zhimg.com/80/v2-8acdbe49c2318087203d642c29a69693.png" alt="Image"></p>
+<h2 id="Weierstrass的逼近"><a href="#Weierstrass的逼近" class="headerlink" title="Weierstrass的逼近"></a>Weierstrass的逼近</h2><blockquote>
+<p>$\textbf{Theorem(Weierstrass).}\quad$ 如果 $f$ 是 $[a,b]$ 上的一个连续实函数，那么便有实多项式 $P_n$ 的序列使得<br>$$<br>\lim\limits_{n\to \infty} P_n(x) &#x3D; f(x)<br>$$</p>
+<p>在 $[a,b]$ 上一致地成立，对于连续复函数也可以用复多项式逼近</p>
+</blockquote>
+<p>这是 $\text{Weierstrass}$ 最早发现的逼近定理的形式。</p>
+<p><strong>证明 :</strong> 不失一般性地假定 $[a,b] &#x3D; [0,1]$ 并且假设 $f(0) &#x3D; f(1) &#x3D; 0$ ，否则令 $$<br>g(x) &#x3D; f(x) - f(0) - x[f(1)-f(0)]\quad (0\le x\le 1)$$</p>
+<p>我们再补充定义 $f$ 在 $[0,1]$ 以外地区间上取 $0$ 那么该函数在实轴上一致连续。</p>
+<p>取<br>$$<br>Q_n(x) &#x3D; \frac{(1-x^2)^n}{\int_{-1}^1 (1 - x^2)^n ,\mathrm{d}x}<br>$$</p>
+<p>现在令<br>$$<br>P_n(x) &#x3D; \int_{0}^1 f(t) Q_n(t-x) ,\mathrm{d}t<br>$$</p>
+<p>注意到这样构造出来的 $P_n(x)$ 是关于 $x$ 多项式。虽然这是一个显然的结论，但是对卷积不熟悉的人可能会产生一定的困惑，所以这里详细展开一下：事实上注意到 $x$ 是变量，所以把 $Q_n$ 写成关于 $x$ 的多项式：<br>$$<br>\begin{aligned}<br>P_n(x) &amp;&#x3D; \int_{0}^1 f(t) Q_n(t-x) ,\mathrm{d}t \<br>&amp;&#x3D; \int_{0}^1 f(t) \sum\limits_{k &#x3D; 0} a_k(t) x^k ,\mathrm{d}t\<br>&amp;&#x3D; \sum\limits_{k &#x3D; 0} \left[\int_{0}^1 f(t) \sum\limits_{k &#x3D; 0} a_k(t) ,\mathrm{d}t\right]x^k<br>\end{aligned}<br>$$</p>
+<p>于是我们就可以试图证明 $P_n$ 逼近 $f$ ，为了完成这一点我们需要一些小小的铺垫，对于任取的 $\varepsilon &gt; 0$ 由函数的连续性取得 $\delta &gt; 0$ 使得 $|y - x| &lt; \delta$ 时 $f(y) &gt; f(x) - \frac{\varepsilon}{2}$ 。同时假设 $M &#x3D; \sup |f(x)|$</p>
+<p>为了完成这个证明我们现在还需要铺垫 $Q_n$ 的性质，也就是估计 $\int_{-1}^1 (1 - x^2)^n ,\mathrm{d}x$ 的数量级：<br>$$<br>\begin{aligned}<br>\int_{-1}^1 (1 - x^2)^n ,\mathrm{d}x &amp;&#x3D; 2\int_0^1(1- x^2)^n,\mathrm{d}x\<br>&amp;\ge 2 \int_0^{\frac{1}{\sqrt n}} (1 - x^2)^n ,\mathrm{d}x\<br>&amp;\ge 2 \int_0^{\frac{1}{\sqrt{n}}} (1 - nx^2) ,\mathrm{d}x\<br>&amp;&#x3D;\frac{4}{3\sqrt{n}}<br>\end{aligned}<br>$$</p>
+<p>这样就把 $Q_n(0)$ 数量级控制在了 $\sqrt{n}$ 。对于任意一个 $\delta$ 在邻域 $(-\delta,\delta)$ 之外有<br>$$<br>Q_n(x) \le\sqrt n(1 - \delta ^ 2) ^n<br>$$</p>
+<p>这也就是说在这个邻域之外 $Q_n(x)$ 一致收敛到 $0$ ，这样我们就能开始最后的逼近。<br>$$<br>\begin{aligned}<br>\left| P_n(x) - f(x) \right| &amp;&#x3D; \left| \int_{-1}^1  [f(x + t) - f(x)] Q_n(t) ,\mathrm{d}t\right|  \<br>&amp;\le \int_{-1}^1 |f(x + t) - f(x)|Q_n(t),\mathrm{d}t \<br>&amp;\le 4M\sqrt{n}(1 - \delta ^ 2) ^ n + \frac{\varepsilon}{2}<br>\end{aligned}<br>$$</p>
+<p>这样对于足够大的 $n$ 上式小于 $\varepsilon$ ，这也就证明了本定理。</p>
+<p><strong>评注&amp;补充 :</strong> 我刚刚看到这一段证明的时候我非常好奇选取这样的 $Q_n$ 的动机是什么呢？我个人认为 $\text{Rudin}$ 在这个部分并没有把这个问题讲清楚。幸好我同时在读 $\text{Stein}$ 的傅里叶分析导论，其中作者提出的 $\text{Good Kernal}$ 的概念在很大程度上解答了我的这个疑惑。实际上本定理的证明想法和 $\text{Stein}$ 证明 $\text{Fourier}$ 级数收敛性时使用的方法如出一辙。</p>
+<p>我们首先观察 $Q_n(x)$ 这个函数，会发现这个函数在 $0$ 点呈现”峰值”的样貌，$\text{Rtein}$ 书中用 $\text{peaky}$ 来形容这种性质。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-1b8781df3394870ddf4cfd178ad485af" alt="Image"></p>
+<p>于是这里我们阐述 $\text{Good Kernal}$ 的概念：对于任意一组卷积核 $K_n$ 如果有</p>
+<p>$\text{(a)} $ $\frac{1}{2\pi}\int_{-\pi}^\pi K_n(x) ,\mathrm{d}x &#x3D; 1$​<br>$\text{(b)} $ $\frac{1}{2\pi}\int_{-\pi}^\pi K_n(x) ,\mathrm{d}x$ 关于 $n$ 是有界的<br>$\text{(c)} $ 在任意一个邻域之外积分为零 $\int_{\delta\le|x|\le\pi}|K_n(x)|,\mathrm{d}x \to 0$</p>
+<p>那么我们就称之为好核。满足这样条件的”好核”具有**单位逼近性(approximation to identity)*<em>，也就是说<br>$$<br>\lim\limits_{n\to \infty} (K_n</em> f)(x) &#x3D; f(x)<br>$$</p>
+<p>当然这些性质是基于对傅里叶分析的研究而提出的，不过其中的思想对于我们理解本定理的构造是有参考价值的，本题证明中的 $Q_n$ 就是构造了这样的一个具有类似好核性质的卷积核。</p>
+<h2 id="Stone对Weierstrass的推广"><a href="#Stone对Weierstrass的推广" class="headerlink" title="Stone对Weierstrass的推广"></a>Stone对Weierstrass的推广</h2><p>首先给出一个原始逼近定理的推论，这个推论是接下来推广定理所需要的全部结论（也因此我们其实可以通过其他的路径去证明这个推广的定理）</p>
+<blockquote>
+<p>$\textbf{Corollary.}\quad$ 可以用多项式函数一致逼近 $f(x) &#x3D; |x|$</p>
+</blockquote>
+<p>现在我们知道，多项式能够一致地逼近任意连续函数，因此现在希望把多项式地一些能够使逼近成立的性质提取出来，我们希望探究怎么样的一族函数能够使得逼近成立。</p>
+<blockquote>
+<p>$\textbf{Definition.}\quad$ 我们称定义在集合 $E$ 上的复函数族 $\mathscr A$ 称为<strong>代数</strong>如果满足以下条件：<br>$\ \text{ i)} $ 对于任意 $f,g\in\mathscr A$ 有 $f+g\in\mathscr A$<br>$\text{ ii)} $ 对于任意 $f,g\in\mathscr A$ 有 $f g\in\mathscr A$<br>$\text{iii)} $ 对于任意 $f\in\mathscr A$ 和常数 $c$ 有 $cf\in\mathscr A$<br>换言之就是满足对加法、乘法、数乘的封闭性。</p>
+<p>如果族 $\mathscr A$ 中存在一列函数 $f_n$ 一致收敛到 $f$ 那么 $f$ 可以认为是 $\mathscr A$ 的一致极限函数（这个词是我自己造的，如有不当请批评）。如果所有一致极限函数都在 $\mathscr A$ 中那么称 $\mathscr A$ 是<strong>一致闭的</strong>。$\mathscr A$ 的一切一致极限函数构成的函数族被称为<strong>一致闭包</strong>。</p>
+</blockquote>
+<p>显然所有多项式构成的集合就是一个代数，因此原始的定理可以被叙述成 $[a,b]$ 上的连续函数集是 $[a,b]$ 上的多项式集的一致闭包，我们接下来要探究的问题就是怎么样的一个代数他的一直闭包是全体连续函数。</p>
+<p>仿照点集拓扑中的理论（读者自证不难），容易证明<strong>一致闭包是一致闭的</strong>。</p>
+<p>接下来再追加几个关于函数族的定义</p>
+<blockquote>
+<p>$\textbf{Definition.}\quad$ 如果对于任意 $x_1,x_2\in E$ 存在一个函数 $f\in\mathscr A$ 使得 $f(x_1)\neq f(x_2)$ ，那么我们称 $\mathscr A$ 能<strong>分离（区分）</strong> $E$ 。如果对于任意 $x\in E$ 存在一个函数 $f\in\mathscr A$ 使得 $f(x) \neq 0$ 那么我们称 $\mathscr A$ <strong>不在 $E$ 上消失</strong>。</p>
+</blockquote>
+<p>这两个关于函数族的条件看起来很弱，实际上通过简单的代数推导我们可以发现二者可以组合出较强的结论。</p>
+<blockquote>
+<p>$\textbf{Theorem.}\quad$ 设 $\mathscr A$ 是定义在集合 $E$ 上的函数的代数， $\mathscr A$ 能分离中的点并且在上不消失，那么对于任意的 $x_1,x_2\in E$ 和任意的常数 $c_1,c_2$ 一定存在一个 $f \in \mathscr A$ 使得<br>$$<br>f(x_1)&#x3D;c_1,\ f(x_2)&#x3D;c_2<br>$$</p>
+</blockquote>
+<p><strong>证明 :</strong> $\mathscr A$ 中一定存在函数 $g,h,k$ 满足<br>$$<br>g(x_1)\neq g(x_2),\ h(x_1) \neq 0,\ k(x_2) \neq 0<br>$$</p>
+<p>令<br>$$<br>u &#x3D; [g-g(x_1)]k, v &#x3D; [g-g(x_2)]h<br>$$</p>
+<p>最后取 $f &#x3D; \frac{c_1v}{v(x_1)} + \frac{c_2u}{u(x_2)}$ 就可以满足条件</p>
+<blockquote>
+<p>$\textbf{Theorem(Stone).}\quad$ $\mathscr A$ 是紧集合 $K$ 上的实连续函数的代数，如果他能区分点并不消失，$\mathscr A$ 的一致闭包 $\mathscr B$ 由 $K$ 上的全体连续实函数构成。</p>
+</blockquote>
+<p>$\text{rudin}$ 对这个定理的证明分成了四步</p>
+<p><strong>第一步</strong> 如果 $f\in\mathscr B$ 那么 $|f|\in\mathscr B$</p>
+<p>对于任意的实数 $\varepsilon &gt; 0$ 我们知道存在多项式 $p(x) &#x3D; \sum\limits_{i &#x3D; 0}^k a_i x^i$ 使得<br>$$<br>|p(x) - |x|| &lt;\varepsilon<br>$$</p>
+<p>也就是 $\left| \sum\limits_{i &#x3D; 0} ^ ka_if^i  - |f|\right|  &lt;\varepsilon$ 一致地成立</p>
+<p>我们又知道 $\sum\limits_{i &#x3D; 0} ^ ka_if^i \in\mathscr B$ 因此我们就证明了 $|f|\in\mathscr B$ </p>
+<p><strong>第二步</strong> 如果 $f, g\in\mathscr B$ 那么 $\max(f,g),\min(f,g)\in\mathscr B$</p>
+<p>应用第一步的结论这是显然的，只需注意到<br>$$<br>\max(f,g) &#x3D; \frac{f + g}{2}+\frac{|f-g|}{2}\<br>\min(f,g) &#x3D; \frac{f + g}{2}-\frac{|f-g|}{2}<br>$$</p>
+<p>这个结论可以被推广到任意<em>有限</em>个函数的最大最小运算。</p>
+<p><strong>第三步</strong> 对任意的实连续函数 $f$ 以及一点 $x \in K$ ，对于任意的 $\varepsilon &gt; 0$ ，便存在着一个函数 $g_x \in \mathscr B$ 满足 $g_x(x) &#x3D; f(x)$ 并且<br>$$<br>g_x(t) &gt; t - \varepsilon<br>$$</p>
+<p>由于 $\mathscr A$ 满足能区分点且不消失，那么 $\mathscr B$ 同样满足这个条件，那么对于任意的 $y \in K$ 我们能够找到 $h_y\in \mathscr B$ 使得<br>$$<br>h_y(x) &#x3D; f(x),\quad h_y(y) &#x3D; f(y)<br>$$</p>
+<p>那么根据连续性，一定存在一个包含 $y$ 的开集 $V_y$ 使得<br>$$<br>h_y(t) &gt; f(t) - \varepsilon\quad(t\in V_y)<br>$$</p>
+<p>根据 $K$ 的紧集性质，这一族开覆盖一定存在有限子覆盖使得<br>$$<br>K \subset V_{y_1}\cup \cdots\cup V_{y_n}<br>$$</p>
+<p>于是只需要取<br>$$<br>g_x &#x3D; \max(h_{y_1},\cdots,h_{y_n})<br>$$</p>
+<p>就可以知道这是一个符合条件的构造。</p>
+<p><strong>第四步</strong> 给定一个实连续函数 $f$ 和 $\varepsilon &gt; 0$ ，那么存在一个函数 $h \in\mathscr B$ 使得<br>$$<br>|h(x) - f(x)| &lt;\varepsilon<br>$$</p>
+<p>对于每一个 $x\in K$ 选取一个满足第三步条件的 $g_x$ 由于 $g_x$ 的连续性存在开集 $V_x$ 使得<br>$$<br>g_x(t) &gt; f(t) + \varepsilon\quad(t\in V_x)<br>$$</p>
+<p>同样可以取有限开覆盖<br>$$<br>K \subset V_{x_1}\cup \cdots\cup V_{x_n}<br>$$</p>
+<p>取<br>$$<br>h &#x3D; \min(g_{x_1},\cdots,g_{x_n})<br>$$</p>
+<p>于是这样的 $h$ 就能够满足<br>$$<br>|h(x) - f(x)| &lt;\varepsilon<br>$$</p>
+<p>因为 $\mathscr B$ 是一致闭集，所以第四步得到的结论就可以导出定理。</p>
+<p><strong>讨论&amp;补充 :</strong> 这个定理可以推广到复数上，只需要 $\mathscr A$ 满足自伴性质，也就是对共轭运算保持封闭性。</p>
+<h2 id="问题-x2F-应用"><a href="#问题-x2F-应用" class="headerlink" title="问题&#x2F;应用"></a>问题&#x2F;应用</h2><p>下面以问题的形式介绍 $\text{Stone-Weierstrass}$ 定理的推广和应用</p>
+<blockquote>
+<p>$\textbf{1.}\quad$ 如果 $f$ 在 $[0,1]$ 上连续，而且<br>$$<br>\int_0^1 f(x) x^n ,\mathrm{d}x &#x3D; 0, (n &#x3D; 0,1,2,\cdots)<br>$$</p>
+<p>证明 $f(x) &#x3D; 0$ 在 $[0,1]$ 上成立</p>
+</blockquote>
+<p><strong>想法 :</strong> 只需注意到<br>$$<br>\int_0^1 f^2(x) ,\mathrm{d}x &#x3D; 0<br>$$</p>
+<p>更一般地，如果代数 $\mathscr A$ 在 $C[0,1]$ 上稠密，并且对于任意 $g \in \mathscr A$ 都有 $\int_0^1 f(x)g(x) &#x3D; 0,\mathrm{d}x$ ，那么也可以得到 $f(x) &#x3D; 0$ 在 $[0,1]$ 上成立。</p>
+<blockquote>
+<p>$\textbf{2.}\quad$ 尝试在不证明 $\text{Weierstrass}$ 逼近的情况下证明 $\text{Stone-Weierstrass}$ 定理。设 $P_0 &#x3D; 0$ 定义<br>$$<br>P_{n + 1}(x) &#x3D; P_n(x) + \frac{x^2-P^2_n(x)}{2}<br>$$</p>
+<p>证明这个函数列在 $[-1,1]$ 一致收敛到 $|x|$</p>
+</blockquote>
+<p><strong>证明 :</strong> 注意到关系式<br>$$<br>\begin{aligned}<br>P_{n + 1} (x) - |x| &amp;&#x3D; P_n(x) - |x| - \frac{(P_n(x) - |x|)(P_n(x) + |x|)}{2} \<br>&amp;&#x3D;(P_n(x) - |x|)\left(1 - \frac{P_x(x) + |x|}{2}\right)\<br>\end{aligned}<br>$$</p>
+<p>于是 我们可以得到不等关系 $P_n(x) \le P_{n + 1}(x) \le|x|$ 。进一步地，<br>$$<br>\begin{aligned}<br>P_n (x) - |x| &amp;\le |x|\left(1 - \frac{|x|}{2}\right)^n\<br>&amp; \le \frac{2}{n} \left(\frac{n}{n + 1}\right)^{n + 1} \<br>&amp; &lt; \frac{2}{n}\<br>\end{aligned}<br>$$</p>
+<p>这样就可以证明一致收敛性。</p>
+<blockquote>
+<p>$\textbf{3 (Trigonometric).}\quad$ 周期为 $2\pi$ 的连续函数可以用三角多项式逼近，即考虑形如<br>$$<br>\sum\limits_{n &#x3D; 0}^\infty (A_n \sin nx+B_n \cos nx)<br>$$</p>
+<p>这样一族函数可以一致得逼近任何 $2\pi-$周期实函数</p>
+</blockquote>
+<p><strong>想法 :</strong> 在紧集 $[0,2\pi]$ 上考虑这个问题，显然这是一个<em>代数</em>，并且由于其包含常函数因此这个代数不在 $[0,2\pi]$ 上消失。然而这一代数可以分离几乎任意两个点除了 $0,2\pi$ ，因此这个代数并不是稠密的也就不符合定理得作用条件。考虑到 $f$ 得周期性我们知道这两个点本质上是等价的，我们需要将 $x$ 和 $x+2\pi$ 等同起来。</p>
+<p>为了做到这一点我们通过映射 $x\to e^{ix}$ 把 $\mathbb R$ 上周期为 $2\pi$ 的函数当作复平面单位圆 $T$ 上的函数（也就是考虑 $f(x) &#x3D; g(e^{ix})$，其中 $g$ 是定义在单位圆上的函数）。这样一来三角多项式 $P(e^{ix}) &#x3D;\sum\limits_{-N}^N c_n e^{inx}$ 是一个自伴代数，并且他在 $T$ 上分离点、不消失。这就满足复数情形下的 $\text{Stone-Weierstrass}$ 逼近定理。</p>
+<p><strong>讨论 :</strong> 假如考虑函数族 $P(e^{ix}) &#x3D;\sum\limits_0^N c_n e^{inx}$ 那么虽然这个函数族能分离点且不消失，但他不是一个自伴代数，因此不能满足条件。</p>
+<blockquote>
+<p>$\textbf{4 (Parseval).}\quad$ 这是一个在傅里叶分析中出现的重要定理，这给出了相比 3 中结论更精确的逼近。（下面假定读者了解傅里叶级数相关概念，这些定义可以在数学分析原理第八章中找到）<br>如果 $f$ 和 $g$ 是周期为 $2\pi$ 且黎曼可积的函数并且有<br>$$<br>f(x) \sim \sum_{-\infty}^{\infty} c_n e^{i n x}, \quad g(x) \sim \sum_{-\infty}^{\infty} \gamma_n e^{i n x}<br>$$</p>
+<p>那么可以证明<br>$$<br>\begin{aligned}<br>\lim <em>{N \rightarrow \infty} \frac{1}{2 \pi} \int</em>{-\pi}^\pi\left|f(x)-s_N(f ; x)\right|^2 ,\mathrm{d} x&amp;&#x3D;0\<br>\frac{1}{2 \pi} \int_{-\pi}^\pi f(x) \overline{g(x)} ,\mathrm{d} x&amp;&#x3D;\sum_{-\infty}^{\infty} c_n \bar{\gamma}<em>n, \<br>\frac{1}{2 \pi} \int</em>{-\pi}^\pi|f(x)|^2 ,\mathrm{d} x&amp;&#x3D;\sum_{-\infty}^{\infty}\left|c_n\right|^2 .<br>\end{aligned}<br>$$</p>
+<p>其中 $s_N(f;x) &#x3D; \sum\limits_{-N}^N c_n e^{inx}$ </p>
+</blockquote>
+<p><strong>证明 :</strong> 式$(1)$由三角版本 $\text{Weierstrass}$ 逼近定理是显然成立的，式$(3)$可以在式$(2)$取 $f &#x3D; g$ 得到。下面证明$(2)$</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad\frac{1}{2 \pi} \int_{-\pi}^\pi f(x) \overline{g(x)} ,\mathrm{d} x - \sum_{-N}^N c_n \bar{\gamma}<em>n\<br> &amp;&#x3D; \frac{1}{2 \pi} \int</em>{-\pi}^\pi f(x) \overline{g(x)} ,\mathrm{d} x - \sum_{-\infty}^\infty c_n e^{inx} \sum_{-N}^N\bar{\gamma}<em>n e^{-inx} \<br>&amp;&#x3D; \frac{1}{2 \pi} \int</em>{-\pi}^\pi f(x) \left(\overline{g(x)} - \sum_{-N}^N\bar{\gamma}_n e^{-inx}\right) ,\mathrm{d} x<br>\end{aligned}<br>$$</p>
+<p>于是根据 $(1)$ 知道上式在 $N \to \infty$ 时趋近 $0$，这就证明了我们想要的结论。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>$\text{Stone-Weierstrass}$ 定理也被应用在 $\text{Weyl}$ 判别准则的证明当中，后者被用来处理数列的一致分布问题。</p>
+<p>这个经典的定理还有其他的推广和应用，在以后的文章中可能会涉及。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/18/new-post/" data-id="clfdcx3hf00017kh23d8570vg" data-title="new post" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/03/18/new-post/" data-id="clfdcz8910001t0h27k5g53q6" data-title="对Stone-Weierstrass定理的简单讨论" class="article-share-link">Share</a>
       
       
       
@@ -161,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/18/hello-world/" data-id="clfdcx3hc00007kh22fdoe3k3" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/03/18/hello-world/" data-id="clfdcz88v0000t0h2bnjfdxz1" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -225,7 +320,7 @@
       <ul>
         
           <li>
-            <a href="/2023/03/18/new-post/">new post</a>
+            <a href="/2023/03/18/new-post/">对Stone-Weierstrass定理的简单讨论</a>
           </li>
         
           <li>
