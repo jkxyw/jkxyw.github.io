@@ -1,0 +1,435 @@
+\documentclass[UTF8]{article}
+\usepackage{graphicx,caption,fancyhdr,multirow,booktabs,amsmath,enumitem,amssymb,tabularx}
+\usepackage[UTF8]{ctex}
+\usepackage[a4paper,left=15mm,right=15mm,top=15mm,bottom=20mm]{geometry}
+\newcommand{\sector}[2]{\section*{#1}% \vspace*{-0.4em}
+\vspace*{-0.8em}\large{#2}% \vspace*{0em}
+\vspace*{-0.3em}
+}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+% 设置页面的环境,纸张大小,左右上下边距信息和行距
+
+% \linespread{0.65}
+
+\begin{document}
+\thispagestyle{empty}
+
+    \begin{center}
+    \bf\LARGE{《大学物理实验》实验报告}
+    \end{center}
+     
+    \begin{center}
+        \centering
+        \newcolumntype{Z}{>{\raggedleft\centering\arraybackslash}X}
+        \newcolumntype{Y}{>{\raggedleft\arraybackslash}X}
+        \begin{tabularx}{\textwidth}{XZY}
+            {院系：22级少年班学院}&{学号：PB22000195}&{实验人姓名：王元叙}\\
+            {}&{}&{实验时间：3月28日}\\
+        \hline      
+        \end{tabularx}
+    \end{center}
+    
+
+% 居中标题
+% {\centering\section*{Section Zero}}
+
+\begin{center}
+    \Large{\bf \Large 实验一\quad 单摆法测量重力加速度}
+\end{center}
+
+\sector{实验目的}{
+
+\begin{enumerate}
+    \item[1)] 利用经典的单摆周期公式和给出的实验器材测量本地的重力加速度\(g\)。
+    \item[2)] 学会应用误差均分原则选用适当的仪器和测量方法。
+    \item[3)] 学习累计放大法的原理及应用。
+    \item[4)] 分析基本误差的来源，提出进行修正和估算的方法。
+\end{enumerate}
+
+}\sector{实验仪器}{
+    \noindent
+    提供的器材及参数：
+
+    游标卡尺,米尺,电子秒表,支架,细线,钢球,摆幅测量标尺
+
+    % 摆长\(l\thickapprox 70.00cm\),
+    摆球直径\(D\thickapprox 2.00cm\)，
+    % 摆动周期\(T\thickapprox 1.700s\),
+    卷尺精度\(\Delta_{\text{尺}}\thickapprox 0.2cm\)，
+    卡尺精度\(\Delta_{\text{卡}}\thickapprox 0.002cm\)，\\
+    千分尺精度\(\Delta_{\text{千}}\thickapprox 0.001cm\)，
+    秒表精度\(\Delta_{\text{秒}}\thickapprox 0.01s\)，
+    人开、停秒表总反应时间\(\Delta_{\text{人}}\thickapprox 0.2s\)。
+    
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=100mm]{pics/figure.pdf}
+    \caption{单摆测重力加速度实验装置}
+\end{figure}
+
+
+}\sector{实验原理}{
+
+\begin{enumerate}
+    
+    \item \textsl{单摆法基本原理}
+    
+    理想单摆周期公式为：
+    \[
+    T=2 \pi \sqrt{\frac{l}{g}\left[1+\frac{d^2}{20 l^2}-\frac{m_0}{12 m}\left(1+\frac{d}{2 l}+\frac{m_0}{m}\right)+\frac{\rho_0}{2 \rho}+\frac{\theta^2}{16}\right]}
+    \]
+
+    在本实验中，$\Delta g / g <1\%$，故摆球的几何形状、摆的质量、空气浮力、摆角等因素对测量造成的修正项均是高阶小量，可忽略。
+    
+    由一级单摆近似周期公式\(\displaystyle T=2\pi\sqrt{\frac{L}{g}}\)得:
+    \[ g=\frac{4\pi^{2}L}{T^{2}}. \tag{*}\] 
+
+    通过测量单摆周期$T$，摆长$L$，求出重力加速度$g$的大小。
+
+
+
+    \item \textsl{利用不确定度均分原理设计}
+    
+    对\((*)\)式按最大不确定度估算，有
+    \[
+        \frac{\Delta g}{g}=\frac{\Delta L}{L}+2\frac{\Delta T}{T}
+    \]
+    
+    故在一定范围内增大摆长$L$可以减小误差，提高测量精度。
+
+    根据实验仪器说明，$50cm < L < 100cm$，而为了减小摆球直径对摆长的影响，同时防止周期过长影响实验，故选用\(L\thickapprox 75cm\)，估测\(T\thickapprox 1.75s\)。
+
+    考虑到\(L=l+D/2\),由不确定度均分原理，
+    \[
+        \displaystyle \frac{\Delta L}{L}=\frac{\Delta l+\Delta D/2}{l+D/2}<0.5\%\:,\: 
+        \displaystyle 2\frac{\Delta T}{T}<0.5\%
+    .\]
+    
+    将\(L=l+D/2\)和\(\Delta T=\Delta_{\text{秒}}+\Delta_{\text{人}}\)的粗测值代入,于是要求
+    \[
+        \begin{aligned}
+            \Delta l &< 0.5\%\times l \thickapprox  0.35cm,\\
+            \Delta D &< 0.5\%\times 2D \thickapprox  0.2mm,\\
+            T_{\text{测}} &> 2\Delta T/0.5\% \thickapprox  84s\thickapprox 50T. 
+        \end{aligned}
+    \]
+    
+    使用钢卷尺测量摆长，不需要用游标卡尺测量摆球直径，可直接对摆长进行测量。摆动时间测量50个周期。
+
+\end{enumerate}
+
+}\sector{实验步骤}{
+
+    \begin{enumerate}
+        \item 按照实验要求组装好实验仪器, 将电子秒表归零;
+        \item 多次（本实验中 5 次）测量摆球直径, 摆线长度;
+        \item 将摆球拉离平衡位置且无初速度释放,使其小角度（小于 5 度）在平面内摆动, 尽量避免出现圆锥摆;
+        \item 多次（本实验中 5 次）用电子秒表测量单摆 50 次全振动所需时间;
+        \item 整理仪器,并打乱支架平衡、标尺及平面镜位置;
+        \item 记录并分析处理数据, 进行误差分析, 计算重力加速度$g$。
+    \end{enumerate}
+
+}\sector{实验数据}{\vspace{1em}
+
+\begin{center}
+    \normalsize{
+        \newcolumntype{Y}{>{\centering\arraybackslash}X}
+        \begin{tabularx}{1\textwidth}{|Y|Y|Y|Y|Y|Y|Y|}
+            \hline
+            测量序号
+                &  1&  2&  3&  4&  5&平均\\
+            \hline
+            $L$/cm
+                &   68.10&   68.00&   67.95&   68.00&   68.03&   68.016\\
+            \hline
+            $T_{\text{测}}$/s
+                &   82.84&   82.88&   83.00&   83.00&   82.85&   82.915\\
+            \hline
+            $T$/s
+                &   1.6568&   1.6576&   1.6600&   1.6600&   1.6570&   1.6583\\
+            \hline
+        \end{tabularx}
+        \vspace{0.3em}
+    
+        表1:原始数据
+    }
+\end{center}
+\vspace{-1em}
+
+}\sector{结果分析}{
+
+摆线长度l的平均值
+$$
+\overline{l}=\frac{1}{n}\sum_{i=1}^{n}l_i=\frac{68.10+68.00+67.95+68.00+68.03}{5}\,\mathrm{cm}=68.016\,\mathrm{cm}
+$$
+
+摆长L的标准差
+$$
+\begin{aligned}
+\sigma_{l}&=\sqrt{\frac{1}{n-1}\sum_{i=1}^n\left(l_i-\overline{l}\right)^2}\\
+&=0.055045\,\mathrm{cm}
+\end{aligned}
+$$
+
+摆长L的B类不确定度
+$$
+\Delta_{B,l}=\sqrt{\Delta_\text{仪}^2+\Delta_\text{估}^2}=\sqrt{0.2^2+0.05^2}\,\mathrm{cm}=0.20616\,\mathrm{cm}
+$$
+
+摆长L的展伸不确定度
+$$
+\begin{aligned}
+U_{l,P}&=\sqrt{\left(t_P\frac{\sigma_{l}}{\sqrt{n}}\right)^2+\left(k_P\frac{\Delta_{B,l}}{C}\right)^2}\\
+&=\sqrt{\left(2.78\times\frac{0.055045}{\sqrt{5}}\right)^2+\left(1.96\times\frac{0.20616}{3}\right)^2}\,\mathrm{cm}\\
+&=0.15108\,\mathrm{cm},P=0.95
+\end{aligned}
+$$
+
+周期T的平均值
+$$
+\overline{T}=\frac{1}{n}\sum_{i=1}^{n}T_i=\frac{1.6568+1.6576+1.6600+1.6600+1.6570}{5}\,\mathrm{s}=1.6583\,\mathrm{s}
+$$
+
+周期T的标准差
+$$
+\begin{aligned}
+\sigma_{T}&=\sqrt{\frac{1}{n-1}\sum_{i=1}^n\left(T_i-\overline{T}\right)^2}\\
+&=0.0015975\,\mathrm{s}
+\end{aligned}
+$$
+
+周期T的B类不确定度
+$$
+\Delta_{B,T}=\sqrt{\Delta_\text{仪}^2+\Delta_\text{估}^2}=\sqrt{0.0002^2+0.004^2}\,\mathrm{s}=0.004005\,\mathrm{s}
+$$
+
+周期T的展伸不确定度
+$$
+\begin{aligned}
+U_{T,P}&=\sqrt{\left(t_P\frac{\sigma_{T}}{\sqrt{n}}\right)^2+\left(k_P\frac{\Delta_{B,T}}{C}\right)^2}\\
+&=\sqrt{\left(2.78\times\frac{0.0015975}{\sqrt{5}}\right)^2+\left(1.96\times\frac{0.004005}{3}\right)^2}\,\mathrm{s}\\
+&=3.285 \times 10^{-3}\,\mathrm{s},P=0.95
+\end{aligned}
+$$
+
+根据经典的单摆公式，重力加速度g
+$$
+g=\frac{4 \pi^{2} L}{T^{2}}=\frac{4\times \pi^2\times 0.68016}{1.6583^2}\,\mathrm{m/s^2}=9.7646\,\mathrm{m/s^2}
+$$
+
+综上所述，重力加速度g的延伸不确定度
+$$
+\begin{aligned}
+U_{g,P}&=\sqrt{\left(\frac{\partial g}{\partial L}U_{L,P}\right)^2+\left(\frac{\partial g}{\partial T}U_{T,P}\right)^2}\\
+&=\sqrt{\left(\frac{4 \pi^{2}}{T^{2}}U_{L,P}\right)^2+\left(- \frac{8 \pi^{2} L}{T^{3}}U_{T,P}\right)^2}\\
+&=\sqrt{\left(\frac{4\times \pi^2}{1.6583^2}\times 0.0015108\right)^2+\left(-\frac{8\times \pi^2\times 0.68016}{1.6583^3}\times 0.003285\right)^2}\,\mathrm{m/s^2}\\
+&=0.044352\,\mathrm{m/s^2},P=0.95
+\end{aligned}
+$$
+
+重力加速度g最终结果：
+$$
+g=\left(9.765 \pm 0.044\right)\,\mathrm{m/s^2} ,P=0.95
+$$
+
+由此可知测量结果中 $\frac{\Delta g}{g} < 1\%$ 符合实验设计的条件。
+
+}\sector{思考题}{
+
+    \textbf{讨论}\ \textsl{分析实验测量误差的主要来源，提出可能的改进方案。}
+
+    \begin{enumerate}[itemindent=1.3em,parsep=5pt,label=\arabic*.]
+        \item 使用人开、停秒表导致较大误差，应当改进为使用光电门自动对摆进行计数。
+        
+        \item 考虑在单摆周期公式计算角度的一阶小量得到 $T=2 \pi \sqrt{\frac{l}{g}}\left(1+\frac{1}{4} \sin ^2 \frac{\theta}{2}\right)$ ，可知起摆角度过大导致测量结果偏小。
+        使用修正后的公式带入 $\theta = 5^\circ$ 进行修正得到 $g = 9.802\,\mathrm{m/s^2}$ ，更接近合肥地区参考重力加速度 $g = 9.7947\,\mathrm{m/s^2}$ 。
+        本实验中，起摆时角度达到 $5^{\circ}$ 左右造成较大误差，应当减小摆动角度改为 $3.5^{\circ}$ 。
+        
+        \item 起摆时有垂直平面方向的微小扰动，产生圆锥摆现象造成测量重力加速度结果较大。应当在起摆后观察几个周期确保并无明显圆锥摆现象后，待摆动稳定再开始测量周期。
+        
+        \item 摆线不细而导致重力中心高度误差：当摆线较粗或者有扭曲时，摆的实际重心位置可能偏高或偏低，从而导致重力加速度的计算误差。
+        应当使用细而直的摆线，或者对摆线进行光滑处理，以确保摆的中心位置与摆线垂线的交点精确可靠。
+        
+        \item 空气阻力对实验结果影响较大。应当确保尽量减小摆球的空气阻力，尽可能在室内无风环境下进行实验，使用光滑的球面，或者对摆球进行表面涂层等。
+        
+    \end{enumerate}
+
+}
+
+\newpage
+
+
+\thispagestyle{empty}
+
+    \begin{center}
+    \bf\LARGE{《大学物理实验》实验报告}
+    \end{center}
+     
+    \begin{center}
+        \centering
+        \newcolumntype{Z}{>{\raggedleft\centering\arraybackslash}X}
+        \newcolumntype{Y}{>{\raggedleft\arraybackslash}X}
+        \begin{tabularx}{\textwidth}{XZY}
+            {院系：22级少年班学院}&{学号：PB22000195}&{实验人姓名：王元叙}\\
+            {}&{}&{实验时间：3月28日}\\
+        \hline      
+        \end{tabularx}
+    \end{center}
+    
+
+% 居中标题
+% {\centering\section*{Section Zero}}
+
+\begin{center}
+    \Large{\bf \Large 实验二\quad 自由落体法测量重力加速度}
+\end{center}
+
+\sector{实验目的}{
+    \noindent
+    利用物体仅在重力作用下作自由落体运动测量本地重力加速度 $g$
+
+}\sector{实验仪器}{
+    \noindent
+    自由落体实验装置见下图。立柱底座的调节螺栓用于调节竖直，立柱上端有一电磁铁，
+    用于吸住小钢球。电磁铁一旦断电，小球即作
+    自由落体运动。由于电磁铁有剩磁，因此小球
+    下落的初始时间不准确（最大不确定度约 20 
+    ms）。立柱上装有两个可上下移动的光电门，
+    其位置可利用立柱上标定的刻度读出。数字毫秒计显示 3 个
+    值，分别对应：从电磁铁断电到小球通过光电
+    门 1 的时间差、从电磁铁断电到小球通过光电
+    门 2 的时间差、小球通过两个光电门的时间差，
+    单位为 ms。
+
+}\sector{实验原理}{
+\noindent
+\begin{minipage}{0.65\textwidth}
+\noindent
+根据牛顿运动定律，自由落体的运动方程为：
+\[
+h  = \frac{1}{2}gt^2 \tag*{(**)}
+\]
+其中 $h$ 是下落距离，$t$ 是下落时间。但在实际工作中，$t$ 的测量精度不高, 利用 $(**)$ 式很难精确测量重力加速度 $g$ 。本实验用卷尺测 $h$, 采用双光电门法测 $t$, 其原理见图 1 。光电门 1 的位置 固定, 即小球通过光电门 1 时的速度 $v_0$ 保持不变, 小球通过光电门 1 与光电门 2 的高度差为 $h_i$, 时间差为 $t_i$, 改变光电门 2 的位置, 则有:
+$$
+\begin{aligned}
+h_1= & v_0 t_1+\frac{1}{2} g \mathrm{t}_1^2 \\
+h_2= & v_0 t_2+\frac{1}{2} g \mathrm{t}_2^2 \\
+& \ldots \cdots \\
+h_i= & v_0 t_i+\frac{1}{2} g \mathrm{t}_i^2
+\end{aligned}
+$$
+两端同时除以 $t_i$ :
+$$
+\begin{gathered}
+\overline{v_1}=\frac{h_1}{t_1}=v_0+\frac{1}{2} g t_1 \\
+\overline{v_2}=\frac{h_2}{t_2}=v_0+\frac{1}{2} g t_2 \\
+\overline{v_i}=\frac{h_i}{t_i}=v_0+\frac{1}{2} g t_i
+\end{gathered}
+$$
+测出系列 $h_i, t_i$ ， 利用线性拟合即可求出当地的重力加速度 $g$ 。
+\end{minipage}
+\hfill
+\begin{minipage}{0.35\textwidth}
+    \centering
+    \includegraphics[width=0.8\linewidth]{pics/figure.png}
+    \captionof{figure}{单摆测重力加速度实验装置}
+\end{minipage}
+
+}\sector{实验步骤}{
+
+    \begin{enumerate}
+        \item 利用铅锤线调整立柱使其垂直于地面，并使光电门与水平地面平行，固定光电门 1，接下来光电门1位置不变。打开数字毫秒计，重置后将小球吸于电磁铁上;
+        \item 先根据立柱上的刻度测出光电门 1 与光电门 2 的高度。接着待小球稳定，
+        让电子毫秒计开始工作（即让电磁铁消磁）。纸杯接住落下的小球，在毫秒计显示屏上读数，
+        依次记下通过光电门 1、2 的时间与时间差;
+        \item 调整光电门 2 的高度，重复以上过程 6 次;
+        \item 整理仪器,并打乱底座平衡、标尺，断开电源;
+        \item 记录并分析处理数据, 进行误差分析, 计算重力加速度$g$。
+    \end{enumerate}
+
+}\sector{实验数据}{\vspace{1em}
+
+\begin{center}
+    \normalsize{
+        \newcolumntype{Y}{>{\centering\arraybackslash}X}
+        \begin{tabularx}{1\textwidth}{|Y|Y|Y|Y|Y|Y|Y|}
+            \hline
+            测量序号
+                &  1&  2&  3&  4&  5& 6\\
+            \hline
+            $L_1$/cm
+                &   20&   20&   20&   20&   20&   20\\
+            \hline
+            $L_2$/cm
+                &   50&   55&   60&   65&   70&   75\\
+            \hline
+            $\Delta T$/ms
+                &   116.2&   131.4&   146.2&   160.4&   174.1&   187.3\\
+            \hline
+        \end{tabularx}
+        \vspace{0.3em}
+    
+        表2:原始数据
+    }
+\end{center}
+\vspace{-1em}
+
+}\sector{结果分析}{
+\noindent
+利用公式 $v_i = \frac{h_i}{t_i} = v_0 + \frac{1}{2}gt_i$，使用线性拟合方法。\\
+得到斜率、截距分别为
+$$
+k=4.9595\,\mathrm{m/s^2},\ b=2.009\,\mathrm{m/s}
+$$
+线性拟合的相关系数
+$$
+r=\frac{\overline{tv}-\overline{t}\cdot\overline{v}}{\sqrt{\left(\overline{t^2}-\overline{t}^2\right)\left(\overline{v^2}-\overline{v}^2\right)}}=0.99983861
+$$
+斜率标准不确定度
+$$
+u_k=\lvert \overline{k}\rvert\cdot\sqrt{\left(\frac{1}{r^2}-1\right)/(n-2)}=0.044556\,\mathrm{m/s^2}
+$$
+截距标准不确定度
+$$
+u_b=u_k\cdot\sqrt{\overline{t^2}}=0.006885\,\mathrm{m/s}
+$$
+重力加速度
+$$
+g=2 k=2\times 4.9595\,\mathrm{m/s^2}=9.9191\,\mathrm{m/s^2}
+$$
+于是得到本地重力加速度测量值为
+$$
+g=\left(9.91 \pm 0.04\right)\,\mathrm{m/s^2}
+$$
+作图如下：
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=100mm]{pics/data.png}
+    \caption{自由落体测重力加速度线性拟合图示}
+\end{figure}
+
+
+}\sector{思考题}{
+    
+    \noindent\textbf{讨论}\ \textsl{在实际工作中，为什么利用 $h = \frac{1}{2}gt^2$ 很难精确测量重力加速度g？}
+    
+    直接使用该公式测量重力加速度，需要确保的是开始计时的时候正好就是小球刚开始下落的时候。比如在该实验装置中，打开计时器后有剩磁，消磁时间是不可知的，故难以确定下落的初始时间，并且最开始一段距离的运动并不是自由落体运动。
+
+    \noindent\textbf{讨论}\ \textsl{为了提高测量精度，光电门 $1$ 和光电门 $2$ 的位置应如何选取？}
+
+    光电门 $1$ 与顶部的距离不宜过短，防止开始运动时在电磁铁的剩磁作用下，小球并未开始做自由落体运动使测量结果不准确；同时不应当过长，防止速度过大、空气阻力作用与小球使相对误差增大。本实验中我选取 $20$cm。
+
+    同样是出于减小空气阻力作用于小球带来的误差的原因，光电门 $2$ 与光电门 $1$ 的距离同样不应当过长。但是该距离也不应当过短，否则在时间与长度不确定度不变的情况下，相对误差显著增大，使得测量数据产生较大的误差。本实验中选取 $30$cm-$55$cm。
+
+    \noindent\textbf{讨论}\ \textsl{利用本实验装置，你还能提出其他测量重力加速度 $g$ 的实验方案吗？}
+    
+    由于实验室器材的限制，一种可行方式是保持光电门 2 不动，改变光电门 1 位置，同样使用线性回归方法测量重力加速度。
+
+    如果光电门可以连接其他电子器件，则可以测出小球半径后，利用同一个光电门读出小球经过光电门的时间，
+近似计算出小球经过光电门时的瞬时速度。以相同的条件释放，同时多次改变光电门的位置，从而得出小
+球在各个高度的瞬时速度，利用线性拟合的方法也可求出重力加速度的值。
+
+}
+
+\end{document}
