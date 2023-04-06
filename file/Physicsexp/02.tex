@@ -243,7 +243,7 @@
 			\vspace*{0.3em}
 		\end{tablehere}
 
-		相较于
+		相较于使用1$\mu$F电容的情况，无论是单电容滤波还是$\pi$型滤波电路的纹波系数都显著下降。可以猜想大电容可以增强滤波电路的滤波效果，这一点将在高阶实验中进一步证明。
 
 		\subsection{进阶实验：信号源频率对滤波效果的影响}
 		
@@ -251,8 +251,8 @@
 
 		\begin{tablehere}
 			\caption*{\bf 表3 不同信号源频率下滤波电路的纹波系数}
-			\centering
 			\noindent
+			\begin{center}
 			\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
 			\hline
 					   & 频率/Hz     & 10     & 20     & 50     & 100    & 200   & 400   & 1000  & 2000  \\ \hline
@@ -263,18 +263,21 @@
 					   & 交流电压有效值/V & 0.66   & 0.67   & 0.73   & 0.90   & 1.14  & 1.35  & 1.61  & 1.68  \\ \cline{2-10}
 					   & 纹波系数      & 98.48  & 116.41 & 98.63  & 67.78  & 17.54 & 29.63 & 3.48  & 1.01  \\ \hline
 			\end{tabular}
+			\end{center}
 			\vspace*{1em}
 		\end{tablehere}
 
 		根据以上数据，绘制纹波系数与频率的关系曲线，如图 3.1 所示。
 
 		\begin{figurehere}
-			\vspace*{1em}
+			\vspace*{0.3em}
 			\centering
 			\includegraphics[width=0.6\linewidth]{pics/graph1.png}
 			\caption*{\bf 图3.1 单电容滤波、$\pi$型 RC 滤波的纹波系数-频率曲线}
-			\vspace*{0.3em}
+			\vspace*{0.8em}
 		\end{figurehere}
+
+		从图中可以看出，随着初始信号频率增大，纹波系数显著下降。这说明低频率信号是导致较大纹波的原因之一，而提高信号频率可以显著减小纹波带来的影响。
 
 		\subsection{高阶实验：电容对滤波效果的影响}
 
@@ -282,8 +285,8 @@
 
 		\begin{tablehere}
 			\caption*{\bf 表3 不同电容下滤波电路的纹波系数}
-			\centering
 			\noindent
+			\begin{center}
 			\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
 				\hline
 				频率/Hz     & 0.1   & 0.2   & 0.3   & 0.4   & 0.5   & 0.6   & 0.7   & 0.8   & 0.9   & 1.0   \\ \hline
@@ -291,19 +294,23 @@
 				交流电压有效值/V & 1.95  & 2.03  & 2.12  & 2.20  & 2.28  & 2.35  & 2.41  & 2.47  & 2.52  & 2.56  \\ \hline
 				纹波系数      & 61.03 & 53.69 & 47.17 & 41.36 & 35.96 & 32.34 & 28.63 & 26.72 & 24.21 & 22.66 \\ \hline
 			\end{tabular}
+			\end{center}
 			\vspace*{1em}
 		\end{tablehere}
 
+		\newpage
 		根据以上数据，绘制纹波系数与电容的关系曲线，如图 3.2 所示。
 
 		\begin{figurehere}
-			\vspace*{1em}
+			\vspace*{0.3em}
 			\centering
 			\includegraphics[width=0.6\linewidth]{pics/graph2.png}
 			\caption*{\bf 图3.2 单电容滤波的纹波系数-电容曲线}
-			\vspace*{0.3em}
+			\vspace*{0.8em}
 		\end{figurehere}
 		
+		从图中可以看出，纹波系数与电容负相关。
+
 	\section{思考题}
 		\subsection{整流、滤波的主要目的是什么？}
 
