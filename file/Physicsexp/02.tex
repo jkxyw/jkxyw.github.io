@@ -1,0 +1,331 @@
+\documentclass[10pt,a4paper]{article}	%字体、纸张
+\usepackage{xeCJK}	%中文
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=20mm]{geometry}	%页边距
+\usepackage{fancyhdr}	%页眉、页脚
+\usepackage{indentfirst}	%首行缩进
+\usepackage{graphicx}	%图片
+\usepackage{subfigure}	
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}	%公式对齐
+
+%————页眉、页脚设置————
+\thispagestyle{plain}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{PB22000195 王元叙}
+\fancyhead[L]{整流滤波电路及应用}	%————————————
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%————————————
+
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setlength{\parindent}{2em}
+
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+\makeatother
+
+\begin{document}
+	%————起始————
+	\vspace*{-5em}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{Picture//USTC}\\
+		\Large \textbf{大学物理-基础实验｜实验报告}\\[5mm]
+
+		\normalsize
+		\begin{tabular}{ll}
+			姓名 & \textbf{王元叙}\\
+			学号 & \textbf{PB22000195}\\
+			班级 & \textbf{22级少年班学院5班}\\
+			日期 & \textbf{2023年4月5日}\\	
+		\end{tabular}\\[5mm]
+
+		\LARGE \textbf{整流滤波电路及应用}\\[5mm]	
+
+	\end{center}
+	%————————————
+
+	%————正文————
+	\section{实验目的}
+
+	\begin{enumerate}
+		\item[1)] 学习整流滤波电路的基本工作原理，了解交流信号的几个参数。
+		\item[2)] 掌握面包板的使用、整流滤波电路的搭建。
+		\item[3)] 通过示波器观察输出信号来加深对整流滤波认识。
+		\item[4)] 计算纹波系数，探究影响滤波效果的因素。
+	
+	\end{enumerate}
+
+	\section{实验仪器}
+    信号发生器，示波器；数字电压表 (直流电压档、交流电压档)；面包板，二极若干管，电容（1µF、10µF
+    各若干），电阻（1k$\Omega$2 个），电容箱一只，导线若干。
+
+	\section{实验原理}
+
+		\subsection{整流电路}
+
+			整流电路的作用是把交流电转换成直流电，严格地讲是单方向大脉动直流电，而滤波电路的作用是把大脉动直流电处理成平滑的脉动小的直流电。
+			利用半导体的单项导电性可以实现整流。
+			
+			\begin{enumerate}
+				\item 半波整流
+				
+				使用单个二极管，利用其正向导通、反向截止的特性，将大小、方向随时间变化的交流电转换为单方向的脉动直流电，如图1.1所示。
+				
+				
+				\item 全波整流
+				
+				半波整流的缺点是只利用了交流电半个周期的正弦信号，整流效率较低。使用四个二极管组成桥式电路，使交流电的正负半周信号都被利用，较半波整流，全波桥式整流使直流电压脉动大大减少、平均电压提高一倍 (忽略整流内阻时)，如图1.2所示。
+
+			\end{enumerate}
+
+			\begin{figurehere}
+				\centering
+				\begin{minipage}[t]{0.48\textwidth}
+				\centering
+				\includegraphics[width=0.95\linewidth]{pics/figure1.png}
+				\caption*{\bf 图1.1 半波整流电路}
+				\end{minipage}
+				\begin{minipage}[t]{0.48\textwidth}
+				\centering
+				\includegraphics[width=0.95\linewidth]{pics/figure2.png}
+				\caption*{\bf 图1.2 桥式全波整流电路}
+				\end{minipage}
+			\end{figurehere}
+
+		\subsection{滤波电路}
+			
+			经过整流后的电压（电流）仍然是有“脉动”的直流电，为了减少被波动，通常要加滤波器，常用的滤波电路有电容、电感滤波等。本实验中使用电容滤波器。
+			
+			\begin{enumerate}
+				\item 单电容RC滤波器
+				
+				电容滤波器是利用电容充电和放电来使脉动的直流电变成平稳的直流电。由电容两端的电压不能突变的特点，达到输出波形趋于平滑的目的。如图1.3所示。
+				\item $\pi$型RC滤波器
+				
+				为进一步减少脉动，再加一级电容滤波滤波形成$\pi$型RC滤波电路，进行多级滤波。如图1.4所示。
+
+			\end{enumerate}
+
+			\begin{figurehere}
+				\centering
+				\begin{minipage}[t]{0.48\textwidth}
+				\centering
+				\includegraphics[width=0.95\linewidth]{pics/figure3.png}
+				\caption*{\bf 图1.3 全波整流单电容滤波电路}
+				\end{minipage}
+				\begin{minipage}[t]{0.48\textwidth}
+				\centering
+				\includegraphics[width=0.95\linewidth]{pics/figure4.png}
+				\caption*{\bf 图1.4 $\pi$型RC滤波电路}
+				\end{minipage}
+			\end{figurehere}
+		\subsection{纹波与纹波系数}
+
+		实验中涉及到的直流电压是由交流电压经整流、滤波后得到的。由于滤波不完全，直流电平之上就会附着包含周期性与随机性成分的杂波信号，这就是纹波。电源中携带的纹波会在电器上产生谐波，降低电源的使用效率。
+
+		纹波系数是指负载上交流电压的有效值与直流电压之比，是表征直流电源品质的一个重要参数。除了与整流滤波电路品质有关之外，与外电路负载关系也很大。
+		$$
+		\text { 纹波系数 } K_u=\frac{\text { 交流电压有效值 }}{\text { 直流电压 }} \times 100 \%
+		$$
+
+	\section{数据与分析}
+		\subsection{基础实验：整流、滤波实验}
+			\subsubsection{整流实验}
+
+			设置型号源输出纯正弦波形，$U_{p-p} = 10\text{V}, f = 400\text{Hz}$ ，用示波器观察初始信号、半波整流信号、桥式全波整流信号波形。如图所示：
+			
+			\begin{figurehere}
+				\vspace*{1em}
+				\centering
+				\begin{minipage}[t]{0.48\textwidth}
+				\centering
+				\includegraphics[width=0.95\linewidth]{pics/1.jpg}
+				\caption*{\bf 图2.1 初始信号、半波整流波形}
+				\end{minipage}
+				\begin{minipage}[t]{0.48\textwidth}
+				\centering
+				\includegraphics[width=0.95\linewidth]{pics/2.jpg}
+				\caption*{\bf 图2.2 全波整流波形}
+				\end{minipage}
+			\end{figurehere}
+
+			\subsubsection{滤波实验}
+
+			在上面连接的桥式全波整流电路中分别使用 $1\mu \text{F}$ 电容连接单电容RC滤波电路、$\pi$型RC滤波电路，用示波器观察信号得到波形图如下：
+
+			\begin{figurehere}
+				\vspace*{1em}
+				\centering
+				\begin{minipage}[t]{0.48\textwidth}
+				\centering
+				\includegraphics[width=0.95\linewidth]{pics/3.jpg}
+				\caption*{\bf 图2.3 1$\mu \text{F}$ 单电容滤波}
+				\end{minipage}
+				\begin{minipage}[t]{0.48\textwidth}
+				\centering
+				\includegraphics[width=0.95\linewidth]{pics/4.jpg}
+				\caption*{\bf 图2.4 1$\mu \text{F}$ $\pi$型滤波}
+				\end{minipage}
+				\vspace*{0.3em}
+			\end{figurehere}
+
+			分别在电容滤波、π 型 RC 滤波电路中，用万用表测量负载上的直流电压和交流电压有效值，并计算纹波系数，测量数据及计算结果如表 1 所示。
+
+			
+			\begin{tablehere}
+				\caption*{\bf 表1 使用 1$\mu$F 电容的滤波电路的纹波系数}
+				\large
+				\noindent
+				\begin{center}
+				\begin{tabular}{|c|c|c|c|}
+					\hline
+					&  交流电压有效值/V&直流电压/V&    纹波系数\\
+					\hline
+					单电容滤波
+					&  0.59&  2.55&  23.14\%\\
+					\hline
+					$\pi$型RC滤波
+					&  0.20&  1.35&  14.81\%\\
+					\hline
+				\end{tabular}
+				\end{center}
+				\vspace*{0.3em}
+			\end{tablehere}
+
+		\subsection{提升实验：电容对滤波效果的影响}
+		在全波整流电路中分别使用 $10\mu \text{F}$ 电容连接单电容RC滤波电路、$\pi$型RC滤波电路，用示波器观察信号得到波形图如下：
+
+		\begin{figurehere}
+			\vspace*{1em}
+			\centering
+			\begin{minipage}[t]{0.48\textwidth}
+			\centering
+			\includegraphics[width=0.95\linewidth]{pics/5.jpg}
+			\caption*{\bf 图2.5 10$\mu \text{F}$ 单电容滤波}
+			\end{minipage}
+			\begin{minipage}[t]{0.48\textwidth}
+			\centering
+			\includegraphics[width=0.95\linewidth]{pics/6.jpg}
+			\caption*{\bf 图2.6 10$\mu \text{F}$ $\pi$型滤波}
+			\end{minipage}
+			\vspace*{0.3em}
+		\end{figurehere}
+
+		分别在电容滤波、π 型 RC 滤波电路中，用万用表测量负载上的直流电压和交流电压有效值，并计算纹波系数，测量数据及计算结果如表 1 所示。
+
+		\begin{tablehere}
+			\caption*{\bf 表2 使用 1$\mu$F 电容的滤波电路的纹波系数}
+			\large
+			\noindent
+			\begin{center}
+			\begin{tabular}{|c|c|c|c|}
+				\hline
+				&  交流电压有效值/V&直流电压/V&    纹波系数\\
+				\hline
+				单电容滤波
+				&  0.19&  3.09&  6.15\%\\
+				\hline
+				$\pi$型RC滤波
+				&  0.00148&  1.58&  0.09\%\\
+				\hline
+			\end{tabular}
+			\end{center}
+			\vspace*{0.3em}
+		\end{tablehere}
+
+		相较于
+
+		\subsection{进阶实验：信号源频率对滤波效果的影响}
+		
+		固定电容 1$\mu$F，改变信号源频率从 10-2000Hz，分别在电容滤波、$\pi$型 RC 滤波电路中，测量并计算纹波系数，结果如表3所示。
+
+		\begin{tablehere}
+			\caption*{\bf 表3 不同信号源频率下滤波电路的纹波系数}
+			\centering
+			\noindent
+			\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+			\hline
+					   & 频率/Hz     & 10     & 20     & 50     & 100    & 200   & 400   & 1000  & 2000  \\ \hline
+			\multirow{3}*{单电容滤波}      & 直流电压/V    & 1.32   & 1.55   & 1.52   & 1.47   & 1.34  & 1.08  & 0.64  & 0.37  \\ \cline{2-10}
+					   & 交流电压有效值/V & 1.26   & 1.27   & 1.25   & 1.34   & 1.60  & 2.06  & 2.65  & 2.89  \\ \cline{2-10}
+					   & 纹波系数      & 104.76 & 122.05 & 121.60 & 109.70 & 83.75 & 52.43 & 24.15 & 12.80 \\ \hline
+			\multirow{3}*{$\pi$型RC滤波} & 直流电压/V    & 0.65   & 0.78   & 0.72   & 0.61   & 0.40  & 0.20  & 0.056 & 0.017 \\ \cline{2-10}
+					   & 交流电压有效值/V & 0.66   & 0.67   & 0.73   & 0.90   & 1.14  & 1.35  & 1.61  & 1.68  \\ \cline{2-10}
+					   & 纹波系数      & 98.48  & 116.41 & 98.63  & 67.78  & 17.54 & 29.63 & 3.48  & 1.01  \\ \hline
+			\end{tabular}
+			\vspace*{1em}
+		\end{tablehere}
+
+		根据以上数据，绘制纹波系数与频率的关系曲线，如图 3.1 所示。
+
+		\begin{figurehere}
+			\vspace*{1em}
+			\centering
+			\includegraphics[width=0.6\linewidth]{pics/graph1.png}
+			\caption*{\bf 图3.1 单电容滤波、$\pi$型 RC 滤波的纹波系数-频率曲线}
+			\vspace*{0.3em}
+		\end{figurehere}
+
+		\subsection{高阶实验：电容对滤波效果的影响}
+
+		使用电容箱，固定频率 400Hz 和峰-峰值 10V，调节电容大小从0.1到1.0$\mu$F，在单电容滤波电路中，测量并计算纹波系数，结果如表 3.2 所示。
+
+		\begin{tablehere}
+			\caption*{\bf 表3 不同电容下滤波电路的纹波系数}
+			\centering
+			\noindent
+			\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+				\hline
+				频率/Hz     & 0.1   & 0.2   & 0.3   & 0.4   & 0.5   & 0.6   & 0.7   & 0.8   & 0.9   & 1.0   \\ \hline
+				直流电压/V    & 1.19  & 1.09  & 1.00  & 0.91  & 0.82  & 0.76  & 0.69  & 0.66  & 0.61  & 0.58  \\ \hline
+				交流电压有效值/V & 1.95  & 2.03  & 2.12  & 2.20  & 2.28  & 2.35  & 2.41  & 2.47  & 2.52  & 2.56  \\ \hline
+				纹波系数      & 61.03 & 53.69 & 47.17 & 41.36 & 35.96 & 32.34 & 28.63 & 26.72 & 24.21 & 22.66 \\ \hline
+			\end{tabular}
+			\vspace*{1em}
+		\end{tablehere}
+
+		根据以上数据，绘制纹波系数与电容的关系曲线，如图 3.2 所示。
+
+		\begin{figurehere}
+			\vspace*{1em}
+			\centering
+			\includegraphics[width=0.6\linewidth]{pics/graph2.png}
+			\caption*{\bf 图3.2 单电容滤波的纹波系数-电容曲线}
+			\vspace*{0.3em}
+		\end{figurehere}
+		
+	\section{思考题}
+		\subsection{整流、滤波的主要目的是什么？}
+
+		整流的主要目的是将交流电信号转换为单向电信号（即直流电信号），
+		对于很多需要直流电源运作的电路来说这是很必要的，如电动机和其他电器设备。
+		因此需要使用整流电路将交流电转换为直流电。
+
+		滤波的主要目的是消除电路中的噪声和干扰。
+		整流只是将交流电变换为单方向的脉动电压和电流，含有较大的交流成分。因此通常还需在整流电路的输出端接入滤波电路，以滤除交流分量，从而得到较平滑的直流电压，也就是品质较高的直流电源。
+		在电路中，输入电信号可能包含许多具有不同频率的成分，其中含有的噪声和干扰可以干扰电路的正常操作，
+		并导致电路输出的电信号不准确。使用滤波电路可以去除这些噪声和干扰成分，
+		从而提高电路的精度和可靠性。
+
+		\subsection{滤波电路中电容是否越大越好？请根据实验过程简述理由。}
+
+		不是的。
+
+		在实验过程中可以观察到，随着电容增大，直流电平的纹波系数逐渐减小。但另一方面，这种逐渐减小的趋势随着电容增大逐渐放缓，因此在电容较大的时继续增大电容并不会显著降低纹波，相比之下选择设计更好的滤波电路会是更好的选择（例如将单电容滤波换为$\pi$型滤波）。大电容能够储存更大量的电荷，导致充放电时间增长，带来更大的负载，同时更大的寄生电感也会影响滤波效果本身。
+		
+		另一方面使用的电容的增大会导致电容本身体积显著增大，影响电路连接以及空气流通和散热问题。同时大电容带来的较高成本，在实际工作中也是不可接受的。
+	
+		在实际工作用，应当综合考虑多方面因素选择合适的电容。
+	%————————————
+
+\end{document}
