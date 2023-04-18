@@ -1,0 +1,357 @@
+\documentclass[10pt,a4paper]{article}	%字体、纸张
+\usepackage{xeCJK}	%中文
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=20mm]{geometry}	%页边距
+\usepackage{fancyhdr}	%页眉、页脚
+\usepackage{indentfirst}	%首行缩进
+\usepackage{graphicx}	%图片
+\usepackage{subfigure}	
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}	%公式对齐
+
+\newcommand{\nexp}{声速测量}
+
+%————页眉、页脚设置————
+\thispagestyle{plain}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{PB22000195 王元叙}
+\fancyhead[L]{\nexp}	%————————————
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%————————————
+
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setlength{\parindent}{2em}
+\renewcommand\arraystretch{1.3}
+
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+\makeatother
+
+\begin{document}
+	%————起始————
+	\vspace*{-5em}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{Picture//USTC}\\
+		\Large \textbf{大学物理-基础实验｜实验报告}\\[5mm]
+
+		\normalsize
+		\begin{tabular}{ll}
+			姓名 & \textbf{王元叙}\\
+			学号 & \textbf{PB22000195}\\
+			班级 & \textbf{22级少年班学院5班}\\
+			日期 & \textbf{2023年4月5日}\\	
+		\end{tabular}\\[5mm]
+
+		\LARGE \textbf{\nexp}\\[5mm]	
+
+	\end{center}
+	%————————————
+
+	%————正文————
+	\section{实验目的}
+
+	\begin{enumerate}
+		\item[1)] 使用压电陶瓷超声换能器来测定超声波在气体、液体和固体中的传播速度；
+		\item[2)] 理解并学会运用压电效应（正逆效应）；
+		\item[3)] 理解驻波的性质，并正确运用其进行声速测量；
+		\item[4)] 理解利用利萨如图的性质进行声速测量的原理。
+	
+	\end{enumerate}
+
+	\section{实验仪器}
+    SV5 型声速测量仪（如图所示，主要部件包括信号源和声速测试仪（含水槽））、双踪示波器、不同长度的有机玻璃棒、不同长度的黄铜棒、游标卡尺等
+	
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.55\linewidth]{pics/equip.png}
+		\caption*{\bf 图1: SV5型声速测量仪}
+	\end{figurehere}
+
+	\section{实验原理}
+	\subsection{驻波法测量}
+	声波在介质（空气、液体）中传播，带动介质发生振动；当振动区间的长度是半波长的整数倍时，可
+	以形成稳定的驻波；压电传感器可以测量某个场点的振幅，当压电传感器处在驻波波腹位置时，可测得振
+	幅极大值；由此可以测出半波长 $\lambda / 2$
+
+	信号源同时给出信号的频率 $f$，利用波动关系 $v = \lambda f$ 可计算声速大小。
+	\subsection{相位比较法测量}
+	当信号发生器的信号经过介质传播被重新接收后，与直接输出的信号间会产生相位差 $\Delta \varphi$。将两信号
+	分别接入示波器的两个输入通道 CH1 和 CH2，在 CH2 上可观测到利萨如图形。当利萨如图从直线演化
+	为斜率相反的直线时，信号接收器即经过了半个波长的距离。由此可测出半波长 $\lambda / 2$；
+
+	信号源同时给出信号的频率 $f$，利用波动关系 $v = \lambda f$ 可计`算声速大小。
+	\subsection{时差法测量}
+	声速测量仪允许加载固体介质。信号源发出脉冲波，测量仪会给出脉冲波通过介质所需的时间 $\Delta t$；利
+	用游标卡尺可测出固体介质（固体棒）的长度 L，利用速度的定义式 $v = {L}/{\Delta t}$ 可计算固体介质中声速大
+	小
+	\section{实验步骤}
+	\begin{enumerate}
+		\item 正确连接示波器到声速测量仪和示波器。固定传感器探头位置，调节信号源频率直至示波器上观察测到振幅达到最大值。记录下此时信号源的频率 f 作为谐振频率。
+		\item 记录实验室空气温度。
+		\item 维持谐振频率，首先连接驻波法测量的电路。
+		\item 单方向转动鼓轮移动可动探头；观察示波器波形变化，记录下振幅达到极值时声速测量仪上游标对应的位置。共记录 12 组。
+
+		\item 将水槽中盛水至液面线，连接相位比较法测量的电路。
+		\item 单方向转动鼓轮移动可动探头；观察示波器上利萨如图图形变化，记录下利萨如图呈现直线时声速测量仪上游标对应的位置。共记录 8 组。
+		
+		\item 分别将信号源模式改为金属和非金属，发出脉冲波；连接时差法测量的电路。
+		\item 分别测量不同长度黄铜棒和有机玻璃棒长度，读取时间。
+		\item 整理器材，结束实验，对以上测量的数据进行处理和误差分析。
+	\end{enumerate}
+
+
+	\section{实验数据}
+	在以下实验中，确定正弦波信号源频率为 $f=36853\mathrm{~Hz}$，空气温度为 $t=27^\circ \mathrm{C}$
+	在给定温度下计算空气中理论声速：
+	$$
+	v_s=v_0 \sqrt{1+\frac{t}{273.15}}=347.45 \mathrm{~m} / \mathrm{s}
+	$$
+	\subsection{驻波法测量空气中声速 \& 相位比较法测量液体中声速}
+	
+	\begin{center}\begin{minipage}[t]{0.9\textwidth}
+	\begin{minipage}[t]{0.48\textwidth}
+	\begin{tablehere}
+		\caption*{\bf 表1  空气中声速测量（驻波法）实验数据}
+		\vspace*{-1em}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.95\linewidth}{|Y|Y|}
+				\hline
+				测量次数 & 读数/cm \\ \hline
+				1    & 1.190 \\ \hline
+				2    & 1.668 \\ \hline
+				3    & 2.146 \\ \hline
+				4    & 2.598 \\ \hline
+				5    & 3.086 \\ \hline
+				6    & 3.572 \\ \hline
+				7    & 4.042 \\ \hline
+				8    & 4.530 \\ \hline
+				9    & 4.992 \\ \hline
+				10   & 5.470 \\ \hline
+				11   & 5.948 \\ \hline
+				12   & 6.412 \\ \hline
+			\end{tabularx}
+		\end{center}
+	\end{tablehere}
+	\end{minipage}
+	\begin{minipage}[t]{0.48\textwidth}
+	\begin{tablehere}
+		\caption*{\bf 表2  水中声速测量（相位比较法）实验数据}
+		\vspace*{-1em}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.95\linewidth}{|Y|Y|}
+				\hline
+				测量次数 & 读数/cm  \\ \hline
+				1    & 5.194  \\ \hline
+				2    & 7.364  \\ \hline
+				3    & 9.462  \\ \hline
+				4    & 11.364 \\ \hline
+				5    & 13.148 \\ \hline
+				6    & 15.208 \\ \hline
+				7    & 17.444 \\ \hline
+				8    & 19464  \\ \hline
+			\end{tabularx}
+		\end{center}
+	\end{tablehere}
+	\end{minipage}
+	\end{minipage}\end{center}
+
+	\subsection{时差法测量固体中声速}
+
+
+	
+	\begin{center}\begin{minipage}[t]{0.9\textwidth}
+		\begin{minipage}[t]{0.48\textwidth}
+		\begin{tablehere}
+			\caption*{\bf 表3  黄铜棒中测量的数据}
+			\vspace*{-1em}
+			\noindent
+			\begin{center}
+				\newcolumntype{Y}{>{\centering\arraybackslash}X}
+				\begin{tabularx}{0.95\linewidth}{|Y|Y|}
+					\hline
+					长度/cm  & 用时/$\mu$s \\ \hline
+					17.948 & 57        \\ \hline
+					25.796 & 80        \\ \hline
+				\end{tabularx}
+			\end{center}
+		\end{tablehere}
+		\end{minipage}
+		\begin{minipage}[t]{0.48\textwidth}
+		\begin{tablehere}
+			\caption*{\bf 表4  有机玻璃棒中测量的数据}
+			\vspace*{-1em}
+			\noindent
+			\begin{center}
+				\newcolumntype{Y}{>{\centering\arraybackslash}X}
+				\begin{tabularx}{0.95\linewidth}{|Y|Y|}
+					\hline
+					长度/cm  & 用时/$\mu$s \\ \hline
+					22.802 & 133        \\ \hline
+					26.854 & 150        \\ \hline
+				\end{tabularx}
+			\end{center}
+		\end{tablehere}
+		\end{minipage}
+		\end{minipage}\end{center}
+
+	\section{实验结果分析}
+	
+	\subsection{驻波法测量空气中声速}
+
+	斜率
+	$$
+	m=0.47553\,\mathrm{cm}
+	$$
+
+	截距
+	$$
+	b=0.71355\,\mathrm{cm}
+	$$
+
+	线性拟合的相关系数
+	$$
+	r=\frac{\overline{nL}-\overline{n}\cdot\overline{L}}{\sqrt{\left(\overline{n^2}-\overline{n}^2\right)\left(\overline{L^2}-\overline{L}^2\right)}}=0.99999008
+	$$
+
+	斜率标准差
+	$$
+	s_m=\lvert m\rvert\cdot\sqrt{\left(\frac{1}{r^2}-1\right)/(n-2)}=0.00066983\,\mathrm{cm}
+	$$
+
+	截距标准差
+	$$
+	s_b=s_m\cdot\sqrt{\overline{n^2}}=0.0049298\,\mathrm{cm}
+	$$
+	
+	波长 $\lambda$ 
+	$$
+	\lambda =2 m=2\times 0.47553\,\mathrm{cm}=0.95106\,\mathrm{cm}
+	$$
+
+	波长 $\lambda$ 的延伸不确定度
+	$$
+	\begin{aligned}
+	U_{\lambda ,P}&=\sqrt{\left(\frac{\partial \lambda }{\partial m}U_{m,P}\right)^2}\\
+	&=\sqrt{\left(2U_{m,P}\right)^2}\\
+	&=\sqrt{\left(2\times 0.00066983\right)^2}\,\mathrm{cm}\\
+	&=1.3397 \times 10^{-3}\,\mathrm{cm},P=0.95
+	\end{aligned}
+	$$
+	
+	谐振频率的不确定度
+	$$
+	\Delta_{B,f}=0.001\,\mathrm{Hz}
+	$$
+	
+	声速 $v$
+	$$
+	v=f \lambda =350.5\,\mathrm{m/s}
+	$$
+
+	声速$v$的延伸不确定度
+	$$
+	\begin{aligned}
+	U_{v,P}&=\sqrt{\left(\frac{\partial v}{\partial \lambda }U_{\lambda ,P}\right)^2+\left(\frac{\partial v}{\partial f}U_{f,P}\right)^2}\\
+	&=\sqrt{\left(fU_{\lambda ,P}\right)^2+\left(\lambda U_{f,P}\right)^2}\\
+	&=0.49372\,\mathrm{m/s},P=0.95
+	\end{aligned}
+	$$
+
+	声速 $v$ 最终结果
+	$$
+	v=\left(350.5 \pm 0.5\right)\,\mathrm{m/s}
+	$$
+	
+	实验温度下声速的理论值 $v_t$
+	$$
+	v_{t}=v_{0} \sqrt{\frac{t}{t_{0}} + 1}=331.45 \sqrt{\frac{27}{273.15}+1}\,\mathrm{m/s}=347.45\,\mathrm{m/s}
+	$$
+
+	相对误差δ=0.88052\%
+	$$
+	\delta =\frac{\left|{v - v_{t}}\right|}{v_{t}}=\frac{\left|{\left(350.5-347.45\right)}\right|}{347.45}\,\mathrm{}=8.8052 \times 10^{-3}\,\mathrm{\%}
+	$$
+	
+
+	\begin{figurehere}
+		\vspace*{0.3em}
+		\centering
+		\includegraphics[width=0.6\linewidth]{pics/figure1.jpg}
+		\caption*{\bf 图2.1 气体中声速测量的最小二乘拟合图}
+		\vspace*{0.8em}
+	\end{figurehere}
+	
+
+	\subsection{相位比较法测量液体中声速}
+
+	直接读出斜率 $m=-2.016 \mathrm{~cm}$ 波长即为
+	$$
+	\bar{\lambda}=2|m|=4.0312 \mathrm{~cm} P=0.95
+	$$
+
+	于是声速测量结果即为 $v=\lambda f=1485.7 \mathrm{~m} / \mathrm{s}$
+
+	\begin{figurehere}
+		\vspace*{0.3em}
+		\centering
+		\includegraphics[width=0.6\linewidth]{pics/figure2.jpg}
+		\caption*{\bf 图2.2 水中声速测量的作图法拟合}
+		\vspace*{0.8em}
+	\end{figurehere}
+	
+	\subsection{时差法测量固体中声速}
+
+	金属棒，斜率 m = 0.3396cm/µs，于是得金属中声速为 v = 3396m/s
+
+	有机玻璃棒，斜率 m = 0.2383cm/µs，于是得有机玻璃中声速为 v = 2383m/s
+
+	\section{思考题}
+	\subsection{定性分析共振法测量时，声压振幅极大值随距离变长而减小的原因。}
+
+	声波在传播过程中的减弱现象与传播距离、声波频率和界面等因素有关。声波在介质（如空气，液体，
+固体）中传播时会因为被介质吸收、横向扩散而产生能量损耗；
+
+	实验中所用声波频率很高，力学知识表明，高频声波更容易被介质影响，其能量耗散也较大，因此在
+实验过程中即可观察到明显的振幅变化。
+
+	\subsection{声速测量中驻波法、相位法、时差法有何异同？	}
+
+	相同点：都利用压电陶瓷的正/逆压电效应进行实验\\
+	
+	不同点：
+	\begin{itemize}
+		\item[-]  原理不同：驻波法利用驻波测量半波长，相位法利用相位差的两个波形成利萨如图测量半波长。这两个实验中均使用波长计算声速，然而测量固体中声速的实验中使用长度除以时间的公式直接计算。
+		\item[-]  波源不同：驻波法和相位法都依靠谐振频率 $f$ 下的连续正弦，而时差法不需要调整频率，利用脉冲波；
+		\item[-]  测量标定方式不同：驻波法是通过观察声压振幅达到最大值，相位法是通过观察李萨如图形的周期
+		性变化，时差法是直接观察信号发生器上的时间显示。
+	\end{itemize}
+	\subsection{各种气体中的声速是否相同，为什么？	}
+	
+	根据气体声速经验公式：
+	$$
+	v=\sqrt{\frac{\gamma R T_0}{M}} \sqrt{\left(1+\frac{t}{273.15}\right)\left(1+\frac{0.3192 p_w}{p}\right)} \mathrm{m} / \mathrm{s}
+	$$
+
+	这表明气体声速受到气体绝热指数和摩尔质量以及湿度的影响，因此在同温同压情况下，不同气体声速也不相同
+	%————————————
+	\clearpage
+	\section*{附录: 原始数据}
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=\linewidth, height=0.9\textheight]{pics/origin.pdf}
+	\end{figurehere}
+\end{document}
