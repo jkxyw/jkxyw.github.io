@@ -1,0 +1,492 @@
+\documentclass[10pt,a4paper]{article}	%字体、纸张
+\usepackage{xeCJK}	%中文
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=20mm]{geometry}	%页边距
+\usepackage{fancyhdr}	%页眉、页脚
+\usepackage{indentfirst}	%首行缩进
+\usepackage{graphicx}	%图片
+\usepackage{textcomp}
+\usepackage{subfigure}	
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}	%公式对齐
+\usepackage{tikz-feynman}
+
+\newcommand{\nexp}{分光计的调节与使用}
+
+%————页眉、页脚设置————
+\thispagestyle{plain}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{PB22000195 王元叙}
+\fancyhead[L]{\nexp}	%————————————
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%————————————
+
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setlength{\parindent}{2em}
+\renewcommand\arraystretch{1.3}
+
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+\makeatother
+
+\begin{document}
+	%————起始————
+	\vspace*{-5em}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{Picture//USTC}\\
+		\Large \textbf{大学物理-基础实验｜实验报告}\\[5mm]
+
+		\normalsize
+		\begin{tabular}{ll}
+			姓名 & \textbf{王元叙}\\
+			学号 & \textbf{PB22000195}\\
+			班级 & \textbf{22级少年班学院5班}\\
+			日期 & \textbf{2023年4月18日}\\	
+		\end{tabular}\\[5mm]
+
+		\LARGE \textbf{\nexp}\\[5mm]	
+
+	\end{center}
+	%————————————
+
+	%————正文————
+	\section{实验目的}
+
+	\begin{enumerate}
+		\item 掌握分光计的调整技巧，并正确理解自准直调节法的原理；
+		\item 正确理解实验中使用的减小误差方法，包括粗调法、$\frac{1}{2}$调节法；
+		\item 学会利用分光计测量三棱镜顶角及最小偏转角，间接测量三棱镜材料折射率；
+		\item 学会利用折射率与波长的关系估计色散曲线。
+	
+	\end{enumerate}
+
+	\section{实验仪器}
+
+	分光计（主要由底座、平行光管、望远镜、载物台和读数圆盘五部分组成），汞灯，双面平面镜，三棱镜。
+
+	\section{实验原理}
+
+	\subsection{分光计的调整原理和方法}
+
+	调整分光计以达到如下要求：
+
+	\begin{enumerate}
+		\item 平行光管发出平行光；
+		\item 望远镜对平行光聚焦（即接收平行光）；
+		\item 望远镜、平行光管的光轴垂直仪器公共轴。
+	\end{enumerate}
+
+	其中，分光计仪器的精度调节\textbf{关键在于望远镜的调节}，载物台地调平和平行光管的调节依赖于望远镜的调节。
+	为达到这样的要求，使用的技术方法原理如下：
+	\begin{enumerate}
+		\item 使用目视调节和平面镜自准直调节法调节望远镜的望远镜光轴垂直仪器主轴
+		\item 在使用自准直方法调节时，使用各半调节法，快速找到正确的调节位置
+		\item 再将狭缝转向横向，将像调到中心横线上。这表明平行光管光轴已与望远镜光轴共线，所以也垂直仪器主轴。再将狭缝调成垂直，锁紧螺钉。
+		\item 使用先粗调再细调的方法加快调节速度。
+	\end{enumerate}
+
+	\subsection{测量三棱镜的顶角}
+	转动游标盘，使棱镜 AC 面正对望远镜，记下游标1和游标2的读数；转动游标盘，使棱镜 AB 面正对望远镜，记下游标1和游标2的读数；
+
+	分别计算对于游标读数的差值，取平均得到角度 $\Phi$ 的大小。如图1，计算其补角，即可得到顶角 $A$ 的大小。
+
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.50\linewidth]{pics/graph2.png}
+		\caption*{\bf 图1: 三棱镜顶角测量原理图}
+	\end{figurehere}
+
+	\subsection{用最小偏向角法测三棱镜材料的折射率}
+
+	
+	一束单色光以$i_1$角入射到$AB$ 面上，经棱镜两次折射后，从$AC$ 面折射出来，出射角为$i_2$。入射光
+	和出射光之间的夹角$\delta$ 称为偏向角。当棱镜顶角$A$ 一定时，偏向角$\delta$ 的大小随入射角$i_1$ 的变化而变化。
+	当$i_1 = i_2^{\prime} $时，$\delta$ 为最小。这时的偏向角称为最小偏向角，记作$\delta_{\rm min}$。由图2可以看出，这时
+	\[
+		i_1^{\prime}=\frac{A}{2} \quad \frac{\delta_{\rm min}}{2}=i_1-i_1^{\prime}=i_1-\frac{A}{2} \quad i_1=\frac{\delta_{\rm min}+A}{2}
+	\]
+
+	设材料折射率为$n$，则
+	\[
+		n= \frac{\sin i_1}{\sin\frac{A}{2}}=\frac{\sin\frac{\delta_{\rm min}+A}{2}}{\sin\frac{A}{2}}
+	\]
+
+	由此可知，要求得棱镜材料折射率$n$，须测出其顶角$A$ 和最小偏向角$\delta_{\rm min}$。
+
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.40\linewidth]{pics/graph1.png}
+		\caption*{\bf 图2: 三棱镜最小偏向角原理图}
+	\end{figurehere}
+
+	\section{实验步骤}
+
+    \begin{enumerate}
+        \item 打开汞灯预热；
+        \item 调整分光计，使分光计满足上述要求；
+		\item 对两游标作适当标记，分别称游标1和游标2；
+		\item 先测量三棱镜的顶角：固定望远镜，使三棱镜的其中一个面正对望远镜（通过观察绿色十字确定），记录游标1和游标2的读数；
+		\item 使另一个面正对望远镜，记录游标1和游标2的读数；
+		\item 重复以上步骤三次；
+		\item 再测量对绿光的最小偏向角：移动望远镜找出光谱线，轻轻转动载物台，找到谱线反向移动的转折位置；
+		\item 将望远镜对准谱线，记录游标；
+		\item 将望远镜对准平行光管，记录游标；
+		\item 计算顶角 $A$ 和最小偏向角 $\delta_{\rm min}$ ，得出棱镜材料折射率；
+		\item 重复以上步骤测量三棱镜对蓝光和黄光的折射率，进一步估计色散曲线；
+        \item 整理仪器，结束实验。
+    \end{enumerate}
+
+	\section{实验数据与分析}
+
+	\subsection{基础实验}
+
+	为方便数据分析，在数据记录表中虽然采用度分秒制，但在以下所有计算中均采用角度值
+
+	\begin{tablehere}
+		\caption*{\bf 表1 三棱镜顶角度数测量结果}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.8\linewidth}{|Y|Y|Y|Y|Y|Y|}
+				\hline
+				\multirow{2}*{测量次数} & \multicolumn{2}{c|}{AB面}  & \multicolumn{2}{c|}{AC面} & 	\multirow{2}*{$A$}	\\ \cline{2-5}
+				 &  $\theta_1$ & $\theta_2$ & $\theta_1'$ & $\theta_2'$ &     \\ \hline
+				 1 & $111^\circ 56'$ & $291^\circ 54'$ & $231^\circ 58'$ & $51^\circ 57'$ & $59^\circ 58'$ \\ \hline
+				 2 & $111^\circ 55'$ & $291^\circ 55'$ & $232^\circ 00'$ & $51^\circ 58'$ & $59^\circ 56'$ \\ \hline
+				 3 & $111^\circ 58'$ & $291^\circ 56'$ & $231^\circ 58'$ & $51^\circ 56'$ & $60^\circ 00'$ \\ \hline
+			\end{tabularx}
+		\end{center}
+		\vspace*{1em}
+	\end{tablehere}
+
+	顶角：59.958$\, ^\circ$, 59.933$^\circ$, 60$^\circ$
+
+	顶角的平均值
+	$$
+	\overline{A}=\frac{1}{n}\sum_{i=1}^{n}A_i=\frac{59.958+59.933+60.000}{3}\,\mathrm{^{\circ}}=59.964\,\mathrm{^{\circ}}
+	$$
+
+	顶角的标准差
+	$$
+	\begin{aligned}
+	\sigma_{A}&=\sqrt{\frac{1}{n-1}\sum_{i=1}^n\left(A_i-\overline{A}\right)^2}\\
+	&=\sqrt{\frac{(59.958-59.964)^2+(59.933-59.964)^2+(60.000-59.964)^2}{3-1}}\,\mathrm{^{\circ}}\\
+	&=0.033679\,\mathrm{^{\circ}}
+	\end{aligned}
+	$$
+
+	顶角的B类不确定度
+	$$
+	\Delta_{B,A}=\sqrt{\Delta_\text{仪}^2+\Delta_\text{估}^2}=\sqrt{0.016667^2+0.0083333^2}\,\mathrm{^{\circ}}=0.018634\,\mathrm{^{\circ}}
+	$$
+
+	顶角的展伸不确定度
+	$$
+	\begin{aligned}
+	U_{A,P}&=\sqrt{\left(t_P\frac{\sigma_{A}}{\sqrt{n}}\right)^2+\left(k_P\frac{\Delta_{B,A}}{C}\right)^2}\\
+	&=\sqrt{\left(4.3\times\frac{0.033679}{\sqrt{3}}\right)^2+\left(1.96\times\frac{0.018634}{\sqrt{3}}\right)^2}\,\mathrm{^{\circ}}\\
+	&=0.086229\,\mathrm{^{\circ}},P=0.95
+	\end{aligned}
+	$$
+	
+	于是计算得到顶角的测量值，并转化为度分秒制：
+	$$
+	\begin{aligned}
+	A &= (59.964 \pm 0.086)\,\mathrm{^\circ} \\
+	  &= 59\,\mathrm{^\circ}58' \pm 5'
+	\end{aligned}
+	$$
+
+	\begin{tablehere}
+		\caption*{\bf 表2 最小偏向角度数测量（绿色谱线）}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.8\linewidth}{|Y|Y|Y|Y|Y|Y|}
+				\hline
+				\multirow{2}*{测量次数} & \multicolumn{2}{c|}{最小偏向角位置}  & \multicolumn{2}{c|}{入射光位置} & 	\multirow{2}*{$\delta_{\rm min}$}	\\ \cline{2-5}
+				 &  $\theta_1$ & $\theta_2$ & $\theta_1'$ & $\theta_2'$ &     \\ \hline
+				 1 & $35^\circ 07'$ & $215^\circ 08'$ & $86^\circ 27'$ & $266^\circ 28'$ & $51^\circ 20'$ \\ \hline
+				 2 & $37^\circ 04'$ & $217^\circ 06'$ & $88^\circ 23'$ & $268^\circ 22'$ & $51^\circ 19'$ \\ \hline
+				 3 & $36^\circ 30'$ & $216^\circ 32'$ & $87^\circ 50'$ & $267^\circ 50'$ & $51^\circ 21'$ \\ \hline
+			\end{tabularx}
+		\end{center}
+		\vspace*{1em}
+	\end{tablehere}
+
+	绿光最小偏向角：51.358$^\circ$, 51.292$^\circ$, 51.317$^\circ$
+
+	绿光最小偏向角的平均值
+	$$
+	\overline{{\delta_{\min}}}=\frac{1}{n}\sum_{i=1}^{n}{\delta_{\min}}_i=\frac{51.358+51.292+51.317}{3}\,\mathrm{^{\circ}}=51.322\,\mathrm{^{\circ}}
+	$$
+
+	绿光最小偏向角的标准差
+	$$
+	\begin{aligned}
+	\sigma_{{\delta_{\min}}}&=\sqrt{\frac{1}{n-1}\sum_{i=1}^n\left({\delta_{\min}}_i-\overline{{\delta_{\min}}}\right)^2}\\
+	&=\sqrt{\frac{(51.358-51.322)^2+(51.292-51.322)^2+(51.317-51.322)^2}{3-1}}\,\mathrm{^{\circ}}\\
+	&=0.033679\,\mathrm{^{\circ}}
+	\end{aligned}
+	$$
+
+	绿光最小偏向角的B类不确定度
+	$$
+	\Delta_{B,{\delta_{\min}}}=\sqrt{\Delta_\text{仪}^2+\Delta_\text{估}^2}=\sqrt{0.016667^2+0.0083333^2}\,\mathrm{^{\circ}}=0.018634\,\mathrm{^{\circ}}
+	$$
+
+	绿光最小偏向角的展伸不确定度
+	$$
+	\begin{aligned}
+	U_{{\delta_{\min}},P}&=\sqrt{\left(t_P\frac{\sigma_{{\delta_{\min}}}}{\sqrt{n}}\right)^2+\left(k_P\frac{\Delta_{B,{\delta_{\min}}}}{C}\right)^2}\\
+	&=\sqrt{\left(4.3\times\frac{0.033679}{\sqrt{3}}\right)^2+\left(1.96\times\frac{0.018634}{\sqrt{3}}\right)^2}\,\mathrm{^{\circ}}\\
+	&=0.086229\,\mathrm{^{\circ}},P=0.95
+	\end{aligned}
+	$$
+
+	于是计算得到绿光最小偏向角的测量值，并转化为度分秒制：
+	$$
+	\begin{aligned}
+	A &= (51.322 \pm 0.086)\,\mathrm{^\circ} \\
+	  &= 51\,\mathrm{^\circ}19' \pm 5'
+	\end{aligned}
+	$$
+
+	使用最小偏向角和顶角大小，可以计算得到绿光下玻璃三棱镜折射率 $n$
+	$$
+	n=\frac{\sin{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{\sin{\left(\frac{A}{2} \right)}}=\frac{\sin{\left(\frac{1.0466}{2}+\frac{0.89574}{2}\right)}}{\sin{\left(\frac{1.0466}{2}\right)}}\,\mathrm{}=1.6520\,\mathrm{}
+	$$
+
+	绿光下玻璃三棱镜折射率$n$的延伸不确定度
+	$$
+	\begin{aligned}
+	U_{n,P}&=\sqrt{\left(\frac{\partial n}{\partial A}U_{A,P}\right)^2+\left(\frac{\partial n}{\partial \delta_{\rm min}}U_{\delta_{\rm min},P}\right)^2}\\
+	&=\sqrt{\left(\frac{\cos{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{2 \sin{\left(\frac{A}{2} \right)}} - \frac{\sin{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)} \cos{\left(\frac{A}{2} \right)}}{2 \sin^{2}{\left(\frac{A}{2} \right)}}U_{A,P}\right)^2+\left(\frac{\cos{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{2 \sin{\left(\frac{A}{2} \right)}}U_{\delta_{\rm min},P}\right)^2}\\
+	&=1.5572 \times 10^{-3}\,\mathrm{},P=0.95
+	\end{aligned}
+	$$
+
+	绿光下玻璃三棱镜折射率$n$最终结果
+	$$
+	n=\left(1.6520 \pm 0.0016\right)\,\mathrm{}
+	$$
+	
+	
+	
+
+	\subsection{提升实验}
+	
+	汞灯的光谱由淡紫线、蓝线、绿线、双黄线构成，受实验器材和时间影响本实验中仅测量蓝线、绿线、双黄线对应的折射率。分别对谱线测量折射率，就能计算三棱镜的色散率。
+	
+	重复 {\bf 5.1} 中的数据分析步骤，计算三棱镜对蓝色光和双黄光的折射率。
+
+	\begin{tablehere}
+		\caption*{\bf 表3 最小偏向角度数测量（蓝色谱线）}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.8\linewidth}{|Y|Y|Y|Y|Y|Y|}
+				\hline
+				\multirow{2}*{测量次数} & \multicolumn{2}{c|}{最小偏向角位置}  & \multicolumn{2}{c|}{入射光位置} & 	\multirow{2}*{$\delta_{\rm min}$}	\\ \cline{2-5}
+				 &  $\theta_1$ & $\theta_2$ & $\theta_1'$ & $\theta_2'$ &     \\ \hline
+				 1 & $35^\circ 10'$ & $215^\circ 12'$ & $88^\circ 35'$ & $268^\circ 35'$ & $53^\circ 24'$ \\ \hline
+				 2 & $27^\circ 41'$ & $207^\circ 43'$ & $81^\circ 06'$ & $261^\circ 06'$ & $53^\circ 24'$ \\ \hline
+				 3 & $29^\circ 43'$ & $209^\circ 45'$ & $83^\circ 08'$ & $263^\circ 09'$ & $53^\circ 24'$ \\ \hline
+			\end{tabularx}
+		\end{center}
+		\vspace*{1em}
+	\end{tablehere}
+	
+	蓝光最小偏向角：53.4$\,\mathrm{^\circ}$, 53.4$\,\mathrm{^\circ}$, 53.408$\,\mathrm{^\circ}$
+	
+	蓝光最小偏向角的平均值
+	$$
+	\overline{{\delta_{\min}}}=\frac{1}{n}\sum_{i=1}^{n}{\delta_{\min}}_i=\frac{53.4+53.4+53.408}{3}\,\mathrm{^{\circ}}=53.403\,\mathrm{^{\circ}}
+	$$
+
+	蓝光最小偏向角的标准差
+	$$
+	\begin{aligned}
+	U_{n,P}&=\sqrt{\left(\frac{\partial n}{\partial A}U_{A,P}\right)^2+\left(\frac{\partial n}{\partial \delta_{\rm min}}U_{\delta_{\rm min},P}\right)^2}\\
+	&=\sqrt{\left(\frac{\cos{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{2 \sin{\left(\frac{A}{2} \right)}} - \frac{\sin{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)} \cos{\left(\frac{A}{2} \right)}}{2 \sin^{2}{\left(\frac{A}{2} \right)}}U_{A,P}\right)^2+\left(\frac{\cos{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{2 \sin{\left(\frac{A}{2} \right)}}U_{\delta_{\rm min},P}\right)^2}\\
+	&=0.0048113\,\mathrm{^{\circ}}
+	\end{aligned}
+	$$
+
+	蓝光最小偏向角的B类不确定度
+	$$
+	\Delta_{B,{\delta_{\min}}}=\sqrt{\Delta_\text{仪}^2+\Delta_\text{估}^2}=\sqrt{0.016667^2+0.0083333^2}\,\mathrm{^{\circ}}=0.018634\,\mathrm{^{\circ}}
+	$$
+
+	蓝光最小偏向角的展伸不确定度
+	$$
+	\begin{aligned}
+	U_{{\delta_{\min}},P}&=\sqrt{\left(t_P\frac{\sigma_{{\delta_{\min}}}}{\sqrt{n}}\right)^2+\left(k_P\frac{\Delta_{B,{\delta_{\min}}}}{C}\right)^2}\\
+	&=\sqrt{\left(4.3\times\frac{0.0048113}{\sqrt{3}}\right)^2+\left(1.96\times\frac{0.018634}{\sqrt{3}}\right)^2}\,\mathrm{^{\circ}}\\
+	&=0.024234\,\mathrm{^{\circ}},P=0.95
+	\end{aligned}
+	$$
+	
+	蓝光下玻璃三棱镜折射率 $n$
+	$$
+	n=\frac{\sin{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{\sin{\left(\frac{A}{2} \right)}}=\frac{\sin{\left(\frac{1.0466}{2}+\frac{0.93205}{2}\right)}}{\sin{\left(\frac{1.0466}{2}\right)}}\,\mathrm{}=1.6722\,\mathrm{}
+	$$
+
+	蓝光下玻璃三棱镜折射率 $n$ 的延伸不确定度
+	$$
+	\begin{aligned}
+		U_{n,P}&=\sqrt{\left(\frac{\partial n}{\partial A}U_{A,P}\right)^2+\left(\frac{\partial n}{\partial \delta_{\rm min}}U_{\delta_{\rm min},P}\right)^2}\\
+		&=\sqrt{\left(\frac{\cos{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{2 \sin{\left(\frac{A}{2} \right)}} - \frac{\sin{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)} \cos{\left(\frac{A}{2} \right)}}{2 \sin^{2}{\left(\frac{A}{2} \right)}}U_{A,P}\right)^2+\left(\frac{\cos{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{2 \sin{\left(\frac{A}{2} \right)}}U_{\delta_{\rm min},P}\right)^2}\\
+		&=1.3738 \times 10^{-3}\,\mathrm{},P=0.95
+	\end{aligned}
+	$$
+
+	蓝光下玻璃三棱镜折射率 $n$ 最终结果
+	$$
+	n=\left(1.6722 \pm 0.0014\right)\,\mathrm{}
+	$$
+	
+	\begin{tablehere}
+		\caption*{\bf 表4 最小偏向角度数测量（双黄谱线）}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.8\linewidth}{|Y|Y|Y|Y|Y|Y|}
+				\hline
+				\multirow{2}*{测量次数} & \multicolumn{2}{c|}{最小偏向角位置}  & \multicolumn{2}{c|}{入射光位置} & 	\multirow{2}*{$\delta_{\rm min}$}	\\ \cline{2-5}
+				 &  $\theta_1$ & $\theta_2$ & $\theta_1'$ & $\theta_2'$ &     \\ \hline
+				 1 &  $9^\circ 46'$ & $189^\circ 48'$ & $60^\circ 44'$ & $240^\circ 46'$ & $50^\circ 58'$ \\ \hline
+				 2 & $15^\circ 02'$ & $195^\circ 04'$ & $66^\circ 04'$ & $246^\circ 06'$ & $51^\circ 02'$ \\ \hline
+				 3 & $13^\circ 15'$ & $193^\circ 17'$ & $64^\circ 17'$ & $244^\circ 19'$ & $51^\circ 02'$ \\ \hline
+			\end{tabularx}
+		\end{center}
+		\vspace*{1em}
+	\end{tablehere}
+
+	双黄光最小偏向角：50.967 °, 51.033 °, 51.033 °
+
+	双黄光最小偏向角的平均值
+	$$
+	\overline{{\delta_{\min}}}=\frac{1}{n}\sum_{i=1}^{n}{\delta_{\min}}_i=\frac{50.967+51.033+51.033}{3}\,\mathrm{^{\circ}}=51.011\,\mathrm{^{\circ}}
+	$$
+
+	双黄光最小偏向角的标准差
+	$$
+	\begin{aligned}
+	\sigma_{{\delta_{\min}}}&=\sqrt{\frac{1}{n-1}\sum_{i=1}^n\left({\delta_{\min}}_i-\overline{{\delta_{\min}}}\right)^2}\\
+	&=\sqrt{\frac{(50.967-51.011)^2+(51.033-51.011)^2+(51.033-51.011)^2}{3-1}}\,\mathrm{^{\circ}}\\
+	&=0.03849\,\mathrm{^{\circ}}
+	\end{aligned}
+	$$
+
+	双黄光最小偏向角的B类不确定度
+	$$
+	\Delta_{B,{\delta_{\min}}}=\sqrt{\Delta_\text{仪}^2+\Delta_\text{估}^2}=\sqrt{0.016667^2+0.0083333^2}\,\mathrm{^{\circ}}=0.018634\,\mathrm{^{\circ}}
+	$$
+
+	双黄光最小偏向角的展伸不确定度
+	$$
+	\begin{aligned}
+	U_{{\delta_{\min}},P}&=\sqrt{\left(t_P\frac{\sigma_{{\delta_{\min}}}}{\sqrt{n}}\right)^2+\left(k_P\frac{\Delta_{B,{\delta_{\min}}}}{C}\right)^2}\\
+	&=\sqrt{\left(4.3\times\frac{0.03849}{\sqrt{3}}\right)^2+\left(1.96\times\frac{0.018634}{\sqrt{3}}\right)^2}\,\mathrm{^{\circ}}\\
+	&=0.097854\,\mathrm{^{\circ}},P=0.95
+	\end{aligned}
+	$$
+	
+	双黄光下玻璃三棱镜折射率 $n$
+	$$
+	n=\frac{\sin{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{\sin{\left(\frac{A}{2} \right)}}=\frac{\sin{\left(\frac{1.0466}{2}+\frac{0.89031}{2}\right)}}{\sin{\left(\frac{1.0466}{2}\right)}}\,\mathrm{}=1.6489\,\mathrm{}
+	$$
+
+	双黄光下玻璃三棱镜折射率 $n$ 的延伸不确定度
+	$$
+	\begin{aligned}
+		U_{n,P}&=\sqrt{\left(\frac{\partial n}{\partial A}U_{A,P}\right)^2+\left(\frac{\partial n}{\partial \delta_{\rm min}}U_{\delta_{\rm min},P}\right)^2}\\
+		&=\sqrt{\left(\frac{\cos{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{2 \sin{\left(\frac{A}{2} \right)}} - \frac{\sin{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)} \cos{\left(\frac{A}{2} \right)}}{2 \sin^{2}{\left(\frac{A}{2} \right)}}U_{A,P}\right)^2+\left(\frac{\cos{\left(\frac{A}{2} + \frac{\delta_{\rm min}}{2} \right)}}{2 \sin{\left(\frac{A}{2} \right)}}U_{\delta_{\rm min},P}\right)^2}\\
+	&=1.6189 \times 10^{-3}\,\mathrm{},P=0.95
+	\end{aligned}
+	$$
+
+	双黄光下玻璃三棱镜折射率 $n$ 最终结果
+	$$
+	n=\left(1.6489 \pm 0.0016\right)\,\mathrm{}
+	$$
+	
+	列出三重谱线的折射率和对于光的波长（双黄线波长取两条黄线波长平均值计算）：
+
+	\begin{tablehere}
+		\caption*{\bf 表5 不同光波长和对应三棱镜折射率}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.55\linewidth}{|Y|Y|Y|}
+				\hline
+				谱线  & 波长/nm & 折射率    \\ \hline
+				双黄线 & 578.0   & 1.6489 \\ \hline
+				绿线  & 546.1 & 1.6520 \\ \hline
+				蓝线  & 435.8 & 1.6722 \\ \hline
+			\end{tabularx}
+		\end{center}
+		\vspace*{1em}
+	\end{tablehere}
+
+	使用柯西色散公式 $n = a + \frac{b}{\lambda ^ 2} + \frac{c}{\lambda ^ 4}$ 拟合色散曲线，由于仅有三组数据，故直接解线性方程组即可得到色散方程的三个参数 $a, b, c$ 。
+
+	得到解：
+	$$
+	\left\{\begin{aligned}
+		a &= 1.63174\\
+		b &= 3.16434*10^{-15}\,\mathrm{m} ^ 2\\
+		c &= 8.58576*10^{-28}\,\mathrm{m} ^ 4\\ 
+	\end{aligned}\right.
+	$$
+
+ 	这就得到了三棱镜的色散曲线：
+
+	 \begin{figurehere}
+		\centering
+		\includegraphics[width=0.55\linewidth]{pics/plot.pdf}
+		\caption*{\bf 图3: 三棱镜色散曲线}
+	\end{figurehere}
+
+	\subsection{高阶实验}
+	
+	将光源替换为白光LED灯观察得到的谱线，这里使用拍照方式记录望远镜中观察到的光谱，并对比参考光谱。\\
+
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.50\linewidth]{pics/photo.jpg}
+		\caption*{\bf 图4.1: 白色LED灯光谱照片}
+	\end{figurehere}
+	
+	常见的白光LED灯都是由蓝光芯片激发一种或者多种荧光粉，最终由蓝光和荧光粉发出的光混合而成白光。因此一般LED的光谱会有两个以上峰值，而其他的波长范围相对辐射强度很低，如下图所示：
+	
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.45\linewidth]{pics/led.png}
+		\caption*{\bf 图4.2: 白色LED灯参考光谱}
+	\end{figurehere}
+
+	\section{思考题}
+
+	\textbf{问题： }\textbf{已调好望远镜光轴垂直主轴，若将平面镜取下后，又放到载物台上（放的位置与拿下前的位置不
+	同），发现两镜面又不垂直望远镜光轴了，这是为什么？是否说明望远镜光轴还没调好？}
+	\par
+	这不是由于望远镜光轴未调好造成的。
+
+	实际上若望远镜光轴已调好，则光轴已经与平面镜垂直，但是因为人为调整载物台有偏差，载物台并没
+	有与主轴垂直，而只有当前的特定角度恰好使平面镜两次反射的绿十字映在分划版的上十字上。但是将
+	平面镜第二次放在载物台上时，不能保证将其放在同一个位置，偏差导致镜面又不垂直望远镜光轴了。
+	因此这不是由于望远镜光轴未调好造成的，而是由于载物台未调平导致的。
+
+\end{document}
