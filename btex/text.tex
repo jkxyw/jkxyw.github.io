@@ -20,7 +20,7 @@
 \begin{rem}
 \begin{enumerate}[label = \arabic*)]
 \item 在上述微分的定义中，我们完全没有用到 $\R^n$ 和 $\R^m$ 上的坐标系。实际上，在下面的极限中
-\[\lim_{v\rightarrow 0}\frac{{\color{blue}|}\overbrace{f(\underbrace{x_0+v}_{\text{用到 $\R^n$ 上的加法结构}})-f(x_0)-df(x_0)v}^{\text{用到 $\R^m$ 上的加法结构}}{\color{blue}|}}{{\color{red}|}v{\color{red}|}}=0,\]
+\[\lim_{v\rightarrow 0}\frac{ {\color{blue}|}\overbrace{f(\underbrace{x_0+v}_{\text{用到 $\R^n$ 上的加法结构}})-f(x_0)-df(x_0)v}^{\text{用到 $\R^m$ 上的加法结构}}{\color{blue}|}}{ {\color{red}|}v{\color{red}|}}=0,\]
 我们只用到了 $\R^n$ 和 $\R^m$ 上的线性结构和它们上面的范数（我们分别用了蓝色和红色表示，其中红色的是定义域 $\R^n$ 上的范数，蓝色的是值域 $\R^m$ 上的范数）。
 
 据此，我们可以将上述定义进行推广：给定赋范线性空间 $(V_1,\|\cdot\|_1)$ 和 $(V_2,\|\cdot\|_2)$，
@@ -219,7 +219,7 @@ e^{A+V}-e^V&=\sum_{n=0}^\infty \frac{1}{n!}\left((A+V)^n-A^n\right)
 有了链式法则，我们可以讨论更换坐标系的问题。这是个核心的话题，我们在中学的时候就已经在使用这个概念，比如说我们经常在极坐标和Descartes坐标系之间转换。我们首先用映射的语言来描述极坐标：令
 \[\Omega_1 = \R^2-\bigl\{(x,0)\bigm| x\geqslant 0\bigr\} \subset \R^2,  \ \ \Omega_2=\R_{>0}\times (0,2\pi)=\bigl\{(r,\vartheta)\bigm| r>0, \vartheta \in (0,2\pi)\bigr\}.\]
 
-{{image|MathAnalysis-N0201.svg|center}}
+{ {image|MathAnalysis-N0201.svg|center}}
 
 我们通常用的 $x=r\cos\vartheta$ 和 $y=r\sin \vartheta$ 可以用如下的映射来写：
 \[\Phi\colon \Omega_2\rightarrow \Omega_1, \ \ (r,\vartheta)\mapsto (r\cos\vartheta, r\sin \vartheta). \]
