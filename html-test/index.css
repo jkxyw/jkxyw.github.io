@@ -43,7 +43,7 @@ table.list {
 }
 
 table.list tr.list-item:not(:last-child) > td {
-  padding-bottom: 0px; 
+  padding-bottom: 18px; 
   /* padding-bottom: 18px;  */
 }
 
