@@ -39,6 +39,7 @@ table, table th, table td {
 
 table.list {
   width: 100%;
+  padding: 0px;
 }
 
 table.list tr.list-item:not(:last-child) > td {
