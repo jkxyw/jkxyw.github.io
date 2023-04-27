@@ -31,6 +31,10 @@ p > span.display-math:last-child,
   float: right;
 }
 
+table {
+  border: 0;
+}
+
 table.list {
   width: 100%;
 }
