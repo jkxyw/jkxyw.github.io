@@ -1,6 +1,6 @@
 html {
   background-color: #e4e6e8;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .katex {
@@ -31,9 +31,9 @@ p > span.display-math:last-child,
   float: right;
 }
 
-table th, table td {
+table, table th, table td {
   border: none;
-  padding: none;
+  padding: 0px;
 }
 
 table.list {
@@ -41,7 +41,8 @@ table.list {
 }
 
 table.list tr.list-item:not(:last-child) > td {
-  padding-bottom: 18px;
+  padding-bottom: 0px; 
+  /* padding-bottom: 18px;  */
 }
 
 table.list td {
