@@ -31,13 +31,13 @@ p > span.display-math:last-child,
   float: right;
 }
 
-table {
+table th, table td {
   border: none;
+  padding: none;
 }
 
 table.list {
   width: 100%;
-  border: none;
 }
 
 table.list tr.list-item:not(:last-child) > td {
