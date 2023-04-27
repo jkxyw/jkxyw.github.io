@@ -32,11 +32,12 @@ p > span.display-math:last-child,
 }
 
 table {
-  border: 0;
+  border: none;
 }
 
 table.list {
   width: 100%;
+  border: none;
 }
 
 table.list tr.list-item:not(:last-child) > td {
