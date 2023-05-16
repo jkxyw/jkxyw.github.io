@@ -1,0 +1,403 @@
+\documentclass[10pt,a4paper]{article}	%字体、纸张
+\usepackage{xeCJK}	%中文
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=20mm]{geometry}	%页边距
+\usepackage{fancyhdr}	%页眉、页脚
+\usepackage{indentfirst}	%首行缩进
+\usepackage{graphicx}	%图片
+\usepackage{textcomp}
+\usepackage{subfigure}	
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}	%公式对齐
+\usepackage{tikz-feynman}
+
+\newcommand{\nexp}{落球法测定液体的粘度}
+
+%————页眉、页脚设置————
+\thispagestyle{plain}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{PB22000195 王元叙}
+\fancyhead[L]{\nexp}	%————————————
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%————————————
+
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setlength{\parindent}{2em}
+\renewcommand\arraystretch{1.3}
+
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+\makeatother
+
+\begin{document}
+	%————起始————
+	\vspace*{-5em}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{Picture//USTC}\\
+		\Large \textbf{大学物理-基础实验｜数据分析}\\[5mm]
+
+		\normalsize
+		\begin{tabular}{ll}
+			姓名 & \textbf{王元叙}\\
+			学号 & \textbf{PB22000195}\\
+			班级 & \textbf{22级少年班学院5班}\\
+			日期 & \textbf{2023年5月10日}\\	
+		\end{tabular}\\[5mm]
+
+		\LARGE \textbf{\nexp}\\[5mm]	
+
+	\end{center}
+	%————————————
+
+	\section{基础实验数据分析}
+
+	\subsection{实验环境参数}
+
+	\begin{tablehere}
+		\caption*{\bf 表1 圆筒直径、蓖麻油密度、高度、温度、匀速下降区长度}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.65\linewidth}{|X|Y|Y|Y|}
+				\hline
+				2R/$\mathrm {cm}$                            & 8.136  & 8.138  & 8.144  \\ \hline
+				h/$\mathrm {cm}$                             & 41.33  & 41.35  & 41.35  \\ \hline
+				$\rho_0$/$10^3{\mathrm g}\cdot{\mathrm cm}^{-3}$ & 0.9541 & 0.9547 & 0.9545 \\ \hline
+				l/$\mathrm {cm}$                             & 18.81  & 18.81  & 18.79  \\ \hline
+				T/$^\circ\mathrm C$                          & 27.35  & 27.41  & 27.57  \\ \hline
+			\end{tabularx}
+		\end{center}
+		\vspace*{1em}
+	\end{tablehere}
+
+	三种不同直径球的共同匀速下降区 $l$ 的平均值为
+	$$
+	\bar{l}=\frac{18.81+18.82+18.79}{3} \mathrm{~cm}=18.807 \mathrm{~cm}
+	$$
+
+	容器半径 $R$ 的平均值为
+	$$
+	\bar{R}=\frac{8.136+8.138+8.144}{2 \times 3} \mathrm{~cm}4.0697 \mathrm{~cm}
+	$$
+
+	苜麻油高度 $h$ 的平均值为
+	$$
+	\bar{h}=\frac{41.61+41.60+41.60}{3} \mathrm{~cm}=41.343 \mathrm{~cm}
+	$$
+
+	苜麻油密度 $\rho_0$ 的平均值为
+	$$
+	\overline{\rho_0}=\frac{0.9541+0.9547+0.9545}{3} \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}=0.95443 \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}
+	$$
+
+	苜麻油温度 $T$ 的平均值为	
+	$$
+	\overline{T}=\frac{27.35+27.41+27.57}{3} ^\circ \mathrm{C} = 27.457 ^\circ \mathrm{C}
+	$$
+
+\newpage
+
+	\subsection{粘度系数测量原始数据}
+
+	\begin{tablehere}
+		\caption*{\bf 表2 利用球体测定液体的粘度系数原始数据记录}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.95\linewidth}{|Y|Y|Y|Y|Y|Y|Y|}
+				\hline
+				大球 d/$\mathrm {cm}$ & 0.3492 & 0.3491 & 0.3495 & 0.3491 & 0.3488 & 0.3494 \\ \hline
+				中球 d/$\mathrm {cm}$ & 0.2992 & 0.2991 & 0.2989 & 0.2997 & 0.2995 & 0.2993 \\ \hline
+				小球 d/$\mathrm {cm}$ & 0.2001 & 0.2003 & 0.2005 & 0.2004 & 0.1998 & 0.2001 \\ \hline
+				大球 m/$\mathrm {g}$  & 0.1800 & 0.1792 & 0.1797 & 0.1792 & 0.1801 & 0.1796 \\ \hline
+				中球 m/$\mathrm {g}$  & 0.1129 & 0.2238 & 0.1133 & 0.1129 & 0.1128 & 0.1132 \\ \hline
+				小球 m/$\mathrm {g}$  & 0.0344 & 0.0335 & 0.0341 & 0.0343 & 0.0341 & 0.0343 \\ \hline
+				大球 t/$\mathrm {s}$  & 2.38   & 2.36   & 2.48   & 2.47   & 2.54   & 2.44   \\ \hline
+				大球 t/$\mathrm {s}$  & 3.32   & 3.26   & 3.34   & 3.20   & 3.34   & 3.34   \\ \hline
+				大球 t/$\mathrm {s}$  & 7.24   & 6.95   & 6.98   & 7.26   & 6.88   & 6.95   \\ \hline
+			\end{tabularx}
+		\end{center}
+		\vspace*{1em}
+	\end{tablehere}
+
+%====================================================================================================
+
+
+
+
+
+
+	\subsection{利用大球测定液体的粘度系数}
+	
+	大球直径 $d$ 的平均值为
+	$$
+	\bar{d}=\frac{0.3492+0.3491+0.3495+0.3491+0.3488+0.3494}{6} \mathrm{~cm}=0.34918 \mathrm{~cm}
+	$$
+
+	质量 $m$ 的平均值为
+	$$
+	\bar{m}=\frac{0.1800+0.1792+0.1797+0.1792+0.1801+0.1796}{6} \mathrm{~g}=0.17963 \mathrm{~g}
+	$$
+
+	计算得其密度 $\rho$ 为
+	$$
+	\rho=\frac{\bar{m}}{\frac{4}{3} \pi\left(\frac{\bar{d}}{2}\right)^3}=\frac{0.17963}{\frac{4}{3} \times 3.1416 \times\left(\frac{0.34918}{2}\right)^3} \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}=8.058 \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}
+	$$
+
+	其通过匀速下降区 $l$ 的平均时间 $t$ 为
+	$$
+	\bar{t}=\frac{2.28+2.36+2.48+2.47+2.54+2.44}{6} \mathrm{~s}=2.428 \mathrm{~s}
+	$$
+
+	所以其匀速下降的速度 $v$ 为
+	$$
+	v=\frac{\bar{l}}{\bar{t}}=\frac{18.807}{2.428} \mathrm{~cm} \cdot \mathrm{s}^{-1}=7.746 \mathrm{~cm} \cdot \mathrm{s}^{-1}
+	$$
+
+	因此，其粘滞系数 $\eta_0$ 为
+	$$
+	\begin{aligned}
+	\eta_0&=\frac{1}{18} \frac{\left(\rho-\overline{\rho_0}\right) g \bar{d}^2}{v\left(1+2.4 \frac{\bar{d}}{2 \overline{\bar{R}}}\right)\left(1+3.3 \frac{\bar{d}}{2 \bar{h}}\right)}\\
+	&=\frac{1}{18} \times \frac{(8.058-0.95443) \times 9.795 \times 3.4918^2}{7.746 \times\left(1+2.4 \times \frac{3.4918 \times 10^{-1}}{2 \times 4.0697}\right) \times\left(1+3.3 \times \frac{3.4918 \times 10^{-1}}{2 \times 41.343}\right)} \times 10^{-1} \mathrm{~P a} \cdot \mathrm{s}=0.5440 \mathrm{~P a} \cdot \mathrm{s}	
+	\end{aligned}
+	$$
+
+	计算其雷诺数
+	$$
+	R_{e}=\frac{\bar{d} v \overline{\rho_0}}{\eta_0}=\frac{3.4918 \times 7.746 \times 0.95443}{0.5440} \times 10^{-2}=0.4745
+	$$
+
+	其雷诺数 $0.5>R_{e} > 0.1$ 因此需要进行一次修正，得到修正后的粘滞系数 $\eta_1$ 为
+	$$
+	\begin{aligned}
+	\eta_1 = \eta_0 - \frac{3}{16}\bar{d} v \overline{\rho_0} = 0.5182 \mathrm{~P a} \cdot \mathrm{s}	
+	\end{aligned}
+	$$
+
+
+
+
+%====================================================================================================
+
+
+
+
+	\subsection{利用中球测定液体的粘度系数}
+	
+	中球直径 $d$ 的平均值为
+	$$
+	\bar{d}=\frac{0.2992+0.2991+0.2989+0.2997+0.2995+0.2993}{6} \mathrm{~cm}=0.29928 \mathrm{~cm}
+	$$
+
+	质量 $m$ 的平均值为
+	$$
+	\bar{m}=\frac{0.1129+0.1138+0.1133+0.1129+0.1128+0.1132}{6} \mathrm{~g}=0.11315 \mathrm{~g}
+	$$
+
+	计算得其密度 $\rho$ 为
+	$$
+	\rho=\frac{\bar{m}}{\frac{4}{3} \pi\left(\frac{\bar{d}}{2}\right)^3}=\frac{0.11315}{\frac{4}{3} \times 3.1416 \times\left(\frac{0.29928}{2}\right)^3} \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}=8.061 \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}
+	$$
+
+	其通过匀速下降区 $l$ 的平均时间 $t$ 为
+	$$
+	\bar{t}=\frac{3.31++3.26+3.34+3.20+3.34+3.34}{6} \mathrm{~s}=3.298 \mathrm{~s}
+	$$
+
+	所以其匀速下降的速度 $v$ 为
+	$$
+	v=\frac{\bar{l}}{\bar{t}}=\frac{18.807}{3.298} \mathrm{~cm} \cdot \mathrm{s}^{-1}=5.718 \mathrm{~cm} \cdot \mathrm{s}^{-1}
+	$$
+
+	因此，其粘滞系数 $\eta_0$ 为
+	$$
+	\begin{aligned}
+	\eta_0&=\frac{1}{18} \frac{\left(\rho-\overline{\rho_0}\right) g \bar{d}^2}{v\left(1+2.4 \frac{\bar{d}}{2 \overline{\bar{R}}}\right)\left(1+3.3 \frac{\bar{d}}{2 \bar{h}}\right)}\\
+	&=\frac{1}{18} \times \frac{(8.061-0.95443) \times 9.795 \times 2.9928^2}{5.718 \times\left(1+2.4 \times \frac{2.9928 \times 10^{-1}}{2 \times 4.0697}\right) \times\left(1+3.3 \times \frac{2.9928 \times 10^{-1}}{2 \times 41.343}\right)} \times 10^{-1} \mathrm{~P a} \cdot \mathrm{s}=0.5500 \mathrm{~P a} \cdot \mathrm{s}	
+	\end{aligned}
+	$$
+
+	计算其雷诺数
+	$$
+	R_{e}=\frac{\bar{d} v \overline{\rho_0}}{\eta_0}=\frac{2.9928 \times 5.718 \times 0.95443}{0.5500} \times 10^{-2}=0.3241
+	$$
+
+	其雷诺数 $0.5>R_{e} > 0.1$ 因此需要进行一次修正，得到修正后的粘滞系数 $\eta_1$ 为
+	$$
+	\begin{aligned}
+	\eta_1 = \eta_0 - \frac{3}{16}\bar{d} v \overline{\rho_0} = 0.5194 \mathrm{~P a} \cdot \mathrm{s}	
+	\end{aligned}
+	$$
+
+
+
+
+%====================================================================================================
+
+
+
+
+	\subsection{利用小球测定液体的粘度系数}
+	
+	小球直径 $d$ 的平均值为
+	$$
+	\bar{d}=\frac{0.2001+0.2003+0.2005+0.2004+0.1998+0.2001}{6} \mathrm{~cm}=0.20020 \mathrm{~cm}
+	$$
+
+	质量 $m$ 的平均值为
+	$$
+	\bar{m}=\frac{0.0344+0.0335+0.0341+0.0343+0.0341+0.0343}{6} \mathrm{~g}=0.03412 \mathrm{~g}
+	$$
+
+	计算得其密度 $\rho$ 为
+	$$
+	\rho=\frac{\bar{m}}{\frac{4}{3} \pi\left(\frac{\bar{d}}{2}\right)^3}=\frac{0.03412}{\frac{4}{3} \times 3.1416 \times\left(\frac{0.20020}{2}\right)^3} \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}=8.121 \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}
+	$$
+
+	其通过匀速下降区 $l$ 的平均时间 $t$ 为
+	$$
+	\bar{t}=\frac{7.24+6.95+6.98+7.26+6.88+6.95}{6} \mathrm{~s}=7.043 \mathrm{~s}
+	$$
+
+	所以其匀速下降的速度 $v$ 为
+	$$
+	v=\frac{\bar{l}}{\bar{t}}=\frac{18.807}{7.043} \mathrm{~cm} \cdot \mathrm{s}^{-1}=2.670 \mathrm{~cm} \cdot \mathrm{s}^{-1}
+	$$
+
+	因此，其粘滞系数 $\eta_0$ 为
+	$$
+	\begin{aligned}
+	\eta_0&=\frac{1}{18} \frac{\left(\rho-\overline{\rho_0}\right) g \bar{d}^2}{v\left(1+2.4 \frac{\bar{d}}{2 \overline{\bar{R}}}\right)\left(1+3.3 \frac{\bar{d}}{2 \bar{h}}\right)}\\
+	&=\frac{1}{18} \times \frac{(8.121-0.95443) \times 9.795 \times 2.0020^2}{2.670 \times\left(1+2.4 \times \frac{2.0020 \times 10^{-1}}{2 \times 4.0697}\right) \times\left(1+3.3 \times \frac{2.0020 \times 10^{-1}}{2 \times 41.343}\right)} \times 10^{-1} \mathrm{~P a} \cdot \mathrm{s}=0.5484 \mathrm{~P a} \cdot \mathrm{s}	
+	\end{aligned}
+	$$
+
+	计算其雷诺数
+	$$
+	R_{e}=\frac{\bar{d} v \overline{\rho_0}}{\eta_0}=\frac{2.0020 \times 2.670 \times 0.95443}{0.5484} \times 10^{-2}=0.0930
+	$$
+
+	其雷诺数 $R_{e} < 0.1$ ，因此不需要进行修正。
+	\section{进阶实验}
+
+	\subsection{利用圆柱体测定液体的粘度系数}
+
+	\begin{tablehere}
+		\caption*{\bf 表3 利用圆柱体测定液体的粘度系数原始数据}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.95\linewidth}{|Y|Y|Y|Y|Y|Y|Y|}
+				\hline
+				圆柱 h/$\mathrm {cm}$ & 0.4889 & 0.4962 & 0.5141 & 0.5110 & 0.5098 & 0.4959 \\ \hline
+				圆柱 d/$\mathrm {cm}$ & 0.3082 & 0.2869 & 0.3003 & 0.2975 & 0.3033 & 0.2879 \\ \hline
+				圆柱 m/$\mathrm {g}$  & 0.2449 & 0.2682 & 0.2758 & 0.2678 & 0.2759 & 0.2693 \\ \hline
+				圆柱 t/$\mathrm {s}$  & 1.96   & 2.20   & 2.27   & 2.10   & 2.10   & 2.07   \\ \hline
+				\end{tabularx}
+		\end{center}
+		\vspace*{1em}
+	\end{tablehere}
+
+
+
+%==========================================================
+
+	
+圆柱体直径 $d$ 的平均值为
+$$
+\bar{d}=\frac{0.3082 +0.2869+0.3003+0.2879+0.2975+0.3033}{6} \mathrm{~cm}=0.29735 \mathrm{~cm}
+$$
+
+高度 $h$ 的平均值为
+$$
+\bar{h}=\frac{0.4889 +0.4962 +0.5141 +0.5110+ 0.5098+ 0.4959}{6} \mathrm{~cm}=0.50265 \mathrm{~cm}
+$$
+
+质量 $m$ 的平均值为
+$$
+\bar{m}=\frac{0.2449 +0.2682 +0.2758 +0.2678 +0.2759+ 0.2693}{6} \mathrm{~g}=0.26698 \mathrm{~g}
+$$
+
+计算得其密度 $\rho$ 为
+$$
+\rho=\frac{\bar{m}}{\pi \bar{h} \left(\frac{\bar{d}}{2}\right)^2}=\frac{0.26698}{ 3.1416 \times 0.50265\times\left(\frac{0.29735}{2}\right)^2} \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}=7.649 \times 10^3 \mathrm{~kg} \cdot \mathrm{m}^{-3}
+$$
+
+其通过匀速下降区 $l$ 的平均时间 $t$ 为
+$$
+\bar{t}=\frac{1.96 +2.20 +2.27 +2.10 +2.10 +2.07}{6} \mathrm{~s}=2.117\mathrm{~s}
+$$
+
+所以其匀速下降的速度 $v$ 为
+$$
+v=\frac{\bar{l}}{\bar{t}}=\frac{18.807}{2.117} \mathrm{~cm} \cdot \mathrm{s}^{-1}=8.884 \mathrm{~cm} \cdot \mathrm{s}^{-1}
+$$
+
+参考【周群. $1>>\mathrm{d}$ 的圆柱体在黏性液体中的下落的探究 [J]. 科学时代（上半月）,2011(1):114-115.】 中 扁球流函数, 将圆柱近似为以 $H$ 为长轴、 $D$ 为短轴的椭圆体, 其以速度 $v$ 下降时在液体中受到的阻力为
+$$
+F_E=\frac{8 \pi \eta v \sqrt{H^2-D^2}}{\left(\tau^2+1\right) \operatorname{arccoth} \tau-\tau}
+$$
+
+当圆柱体开始作匀速下降时，有
+$$
+m g=\rho_0 V g+F_E
+$$
+
+其中, $\mathrm{m} 、 \mathrm{~V}$ 为圆柱体的质量、体积。再考虑到容器壁的影响, 对 $F_E$ 作修正, 粘滞系数为
+$$
+\eta=\frac{\left(\rho-\rho_0\right) g D^2 \tau\left[\left(\tau^2+1\right) \operatorname{arccoth} \tau-\tau\right]}{32 v}
+$$
+
+其中, 特征值 
+$$
+\tau=\left[1-\left(\frac{\bar{D}}{\bar{H}}\right)^2\right]^{-\frac{1}{2}}=\left[1-\left(\frac{0.29735}{0.50265}\right)^2\right]^{-\frac{1}{2}} = 1.240
+$$
+
+所以粘滞系数为
+$$
+\begin{aligned}
+\eta_2 & =\frac{\left(\bar{\rho}-\overline{\rho_0}\right) g \bar{D}^2 \tau\left[\left(\tau^2+1\right) \operatorname{arccoth} \tau-\tau\right]}{32 \bar{v}} \\
+& =\frac{(7.649-0.95443) \times 9.795 \times 2.9735^2 \times 1.240 \times\left[\left(1.240^2+1\right) \times \operatorname{arccoth} 1.240-1.240\right]}{32 \times 8.884} \times 10^{-1} \mathrm{~Pa} \cdot \mathrm{s} \\
+& =0.6476 \mathrm{~Pa} \cdot \mathrm{s}
+\end{aligned}
+$$
+
+
+%==========================================================
+
+
+	\subsection{利用圆片测定液体的粘度系数}
+
+	并没有找到合适的使用圆环测定粘滞系数的可用模型，另一方面实验室条件也无法测量圆片的内径和外径，因此这里只记录三次投入的时间数据，不进行粘度系数的测算。三次投入测得得时间分别为 4.26,3.90,4.10 秒。
+
+	\section{实验讨论}
+
+	根据表格查得蓖麻油在温度 $27\circ \mathrm{C}$ 时粘滞系数为0.53，在温度 $28\circ \mathrm{C}$ 时粘滞系数为0.49。那么假设在这个区间内粘滞系数近似线性变化，那么得到实验条件下参考蓖麻油粘滞系数为 $0.51$ 左右。
+
+	\begin{tablehere}
+		\caption*{\bf 表4 多种物体测量粘滞系数的比较}
+		\noindent
+		\begin{center}
+			\begin{tabular}{cccccc}
+				\hline
+				& 参考值  & 大球     & 中球     & 小球     & 圆柱体（椭球模型） \\ \hline
+		   粘滞系数 & 0.51 & 0.5182 & 0.5194 & 0.5484 & 0.6476    \\ \hline
+		\end{tabular}
+		\end{center}
+		\vspace*{1em}
+	\end{tablehere}	
+
+	实验误差主要来自于人用秒表计算的误差、投掷球时未等待液体完全静止造成涡流得干扰，最后圆柱体计算误差较大，原因是椭球模型本身得估计误差。
+
+	%————正文————
+\end{document}
