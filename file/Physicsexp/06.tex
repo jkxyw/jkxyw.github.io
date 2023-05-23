@@ -1,0 +1,302 @@
+\documentclass[10pt,a4paper]{article}	%字体、纸张
+\usepackage{xeCJK}	%中文
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=20mm]{geometry}	%页边距
+\usepackage{fancyhdr}	%页眉、页脚
+\usepackage{indentfirst}	%首行缩进
+\usepackage{graphicx}	%图片
+\usepackage{textcomp}
+\usepackage{subfigure}	
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}	%公式对齐
+\usepackage{tikz-feynman}
+
+\newcommand{\nexp}{透镜参数的测量}
+
+%————页眉、页脚设置————
+\thispagestyle{plain}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{PB22000195 王元叙}
+\fancyhead[L]{\nexp}	%————————————
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%————————————
+
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setlength{\parindent}{2em}
+\renewcommand\arraystretch{1.4}
+
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+\makeatother
+
+\begin{document}
+	%————起始————
+	\vspace*{-5em}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{Picture//USTC}\\
+		\Large \textbf{大学物理-基础实验｜实验报告}\\[5mm]
+
+		\normalsize
+		\begin{tabular}{ll}
+			姓名 & \textbf{王元叙}\\
+			学号 & \textbf{PB22000195}\\
+			班级 & \textbf{22级少年班学院5班}\\
+			日期 & \textbf{2023年5月22日}\\	
+		\end{tabular}\\[5mm]
+
+		\LARGE \textbf{\nexp}\\[5mm]	
+
+	\end{center}
+	%————————————
+
+	%————正文————
+	\section{实验目的}
+
+	\begin{enumerate}
+		\item 掌握光源、物、像间的关系以及球差、色差产生的原因；
+		\item 熟练掌握光具座上各种光学元件的调节并且测量薄透镜的焦距。
+	\end{enumerate}
+
+
+	\section{实验装置}
+	光具座、白炽灯光源、透镜架、“1”字屏、毛玻璃、像屏、一个未知焦距凸透镜、一个焦距大致为15mm凸透镜，一个未知焦距凹透镜、钢卷尺、铅笔、平面镜
+
+	\section{实验原理}
+	\subsection{高斯成像公式}
+	在近轴条件下高斯公式成立, 设 $p$ 为物距, $p^{\prime}$ 为像距, 物方焦距（也称前焦距）为 $f$, 像方焦 距 (也称后焦距) 为 $f$ 则有:
+	\[
+		\frac{f^{\prime}}{p^{\prime}}+\frac{f}{p}=1 \tag{1}
+	\]
+	由于在空气中 $f=-f^{\prime}$, 高斯公式变成
+	\[
+		\frac{1}{p^{\prime}}-\frac{1}{p}=\frac{1}{f^{\prime}} \tag{2}
+	\]
+	\subsection{自准直法}
+		位于焦点F上的物A所发出的光经过透镜变成平行光。再经平面镜M反射后可在物屏上得到清晰的倒立像A'。如图1：
+		
+		\begin{figurehere}
+			\centering
+			\includegraphics[width=0.55\linewidth]{pics/1.png}
+			\caption*{\bf 图1: 自准直法测量焦距原理图}
+		\end{figurehere}
+	\subsection{物像距法（公式法）}
+		固定透镜，将物放在距透镜一倍以上焦距处，在透镜的像方某处会获得一清晰的像，物距、像距分别为自透镜中心处至物、像间的距离。
+		
+		也可以采用如下公式计算焦距
+		\[
+		\frac{1}{p^{\prime}}+\frac{1}{p}=\frac{1}{f^{\prime}} \tag{3}
+		\]
+		
+		式中不再区分前后焦距，采用以下原则来确定符号：对物距和像距，实物与实像时取正号，虚物和虚像时取负号；对透镜焦距f，凸透镜取正号，凹透镜取负号。
+	\subsection{位移法}
+		物距在一倍焦距和二倍焦距之间时，在像方可以获得一放大的实像，物距大于二倍焦距时，可以得到一缩小的实像。当物和屏之间的距离$L$大于$4f$时，固定物和屏，移动透镜至两特定位置C、D处，在像屏上可分别获得放大和缩小的实像。C、D间距离为$l$，通过物像公式，可得
+		\[
+			f=\frac{L^2-l^2}{4 L} \tag{4}
+		\]
+	\subsection{辅助透镜法测凹透镜焦距}
+		凹透镜是一发散透镜，物经其仅能成虚像，虚像不能用像屏接受，这样无法直接用物成像的方法来计算焦距，但可利用凸透镜成的像作为凹透镜的物，再产生一个实像。注意凹透镜的像方焦点在物空间，物方焦点在像空间。实验中应使凹透镜成像的物距、像距均大于0，才能用屏接收到实像，如图2所示。\\
+
+		\begin{figurehere}
+			\centering
+			\includegraphics[width=0.55\linewidth]{pics/2.png}
+			\caption*{\bf 图2: 辅助透镜法测凹透镜焦距原理图}
+		\end{figurehere}
+
+	\subsection{自准直法测凹透镜焦距}
+		无法直接使用自准直法测量凸透镜焦距，因此可以使用辅助透镜方法，实验设计图参见附录中原始数据。
+
+	\section{实验步骤}
+
+    \begin{enumerate}
+		\item 目测调节。即将所用的元件靠拢，使其光心等高，光轴平行于光学平台。
+		\item 利用成像原理细调元件共轴。
+		\item 物像距法测量凸透镜焦距：物距固定不变单次测量，像距6次测量取平均。
+		\item 位移法测量凸透镜焦距数据：物像距离固定不变单次测量，透镜位移量6次测量取平均。
+		\item 自准直法测量凸透镜焦距：直接测得焦距6次，测量前三次后翻转透镜测量后三次。
+		\item 物像距法测量凹透镜焦距：物距固定不变单次测量，像距3次测量取平均。
+		\item 自准直法测量凹透镜焦距：直接测得焦距3次。
+        \item 整理仪器，结束实验。
+    \end{enumerate}
+
+	\section{实验数据与分析}
+
+	\subsection{物像距法测量凸透镜焦距}
+
+	\begin{tablehere}
+		\caption*{\bf 表1 物像距法测量凸透镜焦距数据}
+		\noindent	
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.85\textwidth}{|l|Y|Y|Y|Y|Y|Y|}
+				\hline
+				物距/$\mathrm{mm}$ & \multicolumn{6}{c|}{144.3} \\ \hline
+				像距/$\mathrm{mm}$ & 326.7 & 324.3 & 325.1 & 327.2 & 324.9 & 321.1 \\ \hline
+				平均物距/$\mathrm{mm}$ & \multicolumn{6}{c|}{324.9} \\ \hline
+				焦距/$\mathrm{mm}$ & \multicolumn{6}{c|}{99.9} \\ \hline
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	{\bf 不确定度分析过程：}
+
+	像距 $p^{\prime}$ 平均值
+	$$
+	\overline{p^{\prime}}=\frac{1}{n} \sum_{i=1}^n p_i^\prime=\frac{326.7 + 324.3 + 325.1 + 327.2 + 324.9 + 321.1}{6} \mathrm{~mm}=324.9 \mathrm{~mm}
+	$$
+
+	由高斯公式 (2) 求得焦距
+	$$
+	f=\frac{p p^{\prime}}{p+p^{\prime}}=\frac{324.9 \times 144.3}{324.9+144.3} \mathrm{~mm}=99.9 \mathrm{~mm}
+	$$
+
+	像距的 A 类不确定度
+	$$
+	u_A=\sqrt{\frac{1}{(n-1) } \sum_{i=1}^n\left(p_i^{\prime}-\overline{p^{\prime}}\right)^2} \mathrm{~mm}=2.54\mathrm{~mm}
+	$$
+
+	像距的 B 类不确定度
+	$$
+	\Delta_{B, p^{\prime}}=\sqrt{\Delta_{\text {仪 }}^2+\Delta_{\text {估 }}^2}=\sqrt{2^2+0.5^2} \mathrm{~mm}=2.06 \mathrm{~mm}
+	$$
+
+	像距的展伸不确定度
+	$$
+	\begin{aligned}
+	U_{p^{\prime}, P} & =\sqrt{\left(t_P \frac{u_A}{\sqrt 3}\right)^2+\left(k_P \frac{\Delta_{B, p^{\prime}}}{C}\right)^2} \\
+	& =\sqrt{(2.57 \times \frac{2.54}{\sqrt 3})^2+\left(1.96 \times \frac{2.06}{3}\right)^2} \mathrm{~mm} \\
+	& =3.94 \mathrm{~mm}, P=0.95
+	\end{aligned}
+	$$
+
+	物距 $p$ 展伸不确定度
+	$$
+	U_{p, P}=k_P \frac{\Delta_{B, p^{\prime}}}{C}=1.35 \mathrm{~mm}
+	$$
+
+	焦距 $f$ 的展伸不确定度
+	$$
+	\begin{aligned}
+	U_{f, P} & =\sqrt{\left(\frac{\partial f}{\partial p} U_{p, P}\right)^2+\left(\frac{\partial f}{\partial p^{\prime}} U_{p^{\prime}, P}\right)^2} \\
+	& =\sqrt{\left(\frac{p^2}{\left(p+p^{\prime}\right)^2} U_{p, P}\right)^2+\left(\frac{p^{\prime 2}}{\left(p+p^{\prime}\right)^2} U_{p^{\prime}, P}\right)^2} \\
+	& = 1.9 \mathrm{~mm}, P=0.95
+	\end{aligned}
+	$$
+
+	焦距 $f$ 最终结果
+	$$
+	g=(99.9 \pm 1.9) \mathrm{mm} \quad(P=0.95)
+	$$
+
+
+
+	\subsection{位移法测量凸透镜焦距}
+
+	\begin{tablehere}
+		\caption*{\bf 表2 位移法测量凸透镜焦距数据}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.85\textwidth}{|l|Y|Y|Y|Y|Y|Y|}
+				\hline
+				物像距/$\mathrm{mm}$ & \multicolumn{6}{c|}{540.3}  \\ \hline
+				位移/$\mathrm{mm}$ & 284.2 & 281.9 & 283.0 & 283.2 & 282.7 & 282.1 \\ \hline
+				平均位移/$\mathrm{mm}$ & \multicolumn{6}{c|}{282.9} \\ \hline  	
+				焦距/$\mathrm{mm}$ & \multicolumn{6}{c|}{98.64} \\ \hline  	
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	\subsection{自准直法测量凸透镜焦距}
+
+	\begin{tablehere}
+		\caption*{\bf 表3 自准直法测量凸透镜焦距数据}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.85\textwidth}{|l|Y|Y|Y|Y|Y|Y|}
+				\hline
+				焦距/$\mathrm{mm}$ & 100.9 & 101.5 & 101.1 & 103.5 & 102.1 & 101.9 \\ \hline
+				平均焦距/$\mathrm{mm}$ & \multicolumn{6}{c|}{101.8} \\ \hline  		
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	\subsection{物像距法测量凹透镜焦距}
+
+	\begin{tablehere}
+		\caption*{\bf 表4 物像距法测量凹透镜焦距数据}
+		\noindent	
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.85\textwidth}{|l|Y|Y|Y|}
+				\hline
+				物距/$\mathrm{mm}$ & \multicolumn{3}{c|}{100.9} \\ \hline
+				像距/$\mathrm{mm}$ & 203.2 & 203.9 & 203.1 \\ \hline
+				平均物距/$\mathrm{mm}$ & \multicolumn{3}{c|}{203.4} \\ \hline
+				焦距/$\mathrm{mm}$ & \multicolumn{3}{c|}{200.4} \\ \hline
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	\subsection{自准直距法测量凹透镜焦距}
+
+	\begin{tablehere}
+		\caption*{\bf 表5 自准直法测量凹透镜焦距数据}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.85\textwidth}{|l|Y|Y|Y|}
+				\hline
+				焦距/$\mathrm{mm}$ & 204.4 & 206.0 & 206.0 \\ \hline
+				平均焦距/$\mathrm{mm}$ & \multicolumn{3}{c|}{205.3} \\ \hline  		
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	\subsection{利用视差测量透镜焦距}
+
+	使用视差法测量了了凸透镜的焦距。测量得到物距为$215.5\mathrm{~mm}$，像距为 $207.5\mathrm{~mm}$ 计算得到焦距为 $105.7\mathrm{~mm}$
+
+	\section{误差分析}
+
+	本实验中实验误差主要来自于几个方面
+
+	\begin{enumerate}
+		\item 钢卷尺测量误差
+		\item 透镜安装时偏心导致的对位移法、自准直法测量凸透镜焦距的误差。
+		\item 使用肉眼判断成像最清晰位置不准确导致的误差
+		\item 凹透镜焦距的测量显著更大，这是由于实验使用了辅助透镜法，而增加透镜后上述误差被显著放大。
+	\end{enumerate}
+
+	\section{思考题}
+
+	\textbf {问题 1}\textsl{ 如果在“1”字屏后不加毛玻璃，对实验会有什么影响？}
+
+	毛玻璃可以将光线散射，使得光纤扩散均匀，形成大小一定的光斑。否则由于透镜本身存在的光学缺陷，例如球差、色差、散光等因素导致的光斑扩散情况，导致图像质量下降图像不清晰，影响对像距的测量。毛玻璃可以使得测量更加精确。
+
+	\textbf {问题 2}\textsl{ 自准直法测凸透镜焦距时，如果透镜安装在光具座上时沿光轴方向与光具座中心不重合（偏心），而我们测量距离时测量的是光具座之间的距离（默认为光学元件位于光具座中心位置），这对测量有什么影响？如何消除这一影响？}
+
+	在使用自准直方法进行测量时，直接测量的是光具座之间的距离而不是光学元件之间的距离。因此如果透镜本身存在偏心，那么测量的结果就会有显著的偏差。假设这个偏心的位移量为 $x$ 那么实际上直接测量的值为 $l + x$ ，为了消除这个误差，可以在测量完前三次结果后将透镜反转，是的后三次被测量值为 $l - x$ 通过多次测量取平均值可以较好地将偏心导致的误差降低。
+
+	\textbf {问题 3}\textsl{ 在利用公式法和位移法测凸透镜焦距时，如果透镜安装时也存在上述偏心，对实验测量结果是否有影响？}
+
+	使用公式法测量焦距时，同样假设透镜的偏心位移量为 $x$ ，那么实际测量的物距和像距分别为 $p - x$ 和 $p^\prime + x$ ，那么计算得到的焦距为 $f^\ast = \frac{pp^\prime + (p-p^\prime)x - x ^ 2}{p + p ^ \prime}$ ，差值为 $\Delta f = \frac{(p-p^\prime - x)x}{p + p ^ \prime}$ 。因此此事透镜安装的偏心对实验测量结果有影响，但是影响较小，尤其当物距像距接近时这个影响量可以忽略不计。
+
+	使用位移法对焦距进行测量时则没有如上问题，因为两次测量都受到透镜安装偏心的影响且影响量相同，因此对实验测量结果并没有影响。
+
+\end{document}
