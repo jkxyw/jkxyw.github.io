@@ -1,0 +1,388 @@
+\documentclass[10pt,a4paper]{article}	%字体、纸张
+\usepackage{xeCJK}	%中文
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=20mm]{geometry}	%页边距
+\usepackage{fancyhdr}	%页眉、页脚
+\usepackage{indentfirst}	%首行缩进
+\usepackage{graphicx}	%图片
+\usepackage{textcomp}
+\usepackage{subfigure}	
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}	%公式对齐
+\usepackage{tikz-feynman}
+
+\newcommand{\nexp}{表面张力的测定}
+
+%————页眉、页脚设置————
+\thispagestyle{plain}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{PB22000195 王元叙}
+\fancyhead[L]{\nexp}	%————————————
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%————————————
+
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setlength{\parindent}{2em}
+\renewcommand\arraystretch{1.4}
+
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+\makeatother
+
+\begin{document}
+	%————起始————
+	\vspace*{-5em}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{Picture//USTC}\\
+		\Large \textbf{大学物理-基础实验｜实验报告}\\[5mm]
+
+		\normalsize
+		\begin{tabular}{ll}
+			姓名 & \textbf{王元叙}\\
+			学号 & \textbf{PB22000195}\\
+			班级 & \textbf{22级少年班学院5班}\\
+			日期 & \textbf{2023年5月22日}\\	
+		\end{tabular}\\[5mm]
+
+		\LARGE \textbf{\nexp}\\[5mm]	
+
+	\end{center}
+	%————————————
+
+	%————正文————
+	\section{实验目的}
+
+	\begin{enumerate}
+		\item 了解表面张力产生原理及特性，理解表面张力的测定原理
+		\item 通过实际操作，掌握焦利氏秤的基本调节要求、方法和使用规范。
+		\item 探究浓度与表面张力的关系。
+		\item 合理分析误差，推断出表面张力系数测量误差的主要来源
+	\end{enumerate}
+
+
+	\section{实验装置}
+	焦利氏秤（包括锥形弹簧）、若干 0.5g 砝码和 1g 砝码、镊子、刻度尺、烧杯、针筒注射器、清水、配置好的位置浓度洗洁精水溶液、洗洁精
+
+	\section{实验原理}
+
+	\subsection{表面张力作用原理原理}
+    液体表面层（其厚度等于分子的作用半径）内的分子所处的环境跟液体内部的分子是不同的。\par
+	表面层内的分子合力垂直于液面并指向液体内部，所以分子有从液面挤入液体内部的倾向，并使液体表面自然收缩。\par
+	想象在液面上划一条直线，表面张力就表现为直线两旁的液膜以一定的拉力相互作用。拉力 $F$ 存在于表面层，方向恒与直线垂直，大小与直线的长度$l$成正比，即
+	\[F=\sigma l\]
+	式中$\sigma$称为表面张力系数，它的大小与液体的成分、纯度、浓度以及温度有关。
+
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.40\linewidth]{pics/1.png}
+		\caption*{\bf 图1: 表面张力产生原理示意图}
+	\end{figurehere}
+
+	\subsection{拉脱法测量原理}
+	\noindent
+	\begin{minipage}[l]{0.65\textwidth}
+	\par 在实验操作中,将金属丝（金属环）框缓慢拉出水面的过程中,金属丝框下面将带起一水膜
+	,当水膜刚被拉断时,诸力的平衡条件是$$F=mg+2F'$$
+	联立$$F'=\sigma l$$
+	得到$$\sigma =\frac{F-mg}{2l}$$
+	对金属环来说，同样可以得到$$\sigma =\frac{F-mg}{2\pi d}$$
+	\end{minipage}
+	\begin{minipage}[l]{0.35\textwidth}
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.95\linewidth]{pics/2.png}
+		\caption*{\bf 图2: 金属丝测量表面张力示意图}
+	\end{figurehere}
+	\end{minipage}\\
+	\subsection{焦利秤测量原理}
+
+	\par 焦利秤是一种用于测
+	微小力的精细弹簧秤。一般的弹簧秤都是弹簧秤上端
+	固定，在下端加负载后向下伸长，而焦利秤与之相反，
+	它是控制弹簧下端的位置保持一定，加负载后向上拉
+	动弹簧确定伸长值。
+	\par 为了保证弹簧下端的位置是固定的，必须三线对
+	齐，即玻璃圆筒$E$上的刻线、小平面镜上的刻线、$E$
+	上的刻线在小平面镜中的像，三者始终重合。在力$F$作用下弹簧伸长$\Delta l$,根据虎克定律可知，
+	在弹性限度内$F=k\Delta l$,将已知重量的砝码加在
+	砝码盘中，测出弹簧的伸长量，由上式即可计算该弹
+	簧的$k$值，由$k$值就可测量外力$F$。
+
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.25\linewidth]{pics/3.png}
+		\caption*{\bf 图3: 焦利秤示意图}
+	\end{figurehere}
+
+	\section{实验步骤}
+	
+	\begin{enumerate}
+		\item 确定焦利氏秤上锥形弹簧的劲度系数\begin{enumerate}
+			\item 把锥形弹簧，带小镜子的挂钩和小砝码盘依次安装到秤框内的金属杆上。调节支架底座的底脚螺丝，使秤框竖直，小镜子应正好位于玻璃管中间，挂钩上下运动时不致与管摩擦。
+			\item 逐次在砝码盘内放入砝码，每次增量 $0.5$g 的砝码，从 $0.5$g $\sim$ $5$g 范围内增加。每次操作都要调节升降钮，做到三线对齐。记录升降杆的位置读数。用最小二乘法和作图法计算出弹簧的劲度系数$k$。
+		\end{enumerate}
+		\item 用金属圈测量自来水的表面张力系数\begin{enumerate}
+			\item 用游标卡尺测量金属圈的直径 $d$；当液膜刚要破裂时，记下金属杆的读数。测量 $5$ 次，取平均，计算自来水的表面张力系数和不确定度。
+			\item 取下砝码，在砝码盘下挂上金属圈，仍保持三线对齐，记下此时升降杆读数 $l_0$
+			\item 把盛有自来水的烧杯放在焦利氏秤台上，调节平台的微调螺丝和升降钮，使金属圈浸入水面以下
+			\item 缓慢地旋转平台微调螺丝和升降钮，注意烧杯下降和金属杆上升时，始终保持三线对齐。当液膜刚要破裂时，记下金属杆的读数。测量 $5$ 次，取平均，计算自来水的表面张力系数和不确定度。
+		\end{enumerate}
+		\item 用金属丝测量洗洁精溶液的表面张力系数\begin{enumerate}
+			\item 用游标卡尺测量金属丝两脚之间的距离 $s$
+			\item 取下砝码，在砝码盘下挂上金属丝，仍保持三线对齐，记下此时升降杆读数 $l_0$，然后重复上述 2 中的步骤 (c) 和 (d) 步骤即可
+		\end{enumerate}
+		\item 探究不同浓度的洗洁精的表面张力系数，得出浓度与表面张力的关系曲线
+	\end{enumerate}
+
+	\section{实验数据与分析}
+	\subsection{测量弹簧劲度系数}
+
+	\begin{tablehere}
+		\caption*{\bf 表1 测量弹簧劲度系数原始数据}
+		\noindent	
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.95\textwidth}{|l|Y|Y|Y|Y|Y|Y|Y|Y|Y|Y|}
+				\hline
+				质量 $m/\mathrm{g}$ & 0.5 & 1.0 & 1.5 & 2.0 & 2.5 & 3.0 & 3.5 & 4.0 & 4.5 & 5.0\\ \hline
+				距离 $x/\mathrm{cm}$ & 1.20 & 1.63 & 1.98 & 2.43 & 2.93 & 3.37 & 3.86 & 4.23 & 4.65 & 5.11\\ \hline
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	使用最小二乘法得到结果图：
+
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.9\linewidth]{pics/4.png}
+		\caption*{\bf 图4: 最小二乘法拟合劲度系数}
+	\end{figurehere}
+	
+	采用合肥本地参考重力加速度 $g = 9.7933 \mathrm{m}/\mathrm{s} ^ {-2}$ 可以得到
+	\[
+		k=\frac{x}{m} g = (1.13997 + 0.01165) \times 10^{-1} \times 9.7933 \mathrm{~N}/\mathrm{m} ^ {-2}= 1.1164 \pm 0.0114 \mathrm{~N}/\mathrm{m} ^ {-2}
+	\]
+
+	采用作图法，使用带入计算得到
+	\[
+		k=\frac{x}{m} g = 1.1271 \mathrm{~N}/\mathrm{m} ^ {-2}
+	\]
+
+	采用最小二乘法得到的结果作为下面计算过程中使用的劲度系数
+
+	\subsection{用金属圈测量自来水的表面张力系数}
+
+	\begin{tablehere}
+		\caption*{\bf 表2 金属圈直径测量数据}
+		\noindent	
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.35\textwidth}{|Y|Y|Y|}
+				\hline
+				\multicolumn{3}{|c|}{金属圈直径 $d / \mathrm{cm}$} \\ \hline
+				3.49 & 3.47 & 3.37 \\ \hline
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	金属圈直径测量平均值
+	\[\bar{d}=\frac{3.49 + 3.47 + 3.37}{3}=3.443\,\text{cm}\]
+	
+	\[\sigma _d=\sqrt{\dfrac{\sum_{i=1}^{3}(d_i-\bar{d})^2}{2}}=0.0906\,\text{cm}\]
+	
+	A类不确定度为
+	\[u_A=\dfrac{\sigma _d}{\sqrt{3}}=0.0522\,\text{cm}\]
+	
+	B类不确定度为
+	\[u_B=K_p \dfrac{\Delta _B}{C}=1.960\times \dfrac{0.02}{3}=0.013\,\text{cm}\]
+	
+	由不确定度合成公式 (钢尺允差为 0.02cm)，金属圈直径的不确定度为
+	\[
+		\begin{aligned}
+			U_{d,0.95}&=\sqrt{(t_{0.95}u_A)^2+u_B^2}\\
+			&= \sqrt{(4.3 \times 0.0522)^2+0.013^2}\,\text{cm}\\
+			&=0.0711\,\text{cm},P=0.95\\
+		\end{aligned}
+	\]
+
+
+	\begin{tablehere}
+		\caption*{\bf 表3 金属圈测量自来水表面张力数据}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.75\textwidth}{|l|Y|Y|Y|Y|Y|}
+				\hline
+				初始距离$l_0$/$\mathrm{cm}$ & 1.50 & 1.50 & 1.50 & 1.50 & 1.50 \\ \hline
+				破裂时的距离$l$/$\mathrm{cm}$ & 2.66 & 2.67 & 2.66 & 2.65 & 2.63 \\ \hline  		
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	位移量平均值
+
+	\[\overline{\Delta l}=\dfrac{\sum_{i=1}^{5}\Delta l_i}{5}=1.154\,\text{cm}\]
+	
+	\[\sigma _{\Delta l}=\sqrt{\dfrac{\sum_{i=1}^{5}(\Delta l_i-\overline{\Delta l})^2}{4}}=0.012\,\text{cm}\]
+	
+	由不确定度合成公式（弹簧长度允差为0.01cm），A类不确定度为
+	\[u_A=\dfrac{\sigma _{\Delta l}}{\sqrt{5}}=0.0054\,\text{cm}\]
+	
+	B类不确定度为
+	\[u_B=K_p \dfrac{\Delta _B}{C}=1.960\times \dfrac{0.01}{3}=0.0065\,\text{cm}\]
+	
+	弹簧伸长量的不确定度为
+	\[
+		\begin{aligned}
+			U_{l,0.95}&=\sqrt{(t_{0.95}u_A)^2+u_B^2}\\
+			&= \sqrt{(4.3 \times 0.0054)^2+0.0065^2}\,\text{cm}\\
+			&=0.0239\,\text{cm},P=0.95\\
+		\end{aligned}
+	\]
+
+	自来水的表面张力系数为
+	\[
+		\begin{aligned}
+			\sigma &=\dfrac{k\overline{\Delta l}}{2\pi \overline{d}}\\
+			&= \dfrac{1.1271 \times 1.154}{2 \times 3.1416 \times 3.443} \times 10 ^ 1 \,\text{N/m}\\
+			&=0.0601\,\text{N/m} \\
+		\end{aligned}
+	\]
+	
+	由间接不确定度合成公式
+	\[\dfrac{U_{\sigma,0.95}}{\sigma}=\dfrac{\Delta k}{k}+\dfrac{U_{\Delta l,0.95}}{\overline{\Delta l}}+\dfrac{U_{d,0.95}}{\bar{d}}=0.05147\]
+	\[U_{\sigma ,0.95}=\dfrac{U_{\sigma ,0.95}}{\sigma} \times \sigma=0.0031\,\text{N/m},P=0.95\]
+	
+	综上，自来水的表面张力系数为\[\sigma =(0.0601\pm 0.0031)\,\text{N/m}\]
+
+	\subsection{用金属丝测量洗洁精溶液的表面张力系数}
+
+	
+
+	\begin{tablehere}
+		\caption*{\bf 表4 金属丝长度测量数据}
+		\noindent	
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.35\textwidth}{|Y|Y|Y|}
+				\hline
+				\multicolumn{3}{|c|}{金属丝长度 $s / \mathrm{cm}$} \\ \hline
+				4.00 & 4.02 & 4.09 \\ \hline
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	金属圈直径测量平均值
+	\[\bar{d}=\frac{3.49 + 3.47 + 3.37}{3}=4.037\,\text{cm}\]
+
+
+	\begin{tablehere}
+		\caption*{\bf 表5 金属丝测量洗洁精溶液表面张力数据}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.75\textwidth}{|l|Y|Y|Y|Y|Y|}
+				\hline
+				初始距离$l_0$/$\mathrm{cm}$ & 1.35 & 1.35 & 1.34 & 1.35 & 1.35 \\ \hline
+				破裂时的距离$l$/$\mathrm{cm}$ & 1.55 & 1.55 & 1.54 & 1.56 & 1.57 \\ \hline
+				距离差值$\Delta l$/$\mathrm{cm}$ & 0.20 & 0.20 & 0.20 & 0.21 & 0.22 \\ \hline  		  		
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	位移量平均值
+
+	\[\overline{\Delta l}=\dfrac{\sum_{i=1}^{5}\Delta l_i}{5}=0.206\,\text{cm}\]
+	
+
+	洗洁精溶液的表面张力系数为
+	\[
+		\begin{aligned}
+			\sigma &=\dfrac{k\overline{\Delta l}}{2 \overline{d}}\\
+			&= \dfrac{1.1271 \times 0.206}{2 \times 4.037} \times 10 ^ 1 \,\text{N/m}\\
+			&=0.0287\,\text{N/m} \\
+		\end{aligned}
+	\]
+
+	\subsection{探究不同浓度的洗洁精的表面张力系数}
+
+	在全部三次测量之前均使用金属圈进行预实验，得到的结果都是液膜不破裂，因此三次测量都使用金属丝。中间计算过程从略。
+
+	\begin{tablehere}
+		\caption*{\bf 表6 自配不同浓度洗洁精溶液表面张力测量数据}
+		\noindent
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.75\textwidth}{|Y|c|Y|Y|Y|Y|c|}
+				\hline
+				浓度    & 初始距离$l_0$/cm & \multicolumn{3}{c|}{破裂时的距离$l$/cm} & $\overline{\Delta l}/\text{cm}$ & $\sigma /$N$\cdot$m$^{-1}$ \\ \hline
+				1.0\textperthousand & 1.35 & 1.56 & 1.57 & 1.55 & 0.210 & 0.0292 \\
+				0.4\textperthousand & 1.35 & 1.60 & 1.59 & 1.60 & 0.247 & 0.0344 \\
+				0.1\textperthousand & 1.35 & 1.64 & 1.66 & 1.65 & 0.300 & 0.0417 \\ \hline
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	使用幂函数拟合得到的结果如图所示
+
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.9\linewidth]{pics/5.png}
+		\caption*{\bf 图5: 洗洁精溶液的表面张力系数与浓度的关系}
+	\end{figurehere}
+
+	\section{误差分析}
+
+	本实验中实验误差主要来自于几个方面
+
+	\begin{enumerate}
+		\item 用焦利称测量移动距离时，读数有一定误差。
+		\item 金属圈与金属框并不是严格规整，金属圈各处直径有偏差，进而导致测量误差。
+		\item 液膜刚要破裂的临界点难以准确确定，容易因震动或过度调节导致液膜提前批列，造成误差。
+		\item 实际上表面张力方向也并严格非垂直水面，与理想状态的受力分析存在差异。
+	\end{enumerate}
+
+	\section{思考题}
+
+	\noindent\textbf {问题 }\textsl{ 焦利氏秤法测定液体的表面张力有什么优点？}
+
+	\begin{enumerate}
+		\item 焦利氏称在测量过程中下端保持在三线对齐的位置上，在正确操作的前提下能够保证较高的实验精度。
+		\item 实验中要判断液膜刚好拉脱的临界点，这就需要保证弹簧下端不动，否则难以观察。而测量时焦利
+		氏秤弹簧下端位置固定，便于找到拉脱的临界状态，易于观察。
+		\item 焦利氏秤使用锥形弹簧，克服了因弹簧自重引起弹性系数的变化，实验精度较高。
+	\end{enumerate}
+
+	\noindent\textbf {问题 }\textsl{ 焦利氏秤的弹簧为什么做成锥形？}
+
+	\begin{enumerate}
+		\item 为了使弹簧均匀伸长，消除其自重的影响。
+	\end{enumerate}
+	
+	\noindent\textbf {问题 }\textsl{ 实验中应注意哪些地方，才能减小误差？}
+	
+	\begin{enumerate}
+		\item 实验前先调节底脚螺丝，使焦利氏秤竖直，防止平面镜升降过程中与玻璃管摩擦，使结果不准确。
+		\item 缓慢且同时地转动平台的高度调节螺母和升降钮，始终保持三线合一，防止液膜断裂时玻璃管内不处于三线合一的状态。
+		\item 实验中尽量保证液面没有抖动，这就要求实验调节焦利氏秤时一定要轻微调节，否则水面出现波动会干扰液膜，使拉脱时测量不准
+		\item 每次试验前分别测量对应的原始长度，提高精度。
+	\end{enumerate}
+
+
+\end{document}
