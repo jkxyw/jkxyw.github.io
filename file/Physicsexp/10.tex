@@ -1,0 +1,180 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{xeCJK}
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=20mm]{geometry}	%页边距
+\usepackage{fancyhdr}	%页眉、页脚
+\usepackage{indentfirst}	%首行缩进
+\usepackage{graphicx}	%图片
+\usepackage{textcomp}
+\usepackage{subfigure}	
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}	%公式对齐
+\usepackage{tikz-feynman}
+
+\newcommand{\nexp}{质量与密度的测量}
+
+%————页眉、页脚设置————
+\thispagestyle{plain}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{PB22000195 王元叙}
+\fancyhead[L]{\nexp}	%————————————
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%————————————
+
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setlength{\parindent}{2em}
+\renewcommand\arraystretch{1.4}
+
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+\makeatother
+
+\begin{document}
+	%————起始————
+	\vspace*{-5em}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{Picture//USTC}\\
+		\Large \textbf{大学物理-基础实验｜实验报告}\\[5mm]
+
+		\normalsize
+		\begin{tabular}{ll}
+			姓名 & \textbf{王元叙}\\
+			学号 & \textbf{PB22000195}\\
+			班级 & \textbf{22级少年班学院5班}\\
+			日期 & \textbf{2023年6月20日}\\	
+		\end{tabular}\\[5mm]
+
+		\LARGE \textbf{\nexp}\\[5mm]	
+
+	\end{center}
+	%————————————
+
+	%————正文————
+
+	\section{卡尺法测量金属圆柱体的密度}
+
+	金属圆柱体质量 $m$ 为
+	$$
+	m=10.33 \mathrm{~g}
+	$$
+
+	其直径 $D$ 为
+	$$
+	D=12.00 \mathrm{~mm}
+	$$
+
+	其高度 $H$ 为
+	$$
+	H=12.03 \mathrm{~mm}
+	$$
+
+	因此，其密度为
+	$$
+	\rho=\frac{\bar{m}}{\frac{\pi}{4} \overline{H D}^2}=\frac{10.33}{\frac{\pi}{4} \times 12.03 \times 12.00^2} = \frac{1033}{43308 \pi} \mathrm{~g} / \mathrm{cm}^3=7.59 \mathrm{~g} / \mathrm{cm}^3
+	$$
+
+	\section{流体静力称衡法测量金属圆柱体的密度}
+
+	金属圆柱体质量 $m$ 为
+	$$
+	m=163.17\mathrm{~g}
+	$$
+
+	金属圆柱体排开液体质量 $m_0$ 为
+	$$
+	m_0=19.45\mathrm{~g}
+	$$
+
+	实验前两两次测量水温分别为 $T_0=25.4 ^\circ \mathrm{C},T_1=25.5 \circ \mathrm{c}$, 取平均 $25.5^\circ\mathrm{C}$。查表可得水的密度取 $\rho_0=0.996940 \mathrm{~g} / \mathrm{cm}^3$ 。因此, 金属圆柱体的密度为
+	$$
+	\rho=\frac{{m}}{{m_0}} \rho_0=\frac{163.17}{19.45} \times 0.996940 \mathrm{~g} / \mathrm{cm}^3=8.36 \mathrm{~g} / \mathrm{cm}^3 
+	$$
+
+	\section{利用转动定律测量金属棒的质量}
+
+	\begin{tablehere}
+		\caption*{表1：\bf 利用转动定律测量金属棒的质量}
+		\noindent	
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.75\textwidth}{|Y|Y|Y|Y|Y|}
+				\hline 
+				$r(cm)$ & $t(s)$ & $r^2\left(m^2\right)$ &$ T(s)$ &$ r T^2\left(m s^2\right)$ \\ \hline
+				20 & 84.48 & 2.816 & 0.0400 & 158.5971 \\ \hline
+				25 & 77.87 & 2.596 & 0.0625 & 168.4371 \\ \hline
+				30 & 73.62 & 2.454 & 0.0900 & 180.6635 \\ \hline
+				35 & 70.41 & 2.347 & 0.1225 & 192.7943 \\ \hline
+				40 & 68.59 & 2.286 & 0.1600 & 209.0928 \\ \hline
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	由公式 $r^2=\frac{g r}{4 \pi^2} T^2-\frac{I_C}{2 m}$ 拟合得 $r^2-r T^2$ 关系曲线如下:
+
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=.55\linewidth]{pics/1.png}
+		\caption*{\bf 图1: Origin最小二乘法拟合}
+	\end{figurehere}
+
+	由图 1 得截距 $b=-\frac{I_C}{2 m}=-0.3406 \mathrm{m}^2$, 已知 $m=10.33 \mathrm{~g}$, 故:
+	$$
+	I_C=-2 m b=-2 \times 10.33 \times 10^{-3} \times(-0.3406) =7.037\times 10^{-3} \mathrm{~kg} \cdot \mathrm{m}^2
+	$$
+
+	我们测量得到数据
+	$$
+	T=\frac{46.47}{30} \mathrm{~s}=1.775 \mathrm{~s}, \quad L=62.10 \mathrm{~mm}, r=30.00 \mathrm{~cm}
+	$$
+
+	利用如下公式
+	$$
+	\frac{4 \pi^2}{T^2}=\frac{m_1 g r}{I_C+\frac{1}{12} m_1 L^2+m_1 r^2}
+	$$
+
+	可得金属棒的质量为 
+	$$
+	M=\frac{I_C}{\frac{g r}{4 \pi^2} T^2-\frac{1}{12} L^2-r^2}=\frac{7.037 \times 10^{-3}}{\frac{9.8 \times 0.30}{4 \pi^2} \times 1.775^2-\frac{1}{12} \times 0.0621^2-0.30^2}  = 48.76 \mathrm{~g}
+	$$
+
+	\section{动力学方法测量物体的质量}
+
+	首先, 以托盘为振子, 该弹簧振子周期为 $T_1$, 测量 30 个周期。然后, 以托盘和砝码为振子, 该弹簧振子 周期为 $T_2$, 测量 30 个周期。最后, 以托盘和待测物体为振子, 该弹簧振子周期为 $T_3$, 测量 30 个周期。
+
+	根据关系式
+	$$
+	\frac{m_{\text {1 }}}{T_1^2}=\frac{m_{\text {1 }}+m_{\text {2码 }}}{T_2^2}=\frac{m_{\text {1 }}+m_{\text {3 }}}{T_3^2}
+	$$
+
+	可知待测物体质量为
+	$$
+	m_{\text {3 }}=\frac{T_3^2-T_1^2}{T_2^2-T_1^2} m_{\text {2}}
+	$$
+	
+	根据砝码上的标签读出 $m=99.85\mathrm{~g}$ 测量得到：
+	$$
+	{T_1}=37.23 \mathrm{~s}, {T_2}=54.11 \mathrm{~s}, {T_3}=46.35 \mathrm{~s}
+	$$
+	
+	计算得到：
+	$$
+	{T_1}=1.241 \mathrm{~s}, {T_2}=1.804 \mathrm{~s}, {T_3}=1.545 \mathrm{~s}
+	$$
+
+	因此, 待测物体质量为
+	$$
+	m_{\text {3 }}=\frac{{{T_3}}^2-{{T_1}}^2}{{{T_2}}^2-{{T_1}}^2} m_{\text {2 }}=\frac{397854322}{8571675} g=46.42 g \text { 。 }
+	$$
+	
+\end{document}
