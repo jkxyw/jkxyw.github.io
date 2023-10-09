@@ -1,0 +1,129 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{xeCJK}
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=20mm]{geometry}	%页边距
+\usepackage{fancyhdr}	%页眉、页脚
+\usepackage{indentfirst}	%首行缩进
+\usepackage{graphicx}	%图片
+\usepackage{textcomp}
+\usepackage{subfigure}	
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{amsmath}	%公式对齐
+\usepackage{tikz-feynman}
+
+\newcommand{\nexp}{医学物理实验}
+
+%————页眉、页脚设置————
+\thispagestyle{plain}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{PB22000195 王元叙}
+\fancyhead[L]{\nexp}	%————————————
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%————————————
+
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setlength{\parindent}{2em}
+\renewcommand\arraystretch{1.4}
+
+\makeatletter
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+\makeatother
+
+\begin{document}
+	%————起始————
+	\vspace*{-5em}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{Picture//USTC}\\
+		\Large \textbf{大学物理-综合实验｜数据处理}\\[5mm]
+
+		\normalsize
+		\begin{tabular}{ll}
+			姓名 & \textbf{王元叙}\\
+			学号 & \textbf{PB22000195}\\
+			班级 & \textbf{22级少年班学院5班}\\
+			日期 & \textbf{2023年10月09日}\\	
+		\end{tabular}\\[5mm]
+
+		\LARGE \textbf{\nexp}\\[5mm]	
+
+	\end{center}
+	%————————————
+
+	%————正文————
+	\section{数据分析}
+
+	\subsection{测量 LM35 特性曲线}		
+	\begin{tablehere}
+		\caption*{\bf 表1 LM35 电压-温度特性曲线拟合图像}
+		\noindent	
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.95\textwidth}{|Y|Y|Y|Y|Y|Y|Y|}
+				\hline
+				温度 & 30.2  & 40.0  & 50.1  & 60.1  & 70.0  & 80.2  \\ \hline
+				电压 & 0.302 & 0.409 & 0.524 & 0.626 & 0.721 & 0.824 \\ \hline
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+	
+	
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.85\linewidth]{pics/1.png}
+		\caption*{\bf 图1: LM35 特性曲线线性拟合作图}
+	\end{figurehere}
+
+	通过软件计算可以得到，LM35传感器的灵敏度为
+	$$
+	\begin{aligned}
+		K &= \frac{\Delta U}{\Delta T} \\
+		&= 0.01042 \mathrm V/ ^\circ \mathrm C\\
+		&= 10.42 \mathrm mV/ ^\circ \mathrm C
+	\end{aligned}
+	$$
+
+
+
+	\subsection{使用 LM35 和放大电路组装温度计}
+
+	使用标准温度计对控温仪作 37.0 $^\circ \mathrm C$ 的校正，并在 37.0 $^\circ \mathrm C$ 的条件下调节放大电路的校正旋钮使得控温仪、标准温度计、组装温度计示数均保持一致。
+
+	\begin{tablehere}
+		\caption*{\bf 表2 保持样品电流不变测量霍尔系数数据}
+		\noindent	
+		\begin{center}
+			\newcolumntype{Y}{>{\centering\arraybackslash}X}
+			\begin{tabularx}{0.95\textwidth}{|Y|Y|Y|Y|Y|Y|Y|Y|Y|}
+				\hline
+				控温仪 & 35.0 & 36.0 & 37.0 & 38.0 & 39.0 & 40.0 & 41.0 & 42.0 \\ \hline
+				组装  & 35.0 & 35.9 & 37.0 & 38.1 & 39.1 & 40.0 & 41.2 & 42.3 \\ \hline
+				标准  & 34.8 & 35.8 & 37.0 & 38.3 & 39.3 & 40.2 & 41.4 & 42.6 \\ \hline
+				差异  & 0.2  & 0.1  & 0.0  & 0.2  & 0.2  & 0.2  & 0.2  & 0.3  \\ \hline
+			\end{tabularx}
+			\vspace*{1em}
+		\end{center}
+	\end{tablehere}
+
+	\begin{figurehere}
+		\centering
+		\includegraphics[width=0.85\linewidth]{pics/2.png}
+		\caption*{\bf 图2: LM35 特性曲线线性拟合作图}
+	\end{figurehere}
+
+	计算可以得到该组装温度计的线性度为：$\frac{0.3 ^\circ \mathrm C}{42.3 ^\circ \mathrm C} = 0.709 \%$
+
+	用校准过的组装温度计测量手心的温度，得到的结果为：36.1 $^\circ \mathrm C$
+
+	用校准过的组装温度计测量眉心的温度，得到的结果为：36.9 $^\circ \mathrm C$
+\end{document}
