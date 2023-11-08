@@ -2198,8 +2198,8 @@ figure.highlight pre .javascript .function {
   -ms-flex: 1 auto;
   flex: 1 auto;
   margin: 0 auto;
-  padding: 40px 15px;
-  max-width: 1200px;
+  padding: 25px 15px;
+  max-width: 1300px;
   width: 100%;
 }
 @media screen and (max-width: 900px) {
@@ -2234,7 +2234,7 @@ figure.highlight pre .javascript .function {
   }
 }
 .layout > div:first-child {
-  width: 74%;
+  width: 72%;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -2570,11 +2570,11 @@ h1.page-title + .tag-cloud-list {
   text-align: left;
 }
 #aside-content {
-  width: 26%;
+  width: 28%;
 }
 @media screen and (min-width: 900px) {
   #aside-content {
-    padding-right: 15px;
+    padding-right: 25px;
   }
 }
 @media screen and (max-width: 900px) {
@@ -2594,7 +2594,7 @@ h1.page-title + .tag-cloud-list {
   position: relative;
   overflow: hidden;
   margin-top: 20px;
-  padding: 20px 24px;
+  padding: 20px 20px;
 }
 #aside-content .card-info .author-info__name {
   font-weight: 500;
@@ -2607,7 +2607,7 @@ h1.page-title + .tag-cloud-list {
   margin: 14px 0 4px;
 }
 #aside-content .card-info .card-info-social-icons {
-  margin: 6px 0 -6px;
+  margin: 20px 0 -6px;
 }
 #aside-content .card-info .card-info-social-icons .social-icon {
   margin: 0 10px;
@@ -2631,6 +2631,7 @@ h1.page-title + .tag-cloud-list {
 #aside-content .card-info #card-info-btn {
   display: block;
   margin-top: 14px;
+  border-radius: 4px;
   background-color: var(--btn-bg);
   color: var(--btn-color);
   text-align: center;
@@ -2699,6 +2700,7 @@ h1.page-title + .tag-cloud-list {
 }
 #aside-content .aside-list > .aside-list-item .thumbnail {
   overflow: hidden;
+  border-radius: 4px;
   width: 4.2em;
   height: 4.2em;
 }
@@ -2951,8 +2953,8 @@ h1.page-title + .tag-cloud-list {
 .avatar-img {
   overflow: hidden;
   margin: 0 auto;
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
   border-radius: 70px;
 }
 .avatar-img img {
