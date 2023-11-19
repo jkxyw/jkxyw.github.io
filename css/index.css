@@ -1394,6 +1394,17 @@ body {
 input::placeholder {
   color: var(--font-color);
 }
+#web_bg {
+  position: fixed;
+  z-index: -999;
+  width: 100%;
+  height: 100%;
+  background: #f3f6f7;
+  background-attachment: local;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 h1,
 h2,
 h3,
@@ -2269,7 +2280,7 @@ figure.highlight pre .javascript .function {
   }
 }
 .layout > div:first-child {
-  width: 72%;
+  width: 72.7%;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -2605,7 +2616,7 @@ h1.page-title + .tag-cloud-list {
   text-align: left;
 }
 #aside-content {
-  width: 28%;
+  width: 27.3%;
 }
 @media screen and (min-width: 900px) {
   #aside-content {
@@ -2642,12 +2653,12 @@ h1.page-title + .tag-cloud-list {
   margin: 14px 0 4px;
 }
 #aside-content .card-info .card-info-social-icons {
-  margin: 20px 0 -6px;
+  margin: 10px 0 -6px;
 }
 #aside-content .card-info .card-info-social-icons .social-icon {
   margin: 0 10px;
   color: var(--font-color);
-  font-size: 1.4em;
+  font-size: 20px;
 }
 #aside-content .card-info .card-info-social-icons i {
   -webkit-transition: all 0.3s;
