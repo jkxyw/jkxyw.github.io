@@ -3944,7 +3944,7 @@ h1.page-title + .tag-cloud-list {
   transition: filter 375ms ease-in 0.2s;
 }
 #article-container p {
-  margin: 0 0 16px;
+  margin: 0 0 13px;
 }
 #article-container iframe {
   margin: 0 0 20px;
