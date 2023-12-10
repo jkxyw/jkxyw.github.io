@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>jkxyw's Blog | jkxyw's Blog</title><meta name="author" content="jkxyw"><meta name="copyright" content="jkxyw"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="浅谈 SAT-Solver 的设计和实现————模块化和复杂性理论角度的考量计算机导论期末报告  要求：请选择两个课堂上讲过的概念（如模块化、抽象化），举例并谈谈你的认识。  [TOC] 引言本文将从模块化思想和复杂性理论的角度出发，分析并讨论如何设计一个具有初步实用性的基于 CDCL 算法的 SAT-Solver ，并结合 SAT-Solver 综合论述我对模块化和时间复杂性这两个课上介绍过概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jkxyw&#39;s Blog">
+<meta property="og:url" content="http://jkxyw.github.io/2023/12/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AF%BC%E8%AE%BA%E6%9C%9F%E6%9C%AB%E6%8A%A5%E5%91%8A/index.html">
+<meta property="og:site_name" content="jkxyw&#39;s Blog">
+<meta property="og:description" content="浅谈 SAT-Solver 的设计和实现————模块化和复杂性理论角度的考量计算机导论期末报告  要求：请选择两个课堂上讲过的概念（如模块化、抽象化），举例并谈谈你的认识。  [TOC] 引言本文将从模块化思想和复杂性理论的角度出发，分析并讨论如何设计一个具有初步实用性的基于 CDCL 算法的 SAT-Solver ，并结合 SAT-Solver 综合论述我对模块化和时间复杂性这两个课上介绍过概念">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://jkxyw.github.io/img/shoko.png">
+<meta property="article:published_time" content="2023-12-10T08:07:11.686Z">
+<meta property="article:modified_time" content="2023-12-10T08:05:22.101Z">
+<meta property="article:author" content="jkxyw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jkxyw.github.io/img/shoko.png"><link rel="shortcut icon" href="/img/shoko-1.jpg"><link rel="canonical" href="http://jkxyw.github.io/2023/12/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AF%BC%E8%AE%BA%E6%9C%9F%E6%9C%AB%E6%8A%A5%E5%91%8A/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":650},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'jkxyw\'s Blog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-10 16:05:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom-page.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/shoko.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/test/"><i class="fa-fw fas fa-file-circle-plus"></i><span> 测试</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-compass"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/file/"><i class="fa-fw fas fa-file"></i><span> 文件</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-book"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: linear-gradient(20deg, #0ebeff, #18cbf6, #23d8ec, #2de5e3, #38f2d9, #42ffd0)"><nav id="nav"><span id="blog-info"><a href="/" title="jkxyw's Blog"><span class="site-name">jkxyw's Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/test/"><i class="fa-fw fas fa-file-circle-plus"></i><span> 测试</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-compass"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/file/"><i class="fa-fw fas fa-file"></i><span> 文件</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-book"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-10T08:07:11.686Z" title="发表于 2023-12-10 16:07:11">2023-12-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-10T08:05:22.101Z" title="更新于 2023-12-10 16:05:22">2023-12-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="浅谈-SAT-Solver-的设计和实现————模块化和复杂性理论角度的考量"><a href="#浅谈-SAT-Solver-的设计和实现————模块化和复杂性理论角度的考量" class="headerlink" title="浅谈 SAT-Solver 的设计和实现————模块化和复杂性理论角度的考量"></a>浅谈 SAT-Solver 的设计和实现————模块化和复杂性理论角度的考量</h1><p>计算机导论期末报告</p>
+<blockquote>
+<p>要求：请选择两个课堂上讲过的概念（如模块化、抽象化），举例并谈谈你的认识。</p>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>本文将从模块化思想和复杂性理论的角度出发，分析并讨论如何设计一个具有初步实用性的基于 CDCL 算法的 SAT-Solver ，并结合 SAT-Solver 综合论述我对模块化和时间复杂性这两个课上介绍过概念的认识。由于本文的主要目的是阐述我对模块化、复杂性理论这两个概念的理解，不会在 CDCL 算法的具体介绍上花费过多篇幅。</p>
+<h3 id="渐近时间复杂度"><a href="#渐近时间复杂度" class="headerlink" title="渐近时间复杂度"></a>渐近时间复杂度</h3><p>衡量一个算法的快慢，一定要依赖这个算法运行时所接受的数据规模和具体数据内容。一般而言，影响算法运行快慢的主要参数是数据的规模。所谓数据规模，一般指输入的数字个数、输入中给出的图的点数与边数等等。而在对算法的考察和优化中，我们衡量一个算法的效率时不应当只看它在某个数据规模下的用时，而是看它的用时随数据规模而增长的趋势，这也就引入了渐近时间复杂度的概念。</p>
+<p>渐近时间复杂度是对任何一个算法/工程运行的时间效率的重要考量标准，加入我们使用函数 $g(n)$ 表示在 $n$ 的数据规模下该算法所需要的程序计算次数。一般而言我们使用大 $\Omicron$ 记号来表示一个算法的渐近时间复杂度。</p>
+<p>对于函数 $g(n)$ 和函数 $f(n)$ ，如果存在正整数 $n_0$ 和正常数 $c$ 满足对于所有 $n \ge n_0$ 有</p>
+<script type="math/tex; mode=display">
+0\le g(n) \le c\cdot f(n)</script><p>那么我们称 $g(n)$ 是 $O(f(n))$ 的，这意味着 $g(n)$ 的增长速率不超过 $f(n)$ 。渐近时间复杂度将研究者的目光重点放在了运行用时随数据规模的增长上，因此忽略了计算次数函数中的主项常数和非主项内容。</p>
+<p>然而正如我们前面所提到的，算法的运行效率不仅和数据规模有关，还和数据的具体内容有关。然而在考量算法效率的时候，我们不可能建立一个从数据的具体内容到运行用时的有效映射来评估程序效率，因此我们依然考察算法关于数据规模的渐近时间复杂度。在此基础上，主要研究如下两种渐近时间复杂度：</p>
+<ol>
+<li>最坏时间复杂度<br> 这种时间复杂度的评估主要关心算法在数据最棘手的情况下的表现，如果在最坏情况下程序也能够良好运行，那么算法在所有情况下都能有非常优秀的表现。</li>
+<li>平均时间复杂度<br> 这种时间复杂度的评估考察每个输入规模下所有可能输入对应用时的平均值的复杂度（随机输入下期望用时的复杂度）。然而在具体的分析当中，求得平均时间复杂度并不是一件容易的事情，这通常是因为不能够有效的评估对于任意一种具体情形的时间效率，因此也不容易评估期望效率。</li>
+</ol>
+<!-- 具体数学 Ch.9 -->  
+<h3 id="模块化设计"><a href="#模块化设计" class="headerlink" title="模块化设计"></a>模块化设计</h3><!-- ChatGPT -->
+<p>在计算机工程设计中，模块化是一种重要的设计原则和方法，它强调将项目划分为相互独立、功能明确且相对自治的模块或组件。这些模块可以被独立设计、实现、测试和维护，从而提高系统的可维护性、可扩展性和可重用性。</p>
+<p>模块指的是系统中的任意一个相对独立的单元，它执行特定的功能并且与其他模块相对独立。一个独立的子系统可以被称作一个模块，具体到一个库、一个对象甚至一个函数都可以被称作系统中的一个模块。</p>
+<p>模块化设计最重要的特征被称为高内聚低耦合：高内聚即一个模块内部的元素彼此紧密相关，低耦合即模块之间的关联度低。高内聚确保模块内部功能相关，低耦合则意味着模块之间的相互依赖性降到最低。这样的设计</p>
+<ol>
+<li><p>可重用性：设计良好的模块可以在不同的项目或系统中重复使用，例如封装好的数据结构、集成的函数接口等等，很大程度上减少开发时间和成本。</p>
+</li>
+<li><p>可扩展和可维护性：软件工程通常会在用户社区发展过程中产生各种新的需求或变化，亦或是对现有的工程进行实时维护。通过模块化设计，维护一个项目可以分解为其各个模块的单独维护。添加新的模块或替换现有模块，系统能够方便地进行扩展，适应新的需求和变化。</p>
+</li>
+<li><p>测试和调试：项目的测试和调试通常需要耗费漫长的时间。模块化设计使得单个模块可以独立地进行测试和调试，有助于更快地发现和解决问题。</p>
+</li>
+<li><p>团队协作：在大型项目中，不同的团队成员可以独立地工作于不同的模块，并通过定义清晰的接口规范来将不同的模块拼接在一起。这样可以更容易地集成不同模块的功能而不需要特别规范和关注各个模块的具体实现，提高了团队的协作效率。</p>
+</li>
+</ol>
+<p>综上所述，模块化设计可以让项目开发更加灵活方便，增加项目可维护和可扩展性，有效提高提高项目开发的效率和质量。在下文的分析当中，我将使用 SAT-Solver 为实例来阐明这一观点。</p>
+<h3 id="SAT-问题与-SAT-Solver"><a href="#SAT-问题与-SAT-Solver" class="headerlink" title="SAT 问题与 SAT-Solver"></a>SAT 问题与 SAT-Solver</h3><p>SAT 问题是复杂性理论中的一个重要问题，SAT-Solver 则是线代计算机技术中的一个重要项目，也可以作为应用模块化设计的典范。</p>
+<p>SAT（Boolean Satisfiability Problem）问题的形式化描述是：给定一个布尔表达式，判断是否存在一种对变量的赋值方式，使得布尔表达式的结果为真。例如：</p>
+<script type="math/tex; mode=display">
+(x + y\neg z)(x + y + z)(\neg y + \neg z)</script><p>现有的研究和 SAT 求解器中通常将一个 SAT 问题以合取范式（Conjunctive Normal Form，CNF）的形式给出。一个合取范式形如： $C_1\wedge C_2\wedge\cdots\wedge C_n$,子句 (Clause) $C_i\left(1\leq i\leq n\right)$ 形如： $I_1\vee I_2\vee\cdots\vee I_k$,其中，$I_i$ 称为文字 (Literal) ，为某一布尔变量或该布尔变量的非。例如：</p>
+<script type="math/tex; mode=display">
+(\lnot a_1\lor a_2)\land(\lnot a_1\lor a_3\lor a_4)\land(a_1\lor\lnot a_2\lor a_3\lor\lnot a_4)</script><p>SAT 问题是一个 NP-Complete 问题，这意味在目前阶段学界无法给出一种一般的解法使得其最坏时间复杂度是多项式的。虽然在最坏情况下求解SAT问题可能很困难，但许多实际问题的实例通常可以在合理的时间内解决，这也就引入了计算机科学领域另一个活跃的方向: SAT-Solver 即 SAT 求解器。</p>
+<p>当前的 SAT-Solver 主要有两种不同的实现思路：</p>
+<ul>
+<li>Davis-Putnam-Logemann-Loveland 算法及其各种优化</li>
+<li>随机局部搜索算法（下文中不会提及）</li>
+</ul>
+<p>SAT-Solver 在人工智能推理、软件硬件验证、编译优化、自动化证明、组合优化等诸多领域和工程有着极其重要的应用。</p>
+<h2 id="SAT-Solver-中的模块化设计"><a href="#SAT-Solver-中的模块化设计" class="headerlink" title="SAT-Solver 中的模块化设计"></a>SAT-Solver 中的模块化设计</h2><p>首先值得一提的是，SAT-Solver 本身经常作为一个模块出现在 SMT-Solver (例如常用的 Z3-Prover 项目) 和其他需要自动推理的项目当中。可以说，SAT-Solver 作为一个独立项目的研究和开发本身就是模块化思想的体现。</p>
+<p>模块化设计一个项目主要有以下几个内容: 模块划分、抽象数据结构、接口定义。这里不再一一展开叙述。</p>
+<p>一个 SAT 求解器可以首先粗浅分为以下两个模块：</p>
+<ol>
+<li>输入及处理模块</li>
+<li>求解模块</li>
+</ol>
+<h3 id="输入及处理模块"><a href="#输入及处理模块" class="headerlink" title="输入及处理模块"></a>输入及处理模块</h3><p>其中输入及处理模块接受用户或其他模块给出的布尔表达式或命题逻辑表达式，并将其处理为求解模块能够接受的数据格式，也就是 CNF 合取范式。输入模块也就是求解器的前端，可以采用 GUI 等多种用户界面，而学界最通用的是基于 <code>.cnf</code> 格式的命令行格式输入。</p>
+<p>一个合理的问题是，在布尔公式有很多完备的算符集合能够表达（例如 $\{\lnot , \land\}$ 等），为何选择 CNF 格式而不是 DNF(析取范式) 或其他范式作为输入格式？</p>
+<p>首先值得注意的是：CNF/DNF 这两种格式有一个重要的特征，就是公式的嵌套只发生了一层，而如果使用更少的字符集构成的范式，虽然能够完备表达所有布尔公式，但子句与子句之间嵌套关系复杂，发生了严重的耦合。而 CNF/DNF 这种将一个公式分解为”合式-子句-文字”的结构，非常好地将公式分解为彼此无关的部分，可以用模块化的思想加以切入并解决。</p>
+<p>而在 CNF 和 DNF 之间选择 CNF 则是因为，将一个一般的问题分别转化为 CNF 和 DNF 格式式，往往会发现 DNF 构建出来地合式更加冗长，转化成本及其昂贵。而在添加新的逻辑关系时，CNF 格式的优势也能体现出来，这一点在后文的冲突分析部分将会被再次提到。</p>
+<p>而从研究和学习者的角度来说，CNF 格式更接近自然产生的逻辑形式，例如使用布尔公式表示数独问题、八皇后问题时，合取范式更接近人们的直觉。</p>
+<p>一般求解器的求解模块只接受 CNF 数据格式，因此部分用途更广泛的求解器需要在输入模块之后包含将表达式转化为 CNF 格式的模块。这一个转化过程目前不能做到多项式时间。</p>
+<h3 id="基于-CDCL-的-CNF-求解模块"><a href="#基于-CDCL-的-CNF-求解模块" class="headerlink" title="基于 CDCL 的 CNF 求解模块"></a>基于 CDCL 的 CNF 求解模块</h3><p>对于求解模块，这里涉及到现代求解器的常用核心算法 CDCL 算法。为了分析求解器的各个模块，我们在这里直接（而不对其思想动机以及朴素算法 DPLL 算法做详细叙述）给出 CDCL 算法的一个伪代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def CDCL(ϕ) :</span><br><span class="line">    τ ← ∅</span><br><span class="line">    while true:</span><br><span class="line">        τ ← unit-propagate(ϕ,τ)</span><br><span class="line">        if τ falsifies a clause:</span><br><span class="line">            if at decision level 0:</span><br><span class="line">                return UNSAT</span><br><span class="line">            C ← analyze-conflict(ϕ,τ)</span><br><span class="line">            ϕ ← ϕ∧C</span><br><span class="line">            τ ← backtrack(ϕ,C)</span><br><span class="line">        else</span><br><span class="line">            if all variables have values: </span><br><span class="line">                return SAT</span><br><span class="line">            start a new decision level</span><br><span class="line">            l ← variable-value-decision(ϕ)</span><br><span class="line">            τ ← τ∪&#123;l&#125;</span><br><span class="line">    return τ</span><br></pre></td></tr></table></figure>
+<p>通过算法核心部分的伪代码我们可以轻松地看到算法的运行逻辑、各个模块的分布以及各个模块之间的互动方式。以注意到这份伪代码主要涉及到三个子模块：单位子句传播 <code>unit-propagate</code> 、冲突分析 <code>analyze-conflict</code> 、决策回溯 <code>backtrack</code> 、选择文字并赋值 <code>variable-value-decision</code> 。这四个模块的关系可以用一下这张图（<a target="_blank" rel="noopener" href="http://crest.cs.ucl.ac.uk/readingGroup/satSolvingTutorial-Justyna.pdf">来源</a>）来方便地阐明：</p>
+<p><img src="image-6.png" alt="Temporary Picture"></p>
+<h4 id="单位子句传播"><a href="#单位子句传播" class="headerlink" title="单位子句传播"></a>单位子句传播</h4><p>这一部分也被称为布尔约束传播 (Boolean Constraint Propagation) 。这是一种简单的想法:如果一个子句中只有一个文字则我们称这个子句为单位子句 (Unit Clause) 。那么为了使合式成立即该子句成立这个文字必须复制为真。例如：</p>
+<script type="math/tex; mode=display">
+\phi = (p\lor\lnot q\lor\lnot s\lor t)\land(q\lor\lnot r\lor\lnot s\lor\lnot t)\land(r\lor p)\land t</script><p>该式子中 $\{t\}$ 是单位字句，那么我们有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\phi &= (p\lor\lnot q\lor\lnot s\lor t)\land(q\lor\lnot r\lor\lnot s\lor\lnot t)\land(r\lor p)\land t \\
+&=(q\lor\lnot r\lor\lnot s)\land(r\lor p)\land t\\
+\end{aligned}</script><p>这里利用到了简单的逻辑公式（实际上也是合取范式对任何文字赋值的响应方式）：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    (\phi \lor p)\land p &= p\\
+    (\phi \lor\lnot p)\land p &= \phi\land p\\
+\end{aligned}</script><p>在一个 CDCL(DPLL) 算法中，每次赋值决策之前都会运行单位子句传播直到程序中没有单位子句，并在这之后判断求解过程是否结束，是否产生了冲突。</p>
+<p>相比于朴素的 DPLL 算法，在 CDCL 算法中，单位子句传播模块需要额外加入记录决策依赖关系 (Implication Graph) 的功能，来提供冲突分析模块使用。</p>
+<p>这也指出了在一般的工程/算法设计当中，任何模块都不是编写出来之后就不需要大幅度重构的。实际上很难设计出一个功能完全能够适应未来项目中所有变化的模块，因此在项目更新和维护的过程中，重构一个模块也是常有的事。</p>
+<h4 id="冲突分析及决策回溯"><a href="#冲突分析及决策回溯" class="headerlink" title="冲突分析及决策回溯"></a>冲突分析及决策回溯</h4><p>在 CDCL 算法发明之前通用的使用 DPLL 算法的求解器当中，这个部分是不存在的。在朴素的 DPLL 算法当中，当单位子句传播遇到冲突，求解器不会从中学习任何内容，而是直接向上回溯一层。这是一个效率极低的算法，这是因为单位子句传播中冲突往往产生在很早的位置（当你在 <code>choose-literal</code> 中将某一个未知变量赋值的时候），每次只向上回溯一层会导致程序在一片注定无法找到解的空间内反复进行搜索和回溯，极大浪费时间。为了解决这个问题，我们可以利用决策之间的关系 (Implication Graph) 分析冲突产生的位置和冲突的内容，直接回溯多层到冲突发生之前，并且记录下这次冲突产生的原因。</p>
+<p><img src="image-7.png" alt="Alt text"></p>
+<p>上图中展示了程序中使用的逻辑关系图，也就是所谓的 Implication Graph。这张图记录了每一个决策所在的决策层和决策的由来，最后在 $\kappa$ 位置发生冲突，我们就可以通过这个去倒推出冲突发生的原因，并从中学习到新的子句 $(x_{10}\lor x_2\lor \lnot x_4)$ ，在 CNF 格式中加入这一个子句。</p>
+<p>为了优化程序效率，实际工程中需要控制学习到子句的数量，否则学习到过多的子句也会显著降低程序的效率。</p>
+<p>现在由于我们工程高度模块化的开发方式，我们可以很容易得在原本的求解器算法中插入这一冲突分析部分，在不需要重构整个项目得情况下大幅度提高项目的运行效率。</p>
+<h4 id="启发式决策选择变量并赋值"><a href="#启发式决策选择变量并赋值" class="headerlink" title="启发式决策选择变量并赋值"></a>启发式决策选择变量并赋值</h4><p>这一部分主要有两个功能，即在上面的 <code>variable-value-decision</code> 中选择一个未赋值的文字并将其赋值为 <code>TRUE</code> 或 <code>FALSE</code> 中的一个。</p>
+<p>容易见得，文字的选择和赋值的选择对程序的效率有着及其重要的影响。当然一个朴素的想法是完全随机地选择，这样可以极大地简化编写过程。然而为了使程序的效率提高，启发式 (Heuristic) 方法需要被应用。常见的策略有这么几种：</p>
+<ol>
+<li>按照文字出现频率选择，这是一种最朴素的想法。</li>
+<li>Jeroslow-Wang Heuristic ：在上面的想法的基础上注意到，出现在长度不同的子句中对于一个文字而言的意义是不同的，显然短的子句拥有比长子句更高的权重，因此就有下面的启发函数：<script type="math/tex; mode=display">
+ \mathrm{Score}(v)=\sum_{\mathrm{clause}\in\mathrm{containing}(v)}2^{-\mathrm{size}(\mathrm{clause})}</script></li>
+<li>Variable State Independent Decaying Sum(VSIDS) ：依然是在上面朴素想法的基础上，由频率转而计算文字的”活跃度”。活跃度随着算法的迭代几何式衰减，同时随着文字在冲突分析中出现的情况被更新。</li>
+<li>Literal Block Distance(LBD) ：这种启发函数与上面的思路不同，他考察文字与在单位子句传播中发生冲突的文字之间的”距离”来决定分数，距离采用共同出现的子句来计算。具体公式这里不再展开。</li>
+<li>前面曾提到过 SAT-Solver 的另一种思路：基于随机化算法的 Local Search ，一种两个求解器思路的 hybrid 是将 Local Search 作为启发函数启发 CDCL 算法的变量选择。</li>
+</ol>
+<h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4><p>预处理指的是一个在整个求解器开始工作之前运行的部分，良好的预处理也可以提升求解器的效率：</p>
+<ol>
+<li>考虑到 2-SAT 问题是一个已经解决了的问题，可以每次对公式中长度为 2 的子式应用 2-SAT 的算法来合并文字简化公式.</li>
+<li>pure literal elimination ：部分文字在公式当中只以本身或其逆的形式出现，这样的文字称之为纯文字。在 CNF 格式当中纯文字可以看作单位子句来出了，这样也能够部分提高效率。</li>
+</ol>
+<p>在模块化的算法设计和程序设计框架中，加入并调整预处理模块是常用的提速手段。</p>
+<h4 id="抽象数据结构的引入"><a href="#抽象数据结构的引入" class="headerlink" title="抽象数据结构的引入"></a>抽象数据结构的引入</h4><p>实际开发中，包括文字、子句、启发函数等各种数据需要使用数据结构来储存，为了让开发方便，作为模块化方法的应用我们可以定义抽象的数据结构并预留接口，在随后的开发中不需要调整这些接口就可以更换或修改数据结构本身。</p>
+<h3 id="与社区结合的模块化开发和研究"><a href="#与社区结合的模块化开发和研究" class="headerlink" title="与社区结合的模块化开发和研究"></a>与社区结合的模块化开发和研究</h3><p>应该指出，除了以上部分提到过的内容，模块化方法还有一个巨大的优势：那就是在开源社区的基础上，后来的开发者可以通过引入既有的工程或模块，快速地在其基础上实现自己的想法。这样应用了模块化方法的开发模式极大地推动了研究和开发地快速进行。</p>
+<p>2003 年发布的 <a target="_blank" rel="noopener" href="http://minisat.se/">MiniSAT</a> 项目就是这样一个典型的项目，已经有大量的项目和研究是基于其而展开的。</p>
+<h2 id="SAT-Solver-的时间复杂性优化"><a href="#SAT-Solver-的时间复杂性优化" class="headerlink" title="SAT-Solver 的时间复杂性优化"></a>SAT-Solver 的时间复杂性优化</h2><p>首先要说明的是在 SAT-Solver 的编写当中并不存在显著的最坏时间复杂性的优化，因为针对具体数据的时间复杂性分析是困难的，而整个项目目前被认为不存在多项式时间复杂度（而显然可以使用指数时间枚举+多项式时间验证来完成）。因此接下来讨论的时间复杂性优化并不能给出具体的时间复杂度衡量。</p>
+<h3 id="渐近时间复杂性思路在-SAT-Solver-中的体现"><a href="#渐近时间复杂性思路在-SAT-Solver-中的体现" class="headerlink" title="渐近时间复杂性思路在 SAT-Solver 中的体现"></a>渐近时间复杂性思路在 SAT-Solver 中的体现</h3><!-- ChatGPT -->
+<p><strong>算法选择和设计</strong>：渐近时间复杂度在这里的一个最重要价值就是直接让开发人员放弃研发多项式时间复杂度的算法，转而选择攻克指数时间复杂度算法比如搜索回溯方法（CDCL），又或者是对这种问题常用的随机化方法（Local Search）。</p>
+<p>渐近时间复杂性的分析也可以指导算法的设计。在设计SAT-Solver时，算法设计者可以尝试选择或设计算法，使得其在渐近时间复杂性方面表现得更好。这涉及到选择合适的数据结构、启发式策略、剪枝技术等。</p>
+<p>其中最为直接的是数据结构的选择，在启发式决策当中通常需要频繁更新和查询启发函数，此时就可以使用例如二叉堆、线段树等对数时间复杂度的数据结构来对这一过程进行优化。这也是让求解器解决大规模问题的必要一环。</p>
+<p><strong>问题规模评估和性能预测</strong>：在特殊情况下，通过对SAT-Solver的算法进行渐近时间复杂性分析，可以预测其在未来可能遇到的问题规模下的性能。这对于选择合适的 SAT-Solver 来解决特定问题非常有帮助。</p>
+<p>例如利用实现好的 SAT-Solver 编写数独求解器或其他组合问题的求解器时，良好的时间复杂度分析可以帮助选择合适的算法，提前预测解决问题所需的计算资源，从而优化工程实施。</p>
+<p><strong>理论研究</strong>：虽然我们已经看到了使用渐近时间复杂度分析这类复杂算法是困难的，渐近时间复杂度的理论研究对于寻找时间复杂度更为优越的算法任然具有重要意义。尽管在实践中具体问题的性质可能会对性能产生显著影响，理论研究仍然提供了一种全面的视角，帮助我们理解SAT-Solver算法的局限性和潜在优势。理论分析可以揭示问题求解的计算边界，并推动SAT-Solver领域的前沿研究。这样的研究有助于我们更好地把握算法设计的可能性，提高SAT问题求解的理论上限。</p>
+<p>到目前为止，关于计算复杂性理论和与其紧密关联的 SAT 求解问题的理论工作依然在持续进行。</p>
+<h3 id="渐近时间复杂性在实践中的局限性"><a href="#渐近时间复杂性在实践中的局限性" class="headerlink" title="渐近时间复杂性在实践中的局限性"></a>渐近时间复杂性在实践中的局限性</h3><!-- ChatGPT Solved -->
+<p>在具体程序的优化中，不能只关注到渐近时间复杂度，还应该根据具体应用场景测试平均时间效率并针对其进行优化。</p>
+<p>渐近时间复杂度常常只关心复杂度函数 $g(n)$ 的主项，而选择忽略主项前的常数和主项之后的副项。当然这种处理确实有利于我们更好地把握算法在不同数据规模下的表现，然而当时间复杂度主项已经无可优化的时候，常数优化就变得极为重要。</p>
+<p>渐近时间复杂性通常关注最坏情况下的性能，然而在实际应用中，我们更关心平均情况下的性能，甚至是特殊情况下的性能。相比于最一般的 SAT 情况，具体的 SAT 问题通常有一些特征使得其能够在远比最坏时间效率更快的效率下解决，例如 3-SAT 问题或者应用场景下的数独问题等等。由于 SAT-Solver 在实践中广泛使用各种启发式和随机化方法，渐近时间复杂性分析通常难以准确地捕捉这些启发式方法的效果。一些高效的启发式和随机化方法的应用将会导致实际执行时间远远低于渐近时间复杂性所预测的水平。</p>
+<p>渐近时间复杂性通常以处理器进行一次基本运算（例如 32 位整数的四则运算、赋值）。而实际上，现代计算机系统通常包含多核处理器、显卡专用硬件，支持并行计算等各种硬件加速。在实际生产中，对硬件性能的挖掘和利用可能甚至比优化算法本身收益更大。</p>
+<p>另外，已经有研究者着手设计量子算法来解决 SAT 的求解问题，这同样是突破传统时间复杂性分析范畴的方式。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上论述，结合对 SAT-Solver 和 MiniSAT 项目的考察，我们可以产生如下几个关于模块化和渐近时间复杂性的基本认识：</p>
+<ol>
+<li>模块化方法在算法设计和工程设计中是无处不在，贯穿始终的。对既有模块进行优化和拼接已经是足够有效的工作，然而突破性的创新往往来自于彻底的新模块的发现或发明：例如 CDCL 算法中的冲突分析模块就是一个突破性的创新，而后世在 CDCL 算法中对启发式决策进行繁琐的调参和不同方法的 trade-off 则是对既有模块的组合和优化。</li>
+<li>现代的很多算法研究以及不再关心整体最坏复杂度的有优化，而常常聚焦于在平均情况甚至某些特殊情况下下的实现效率优化，很多算法的时间效率已经不再能够给出精确的渐近时间复杂度。</li>
+<li>渐近时间复杂度对算法和工程优化的参考意义有限，实际工作中，需要在最坏时间复杂度和平均时间复杂度等多方面效率考量之间做出利弊权衡，才能完成优秀的项目。</li>
+</ol>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><!-- 这篇文章的写作也是计算机科学中的模块化思想的应用。 -->
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://theory.cs.princeton.edu/complexity/book.pdf">Computational Complexity: A Modern Approach - Sanjeev Arora and Boaz Barak</a><br><a target="_blank" rel="noopener" href="https://users.aalto.fi/~tjunttil/2020-DP-AUT/notes-sat/preprocessing.html">Propositional satisfiability and SAT solvers - CS-E3220</a><br><a target="_blank" rel="noopener" href="https://math.stackexchange.com/questions/3101073/why-conjunctive-normal-form-cnf-is-used-instead-of-simply-and-not">Why CNF is used instead of simply AND + NOT - Stack Exchange</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://jkxyw.github.io">jkxyw</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://jkxyw.github.io/2023/12/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AF%BC%E8%AE%BA%E6%9C%9F%E6%9C%AB%E6%8A%A5%E5%91%8A/">http://jkxyw.github.io/2023/12/10/计算机导论期末报告/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://jkxyw.github.io" target="_blank">jkxyw's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/shoko.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/11/08/Dancing%20Links%20X%20%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Dancing Links X 算法学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Dancing Links X 算法学习笔记</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/shoko.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">jkxyw</div><div class="author-info__description">我的数学\计算机学习笔记</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/jkxyw"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/jkxyw" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:konjacwyx@mail.ustc.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%85%E8%B0%88-SAT-Solver-%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E6%A8%A1%E5%9D%97%E5%8C%96%E5%92%8C%E5%A4%8D%E6%9D%82%E6%80%A7%E7%90%86%E8%AE%BA%E8%A7%92%E5%BA%A6%E7%9A%84%E8%80%83%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">浅谈 SAT-Solver 的设计和实现————模块化和复杂性理论角度的考量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%90%E8%BF%91%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">渐近时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.1.2.</span> <span class="toc-text">模块化设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAT-%E9%97%AE%E9%A2%98%E4%B8%8E-SAT-Solver"><span class="toc-number">1.1.3.</span> <span class="toc-text">SAT 问题与 SAT-Solver</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SAT-Solver-%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">SAT-Solver 中的模块化设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E5%8F%8A%E5%A4%84%E7%90%86%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.1.</span> <span class="toc-text">输入及处理模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-CDCL-%E7%9A%84-CNF-%E6%B1%82%E8%A7%A3%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.2.</span> <span class="toc-text">基于 CDCL 的 CNF 求解模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BD%8D%E5%AD%90%E5%8F%A5%E4%BC%A0%E6%92%AD"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">单位子句传播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90%E5%8F%8A%E5%86%B3%E7%AD%96%E5%9B%9E%E6%BA%AF"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">冲突分析及决策回溯</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8F%91%E5%BC%8F%E5%86%B3%E7%AD%96%E9%80%89%E6%8B%A9%E5%8F%98%E9%87%8F%E5%B9%B6%E8%B5%8B%E5%80%BC"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">启发式决策选择变量并赋值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">预处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E5%BC%95%E5%85%A5"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">抽象数据结构的引入</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E7%A4%BE%E5%8C%BA%E7%BB%93%E5%90%88%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91%E5%92%8C%E7%A0%94%E7%A9%B6"><span class="toc-number">1.2.3.</span> <span class="toc-text">与社区结合的模块化开发和研究</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SAT-Solver-%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E6%80%A7%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">SAT-Solver 的时间复杂性优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%90%E8%BF%91%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E6%80%A7%E6%80%9D%E8%B7%AF%E5%9C%A8-SAT-Solver-%E4%B8%AD%E7%9A%84%E4%BD%93%E7%8E%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">渐近时间复杂性思路在 SAT-Solver 中的体现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%90%E8%BF%91%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E6%80%A7%E5%9C%A8%E5%AE%9E%E8%B7%B5%E4%B8%AD%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">1.3.2.</span> <span class="toc-text">渐近时间复杂性在实践中的局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">1.5.</span> <span class="toc-text">后记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.6.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AF%BC%E8%AE%BA%E6%9C%9F%E6%9C%AB%E6%8A%A5%E5%91%8A/" title="无题">无题</a><time datetime="2023-12-10T08:07:11.686Z" title="发表于 2023-12-10 16:07:11">2023-12-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/08/Dancing%20Links%20X%20%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Dancing Links X 算法学习笔记">Dancing Links X 算法学习笔记</a><time datetime="2023-11-08T02:38:08.000Z" title="发表于 2023-11-08 10:38:08">2023-11-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/08/%E6%B5%85%E5%85%A5%20SAT-Solver%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="浅谈 SAT 问题与 SAT-Solver">浅谈 SAT 问题与 SAT-Solver</a><time datetime="2023-11-08T02:38:08.000Z" title="发表于 2023-11-08 10:38:08">2023-11-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/06/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90A3%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="数学分析 A3 备忘录">数学分析 A3 备忘录</a><time datetime="2023-11-06T14:54:08.000Z" title="发表于 2023-11-06 22:54:08">2023-11-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/04/Hackergame%202023%20%E6%B8%B8%E8%AE%B0/" title="Hackergame 2023 游记">Hackergame 2023 游记</a><time datetime="2023-11-04T04:15:08.000Z" title="发表于 2023-11-04 12:15:08">2023-11-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By jkxyw</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></body></html>
